@@ -1,0 +1,999 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="PixelPair Services — Web development, e-commerce, UI/UX, and more."
+    />
+    <title>Services — PixelPair</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=DM+Mono:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="pixelpair.css" />
+    <style>
+      /* SERVICES BIG GRID */
+      .services-big-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1px;
+        background: var(--border);
+        margin-top: 4rem;
+      }
+      .srv-card {
+        background: var(--bg);
+        padding: 4rem 3.5rem;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s;
+      }
+      .srv-card::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--accent);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition:
+          transform 0.4s,
+          background 0.3s;
+      }
+      .srv-card:hover::after {
+        transform: scaleX(1);
+      }
+      .srv-card:hover {
+        background: var(--bg2);
+      }
+      .srv-num {
+        font-family: "DM Mono", monospace;
+        font-size: 0.68rem;
+        color: var(--muted);
+        letter-spacing: 0.15em;
+        margin-bottom: 2.5rem;
+      }
+      .srv-icon {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        display: block;
+        transition: transform 0.3s;
+      }
+      .srv-card:hover .srv-icon {
+        transform: scale(1.1) rotate(-5deg);
+      }
+      .srv-name {
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        letter-spacing: -0.02em;
+      }
+      .srv-desc {
+        font-family: "DM Mono", monospace;
+        font-size: 0.82rem;
+        color: var(--muted);
+        line-height: 1.8;
+        margin-bottom: 2rem;
+      }
+      .srv-features {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+      .srv-features li {
+        font-family: "DM Mono", monospace;
+        font-size: 0.75rem;
+        color: var(--muted);
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+      }
+      .srv-features li::before {
+        content: "✓";
+        color: var(--accent);
+        font-size: 0.7rem;
+      }
+      .srv-price {
+        position: absolute;
+        top: 3.5rem;
+        right: 3.5rem;
+        font-family: "DM Mono", monospace;
+        font-size: 0.72rem;
+        color: var(--accent);
+        letter-spacing: 0.1em;
+        border: 1px solid var(--border);
+        padding: 0.35rem 0.8rem;
+        transition: border-color 0.3s;
+      }
+      .srv-card:hover .srv-price {
+        border-color: var(--accent);
+      }
+
+      /* PROCESS */
+      #process {
+        background: var(--bg2);
+      }
+      .process-steps {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 0;
+        margin-top: 4rem;
+        position: relative;
+      }
+      .process-steps::before {
+        content: "";
+        position: absolute;
+        top: 2.2rem;
+        left: 10%;
+        right: 10%;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          var(--border),
+          var(--accent),
+          var(--border),
+          transparent
+        );
+        z-index: 0;
+      }
+      .process-step {
+        text-align: center;
+        padding: 0 1.5rem;
+        position: relative;
+        z-index: 1;
+      }
+      .step-num {
+        width: 44px;
+        height: 44px;
+        border: 1px solid var(--border);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        font-family: "DM Mono", monospace;
+        font-size: 0.75rem;
+        color: var(--accent);
+        background: var(--bg2);
+        transition: all 0.3s;
+      }
+      .process-step:hover .step-num {
+        background: var(--accent);
+        color: #000;
+        border-color: var(--accent);
+      }
+      .step-title {
+        font-size: 0.95rem;
+        font-weight: 700;
+        margin-bottom: 0.6rem;
+        letter-spacing: -0.01em;
+      }
+      .step-desc {
+        font-family: "DM Mono", monospace;
+        font-size: 0.72rem;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      /* TECH STACK */
+      #techstack {
+        background: var(--bg);
+      }
+      .tech-categories {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-top: 4rem;
+      }
+      .tech-cat {
+        background: var(--card);
+        border: 1px solid var(--border);
+        padding: 2.5rem;
+        transition: all 0.3s;
+      }
+      .tech-cat:hover {
+        border-color: var(--accent);
+        transform: translateY(-4px);
+        box-shadow: 0 20px 50px var(--glow);
+      }
+      .tech-cat-name {
+        font-family: "DM Mono", monospace;
+        font-size: 0.7rem;
+        color: var(--accent);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+      }
+      .tech-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+      .tech-pill {
+        font-family: "DM Mono", monospace;
+        font-size: 0.72rem;
+        color: var(--muted);
+        background: var(--bg);
+        border: 1px solid var(--border);
+        padding: 0.4rem 0.9rem;
+        transition: all 0.2s;
+      }
+      .tech-pill:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      /* PRICING */
+      #pricing {
+        background: var(--bg2);
+      }
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        margin-top: 4rem;
+      }
+      .price-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        padding: 3rem 2.5rem;
+        position: relative;
+        transition: all 0.4s;
+      }
+      .price-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 60px var(--glow);
+      }
+      .price-card.featured {
+        border-color: var(--accent);
+        transform: scale(1.03);
+        box-shadow: 0 0 60px var(--glow);
+      }
+      .price-card.featured:hover {
+        transform: scale(1.03) translateY(-4px);
+      }
+      .price-badge {
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: var(--accent);
+        color: #000;
+        font-family: "DM Mono", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.15em;
+        padding: 0.3rem 1rem;
+        white-space: nowrap;
+        font-weight: 700;
+      }
+      .price-plan {
+        font-family: "DM Mono", monospace;
+        font-size: 0.7rem;
+        color: var(--muted);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+      }
+      .price-card.featured .price-plan {
+        color: var(--accent);
+      }
+      .price-amount {
+        font-size: 2.8rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        margin-bottom: 0.3rem;
+      }
+      .price-amount span {
+        font-size: 1rem;
+        color: var(--muted);
+        font-weight: 400;
+      }
+      .price-note {
+        font-family: "DM Mono", monospace;
+        font-size: 0.72rem;
+        color: var(--muted);
+        margin-bottom: 2rem;
+      }
+      .price-features {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+        margin-bottom: 2.5rem;
+      }
+      .price-features li {
+        font-family: "DM Mono", monospace;
+        font-size: 0.75rem;
+        color: var(--muted);
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+      }
+      .price-features li::before {
+        content: "→";
+        color: var(--accent);
+        flex-shrink: 0;
+      }
+      .price-features li.no {
+        opacity: 0.3;
+      }
+      .price-features li.no::before {
+        content: "×";
+        color: var(--muted);
+      }
+      .price-btn {
+        padding: 0.9rem 2rem;
+        background: var(--accent);
+        color: #000;
+        font-family: "Space Mono", monospace;
+        font-weight: 700;
+        font-size: 0.82rem;
+        border: none;
+        cursor: pointer;
+        letter-spacing: 0.03em;
+        transition: all 0.3s;
+        text-decoration: none;
+        display: block;
+        width: 100%;
+        text-align: center;
+      }
+      .price-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px var(--glow);
+      }
+      .price-btn.outline {
+        background: transparent;
+        color: var(--text);
+        border: 1px solid var(--border);
+      }
+      .price-btn.outline:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      /* FAQ */
+      #faq {
+        background: var(--bg);
+      }
+      .faq-list {
+        max-width: 800px;
+        margin: 4rem auto 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+      .faq-item {
+        border-bottom: 1px solid var(--border);
+      }
+      .faq-q {
+        padding: 1.8rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        transition: color 0.3s;
+        user-select: none;
+      }
+      .faq-q:hover {
+        color: var(--accent);
+      }
+      .faq-icon {
+        color: var(--accent);
+        font-size: 1.3rem;
+        transition: transform 0.3s;
+        flex-shrink: 0;
+      }
+      .faq-item.open .faq-icon {
+        transform: rotate(45deg);
+      }
+      .faq-a {
+        font-family: "DM Mono", monospace;
+        font-size: 0.82rem;
+        color: var(--muted);
+        line-height: 1.9;
+        max-height: 0;
+        overflow: hidden;
+        transition:
+          max-height 0.4s ease,
+          padding 0.4s;
+      }
+      .faq-item.open .faq-a {
+        max-height: 300px;
+        padding-bottom: 1.5rem;
+      }
+
+      /* CTA BANNER */
+      .cta-banner {
+        background: var(--bg2);
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        padding: 6rem 4rem;
+        text-align: center;
+      }
+      .cta-title {
+        font-size: clamp(2rem, 4vw, 3.5rem);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin-bottom: 1rem;
+      }
+      .cta-title span {
+        color: var(--accent);
+      }
+      .cta-sub {
+        font-family: "DM Mono", monospace;
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin-bottom: 3rem;
+      }
+      .cta-btns {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      .cta-btns .btn-primary,
+      .cta-btns .btn-outline {
+        padding: 1rem 2.5rem;
+      }
+
+      @media (max-width: 900px) {
+        .services-big-grid {
+          grid-template-columns: 1fr;
+        }
+        .process-steps {
+          grid-template-columns: 1fr 1fr;
+          gap: 2rem;
+        }
+        .process-steps::before {
+          display: none;
+        }
+        .tech-categories {
+          grid-template-columns: 1fr;
+        }
+        .pricing-grid {
+          grid-template-columns: 1fr;
+        }
+        .price-card.featured {
+          transform: scale(1);
+        }
+        .cta-banner {
+          padding: 4rem 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="page-transition">
+      <div class="pt-panel"></div>
+      <div class="pt-label" id="pt-label">Loading...</div>
+    </div>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <nav id="navbar">
+      <a href="index.html" class="nav-logo" data-page="Home"
+        >Pixel<span>Pair</span></a
+      >
+      <ul class="nav-links">
+        <li><a href="services.html" class="active">Services</a></li>
+        <li><a href="portfolio.html" data-page="Portfolio">Works</a></li>
+        <li><a href="about.html" data-page="About">About</a></li>
+        <li><a href="contact.html" data-page="Contact">Contact</a></li>
+      </ul>
+      <div class="nav-right">
+        <div class="theme-switcher">
+          <div class="theme-btn t-green" onclick="setTheme('')"></div>
+          <div class="theme-btn t-cyan" onclick="setTheme('theme-cyan')"></div>
+          <div
+            class="theme-btn t-purple"
+            onclick="setTheme('theme-purple')"
+          ></div>
+          <div
+            class="theme-btn t-orange"
+            onclick="setTheme('theme-orange')"
+          ></div>
+          <div class="theme-btn t-pink" onclick="setTheme('theme-pink')"></div>
+          <div class="theme-btn t-gold" onclick="setTheme('theme-gold')"></div>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html" data-page="Home">Home</a>
+        <a href="services.html" data-page="Services">Services</a>
+        <a href="portfolio.html" data-page="Portfolio">Portfolio</a>
+        <a href="about.html" data-page="About">About</a>
+        <a href="contact.html" data-page="Contact">Contact</a>
+        <div class="mobile-menu-divider"></div>
+        <div class="mobile-theme-row">
+          <span class="mobile-theme-label">Theme</span>
+          <div class="theme-btn t-green" onclick="setTheme('')"></div>
+          <div class="theme-btn t-cyan" onclick="setTheme('theme-cyan')"></div>
+          <div
+            class="theme-btn t-purple"
+            onclick="setTheme('theme-purple')"
+          ></div>
+          <div
+            class="theme-btn t-orange"
+            onclick="setTheme('theme-orange')"
+          ></div>
+          <div class="theme-btn t-pink" onclick="setTheme('theme-pink')"></div>
+          <div class="theme-btn t-gold" onclick="setTheme('theme-gold')"></div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="page-hero">
+      <div class="page-hero-grid"></div>
+      <div class="page-hero-orb orb-a"></div>
+      <div class="page-hero-orb orb-b"></div>
+      <div class="page-tag">What We Offer</div>
+      <h1 class="page-title">Our <span>Services</span></h1>
+      <p class="page-desc">
+        From concept to deployment — we handle every layer of the stack. Six
+        core services, one studio, zero compromises on quality.
+      </p>
+    </div>
+
+    <section id="services-detail">
+      <div class="section-label reveal">Core Offerings</div>
+      <h2 class="section-title reveal">
+        Everything You Need,<br />Nothing You Don't
+      </h2>
+      <div class="services-big-grid">
+        <!-- 01 -->
+        <div class="srv-card reveal">
+          <div class="srv-num">01 / 06</div>
+          <span class="srv-icon">🌐</span>
+          <div class="srv-price">₹6,000 – ₹10,000</div>
+          <div class="srv-name">Web Development</div>
+          <p class="srv-desc">
+            Modern, scalable websites built with clean architecture and
+            performance in mind. Designed to deliver a smooth and reliable user
+            experience.
+          </p>
+          <ul class="srv-features">
+            <li>Custom design & development</li>
+            <li>React / Next.js / Vue.js</li>
+            <li>API integration</li>
+            <li>CMS setup (Sanity, Contentful)</li>
+            <li>Cross-browser compatibility</li>
+            <li>Optimized performance</li>
+          </ul>
+        </div>
+
+        <!-- 02 -->
+        <div class="srv-card reveal">
+          <div class="srv-num">02 / 06</div>
+          <span class="srv-icon">🛒</span>
+          <div class="srv-price">₹8,000 – ₹10,000</div>
+          <div class="srv-name">E-Commerce</div>
+          <p class="srv-desc">
+            Conversion-focused online stores with seamless checkout, payment
+            integration, and intuitive user flows built to drive sales.
+          </p>
+          <ul class="srv-features">
+            <li>Secure payment integration (Stripe / Razorpay)</li>
+            <li>Custom cart & checkout flow</li>
+            <li>Product catalog & filters</li>
+            <li>Order management system</li>
+            <li>Mobile-optimized experience</li>
+            <li>Shopify / custom builds</li>
+          </ul>
+        </div>
+
+        <!-- 03 -->
+        <div class="srv-card reveal">
+          <div class="srv-num">03 / 06</div>
+          <span class="srv-icon">⚡</span>
+          <div class="srv-price">₹9,000 – ₹10,000</div>
+          <div class="srv-name">Web Applications</div>
+          <p class="srv-desc">
+            Advanced web apps and dashboards with authentication, real-time
+            features, and scalable architecture for complex use cases.
+          </p>
+          <ul class="srv-features">
+            <li>User authentication & role management</li>
+            <li>Real-time data handling</li>
+            <li>Database design & integration</li>
+            <li>REST / GraphQL APIs</li>
+            <li>Admin dashboards</li>
+            <li>Deployment setup</li>
+          </ul>
+        </div>
+
+        <!-- 04 -->
+        <div class="srv-card reveal">
+          <div class="srv-num">04 / 06</div>
+          <span class="srv-icon">🎨</span>
+          <div class="srv-price">₹2,000 – ₹5,000</div>
+          <div class="srv-name">UI/UX Design</div>
+          <p class="srv-desc">
+            Clean and user-focused designs that balance aesthetics and
+            usability, ensuring a smooth and engaging experience.
+          </p>
+          <ul class="srv-features">
+            <li>Wireframes & user flows</li>
+            <li>High-fidelity mockups</li>
+            <li>Figma prototypes</li>
+            <li>Design system basics</li>
+            <li>User-friendly layouts</li>
+            <li>Developer handoff</li>
+          </ul>
+        </div>
+
+        <!-- 05 -->
+        <div class="srv-card reveal">
+          <div class="srv-num">05 / 06</div>
+          <span class="srv-icon">📱</span>
+          <div class="srv-price">₹2,000 – ₹4,000</div>
+          <div class="srv-name">Responsive Design</div>
+          <p class="srv-desc">
+            Fully responsive layouts that adapt perfectly across all devices,
+            ensuring consistent performance and usability.
+          </p>
+          <ul class="srv-features">
+            <li>Mobile-first approach</li>
+            <li>All screen sizes supported</li>
+            <li>Touch-friendly interactions</li>
+            <li>Performance optimization</li>
+            <li>Cross-device testing</li>
+            <li>Smooth UI adjustments</li>
+          </ul>
+        </div>
+
+        <!-- 06 -->
+        <div class="srv-card reveal">
+          <div class="srv-num">06 / 06</div>
+          <span class="srv-icon">🔍</span>
+          <div class="srv-price">₹3,000 – ₹7,000</div>
+          <div class="srv-name">Portfolio Websites</div>
+          <p class="srv-desc">
+            Modern portfolio websites designed to showcase your work clearly and
+            make a strong first impression.
+          </p>
+          <ul class="srv-features">
+            <li>Custom design for personal branding</li>
+            <li>Fully responsive layout</li>
+            <li>Clean and minimal UI</li>
+            <li>Fast-loading performance</li>
+            <li>Smooth animations</li>
+            <li>Easy future updates</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="techstack">
+      <div class="section-label reveal">Tools & Technologies</div>
+      <h2 class="section-title reveal">Our Tech Stack</h2>
+      <div class="tech-categories">
+        <div class="tech-cat reveal">
+          <div class="tech-cat-name">// Frontend</div>
+          <div class="tech-pills">
+            <span class="tech-pill">React</span
+            ><span class="tech-pill">Next.js</span
+            ><span class="tech-pill">TypeScript</span
+            ><span class="tech-pill">Tailwind CSS</span
+            ><span class="tech-pill">Framer Motion</span
+            ><span class="tech-pill">GSAP</span
+            ><span class="tech-pill">Figma</span>
+          </div>
+        </div>
+        <div class="tech-cat reveal">
+          <div class="tech-cat-name">// Backend</div>
+          <div class="tech-pills">
+            <span class="tech-pill">Node.js</span
+            ><span class="tech-pill">Express</span
+            ><span class="tech-pill">NestJS</span
+            ><span class="tech-pill">GraphQL</span
+            ><span class="tech-pill">AWS</span
+            ><span class="tech-pill">Vercel</span
+            ><span class="tech-pill">MongoDB</span
+            ><span class="tech-pill">SQL</span
+            ><span class="tech-pill">JWT Auth</span
+            ><span class="tech-pill">Docker</span
+            ><span class="tech-pill">WebSockets</span
+            ><span class="tech-pill">Stripe API</span>
+          </div>
+        </div>
+        <div class="tech-cat reveal">
+          <div class="tech-cat-name">// Vibecoding Tools & AI Tools</div>
+          <div class="tech-pills">
+            <span class="tech-pill">Cursor</span
+            ><span class="tech-pill">Antigravity</span
+            ><span class="tech-pill">Claude</span
+            ><span class="tech-pill">Perplexity</span
+            ><span class="tech-pill">Stitch</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="workflow-line-section">
+      <div class="workflow-line-container">
+        <h2 class="workflow-title">How I Work</h2>
+        <p class="workflow-subtitle">
+          A clear step-by-step process from idea to launch.
+        </p>
+
+        <div class="workflow-line">
+          <!-- Step 1 -->
+          <div class="workflow-step">
+            <div class="circle">01</div>
+            <h4>Requirements</h4>
+            <p>Understanding your goals and project scope.</p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="workflow-step">
+            <div class="circle">02</div>
+            <h4>Planning</h4>
+            <p>Defining structure, flow, and tech stack.</p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="workflow-step">
+            <div class="circle">03</div>
+            <h4>Design</h4>
+            <p>Creating clean and user-friendly UI.</p>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="workflow-step">
+            <div class="circle">04</div>
+            <h4>Development</h4>
+            <p>Building with clean and scalable code.</p>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="workflow-step">
+            <div class="circle">05</div>
+            <h4>Testing</h4>
+            <p>Fixing bugs and optimizing performance.</p>
+          </div>
+
+          <!-- Step 6 -->
+          <div class="workflow-step">
+            <div class="circle">06</div>
+            <h4>Launch</h4>
+            <p>Deploying and providing support.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <div class="section-label reveal">Investment</div>
+      <h2 class="section-title reveal">Transparent Pricing</h2>
+      <div class="pricing-grid">
+        <div class="price-card reveal">
+          <div class="price-plan">Starter</div>
+          <div class="price-amount">₹5000<span> /project</span></div>
+          <div class="price-note">Perfect for landing pages & small sites</div>
+          <ul class="price-features">
+            <li>Up to 5 pages</li>
+            <li>Responsive design</li>
+            <li>Basic SEO setup</li>
+            <li>Contact form</li>
+            <li>2 rounds of revisions</li>
+            <li>1 month support</li>
+            <li class="no">Custom web app</li>
+            <li class="no">E-commerce</li>
+          </ul>
+          <a href="contact.html" class="price-btn outline" data-page="Contact"
+            >Get Started</a
+          >
+        </div>
+        <div class="price-card featured reveal">
+          <div class="price-badge">MOST POPULAR</div>
+          <div class="price-plan">Professional</div>
+          <div class="price-amount">₹10,000<span> /project</span></div>
+          <div class="price-note">For businesses that mean business</div>
+          <ul class="price-features">
+            <li>Up to 15 pages</li>
+            <li>Custom UI/UX design</li>
+            <li>Full SEO optimization</li>
+            <li>CMS integration</li>
+            <li>E-commerce ready</li>
+            <li>5 rounds of revisions</li>
+            <li>3 months support</li>
+            <li>Performance audit</li>
+          </ul>
+          <a href="contact.html" class="price-btn" data-page="Contact"
+            >Start Project</a
+          >
+        </div>
+        <div class="price-card reveal">
+          <div class="price-plan">Enterprise</div>
+          <div class="price-amount">Custom<span> /quote</span></div>
+          <div class="price-note">Complex apps & long-term partnerships</div>
+          <ul class="price-features">
+            <li>Unlimited pages</li>
+            <li>Full-stack web application</li>
+            <li>Custom backend & APIs</li>
+            <li>Database architecture</li>
+            <li>Dedicated support</li>
+            <li>Monthly retainer available</li>
+            <li>NDA & SLA options</li>
+            <li>Priority response</li>
+          </ul>
+          <a href="contact.html" class="price-btn outline" data-page="Contact"
+            >Let's Talk</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="section-label reveal">Questions</div>
+      <h2 class="section-title reveal">FAQ</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            How long does a typical project take?<span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            Most projects take 2–6 weeks depending on scope. Landing pages are
+            typically 1–2 weeks, while full web apps can be 4–8 weeks. We'll
+            give you a detailed timeline during the discovery phase.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            Do you work with clients outside India?<span class="faq-icon"
+              >+</span
+            >
+          </div>
+          <div class="faq-a">
+            Absolutely — we work with clients worldwide. Our team communicates
+            clearly in English and adapts to different time zones. We've worked
+            with clients across India, Europe, and North America.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            What's your payment structure?<span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            We typically work with 50% upfront and 50% on delivery. For longer
+            projects, we can arrange milestone-based payments. We accept UPI,
+            bank transfer, and international wire.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            Do you provide ongoing maintenance?<span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            Yes — all projects include 30 days of post-launch support. We also
+            offer monthly maintenance retainers for ongoing updates, security
+            patches, and feature additions.
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            Can I see your work before hiring?<span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            Of course. Check out our
+            <a
+              href="portfolio.html"
+              data-page="Portfolio"
+              style="color: var(--accent)"
+              >portfolio page</a
+            >
+            for detailed case studies. We're also happy to share private
+            references on request.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="cta-banner">
+      <h2 class="cta-title reveal">Ready to <span>Start</span>?</h2>
+      <p class="cta-sub reveal">
+        Tell us about your project. We'll get back to you within 24 hours.
+      </p>
+      <div class="cta-btns reveal">
+        <a href="contact.html" class="btn-primary" data-page="Contact"
+          ><span>Start a Project</span></a
+        >
+        <a href="portfolio.html" class="btn-outline" data-page="Portfolio"
+          >View Our Work</a
+        >
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">Pixel<span>Pair</span></div>
+          <p>
+            Two CS graduates building fast, beautiful, and functional web
+            experiences. From landing pages to full-stack apps.
+          </p>
+          <div class="footer-social">
+            <a href="#" class="social-btn">𝕏</a
+            ><a href="#" class="social-btn">⌥</a>
+            <a href="#" class="social-btn">in</a
+            ><a href="#" class="social-btn">⊙</a>
+            <a href="#" class="social-btn">◎</a
+            ><a href="#" class="social-btn">▷</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="index.html" data-page="Home">Home</a></li>
+            <li><a href="services.html" data-page="Services">Services</a></li>
+            <li>
+              <a href="portfolio.html" data-page="Portfolio">Portfolio</a>
+            </li>
+            <li><a href="about.html" data-page="About">About Us</a></li>
+            <li><a href="contact.html" data-page="Contact">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="services.html">Web Development</a></li>
+            <li><a href="services.html">E-Commerce</a></li>
+            <li><a href="services.html">Web Applications</a></li>
+            <li><a href="services.html">UI/UX Design</a></li>
+            <li><a href="services.html">Responsive Design</a></li>
+            <li><a href="services.html">SEO & Performance</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <div class="footer-contact-item">
+            <span class="icon">✉</span><span>contactpixelpair@gmail.com</span>
+          </div>
+          <div class="footer-contact-item">
+            <span class="icon">◎</span
+            ><span>Available Worldwide<br />Remote &amp; On-site</span>
+          </div>
+          <div class="footer-contact-item">
+            <span class="icon">⏱</span><span>Mon – sun, 24*7</span>
+          </div>
+          <div class="footer-contact-item">
+            <span class="icon">⚡</span><span>Avg. response: &lt; 24hrs</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-copy">
+          © 2025 <span>PixelPair</span>. All rights reserved.
+        </div>
+        
+        <div class="footer-badge">Crafted with ☕ &amp; 💻</div>
+      </div>
+    </footer>
+
+    <script src="pixelpair.js"></script>
+    <script>
+      function toggleFaq(el) {
+        const item = el.parentElement,
+          currentOpen = document.querySelector(".faq-item.open");
+        if (currentOpen && currentOpen !== item) {
+          currentOpen.classList.remove("open");
+          currentOpen
+            .querySelector(".faq-q")
+            .setAttribute("aria-expanded", "false");
+        }
+        item.classList.toggle("open");
+        el.setAttribute("aria-expanded", item.classList.contains("open"));
+      }
+    </script>
+  </body>
+</html>

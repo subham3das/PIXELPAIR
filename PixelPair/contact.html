@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Contact PixelPair — Start your project today.">
+<title>Contact — PixelPair</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="pixelpair.css">
+<style>
+/* CONTACT MAIN */
+#contact-main{padding:7rem 4rem}
+.contact-grid{display:grid;grid-template-columns:1fr 1.6fr;gap:6rem;align-items:start}
+
+/* INFO SIDE */
+.contact-info-title{font-size:1.5rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:1rem}
+.contact-info-desc{font-family:'DM Mono',monospace;font-size:0.82rem;color:var(--muted);line-height:1.8;margin-bottom:3rem}
+.contact-details{display:flex;flex-direction:column;gap:0}
+.contact-detail-item{padding:1.4rem 0;border-bottom:1px solid var(--border);display:flex;gap:1.2rem;align-items:flex-start;transition:all 0.3s}
+.contact-detail-item:hover .cd-label{color:var(--accent)}
+.cd-icon{font-size:1.2rem;flex-shrink:0;margin-top:2px}
+.cd-label{font-family:'DM Mono',monospace;font-size:0.66rem;color:var(--accent);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.3rem}
+.cd-value{font-family:'DM Mono',monospace;font-size:0.82rem;color:var(--text);line-height:1.5}
+.cd-value a{color:var(--text);text-decoration:none;transition:color 0.3s}
+.cd-value a:hover{color:var(--accent)}
+.availability-bar{margin-top:2.5rem;background:var(--card);border:1px solid var(--border);padding:1.4rem 1.8rem}
+.avail-label{font-family:'DM Mono',monospace;font-size:0.66rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.7rem}
+.avail-status{display:flex;align-items:center;gap:0.8rem;font-family:'DM Mono',monospace;font-size:0.85rem}
+.avail-dot{width:9px;height:9px;border-radius:50%;background:var(--accent);animation:avPulse 2s infinite}
+@keyframes avPulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(1.3)}}
+.avail-text{color:var(--accent)}
+.social-links-block{margin-top:2rem}
+.social-links-label{font-family:'DM Mono',monospace;font-size:0.66rem;color:var(--muted);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1rem}
+.social-row{display:flex;gap:0.5rem;flex-wrap:wrap}
+.soc-btn{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);border:1px solid var(--border);padding:0.4rem 1rem;text-decoration:none;transition:all 0.25s;letter-spacing:0.05em}
+.soc-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--glow)}
+
+/* FORM SIDE */
+.contact-form-wrap{background:var(--card);border:1px solid var(--border);padding:3.5rem;position:relative;overflow:hidden}
+.contact-form-wrap::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--accent)}
+.form-title{font-size:1.3rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:0.4rem}
+.form-subtitle{font-family:'DM Mono',monospace;font-size:0.76rem;color:var(--muted);margin-bottom:2rem}
+.contact-form{display:flex;flex-direction:column;gap:1.2rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.form-field{display:flex;flex-direction:column;gap:0.4rem}
+.form-field label{font-family:'DM Mono',monospace;font-size:0.67rem;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase}
+.form-field input,.form-field textarea,.form-field select{
+  background:var(--bg);border:1px solid var(--border);color:var(--text);
+  padding:0.9rem 1.2rem;font-family:'DM Mono',monospace;font-size:0.82rem;
+  outline:none;transition:border-color 0.3s,box-shadow 0.3s;resize:vertical;width:100%
+}
+.form-field input:focus,.form-field textarea:focus,.form-field select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--glow)}
+.form-field select option{background:var(--card)}
+
+/* BUDGET BUTTONS */
+.budget-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.6rem}
+.budget-btn{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);border:1px solid var(--border);padding:0.55rem 0.5rem;background:transparent;cursor:pointer;transition:all 0.25s;letter-spacing:0.03em}
+.budget-btn:hover,.budget-btn.active{border-color:var(--accent);color:var(--accent);background:var(--glow)}
+
+.form-submit{
+  padding:1.1rem 2.5rem;background:var(--accent);color:#000;
+  font-family:'Space Mono',monospace;font-weight:700;font-size:0.9rem;
+  border:none;cursor:pointer;letter-spacing:0.05em;width:100%;
+  transition:all 0.3s;margin-top:0.5rem;position:relative;overflow:hidden
+}
+.form-submit::before{content:'';position:absolute;inset:0;background:white;transform:translateX(-100%);transition:transform 0.35s}
+.form-submit:hover::before{transform:translateX(0)}
+.form-submit span{position:relative;z-index:1}
+.form-submit:hover{transform:translateY(-2px);box-shadow:0 12px 35px var(--glow)}
+.form-submit:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+
+/* VALIDATION ERRORS */
+.form-error{display:none;background:rgba(255,45,45,0.08);border:1px solid rgba(255,45,45,0.3);color:#ff5555;font-family:'DM Mono',monospace;font-size:0.72rem;padding:0.6rem 0.9rem;margin-top:-0.3rem}
+.form-error.show{display:block}
+
+/* SUCCESS OVERLAY */
+.success-overlay{display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:5rem 2rem;gap:1.5rem;position:absolute;inset:0;background:var(--card);z-index:10}
+.success-overlay.show{display:flex}
+.success-icon{font-size:4rem;animation:popIn 0.5s cubic-bezier(0.34,1.56,0.64,1)}
+@keyframes popIn{from{transform:scale(0) rotate(-20deg)}to{transform:scale(1) rotate(0)}}
+.success-title{font-size:1.5rem;font-weight:700}
+.success-desc{font-family:'DM Mono',monospace;font-size:0.82rem;color:var(--muted);line-height:1.7;max-width:360px}
+.success-back{margin-top:0.5rem;font-family:'DM Mono',monospace;font-size:0.78rem;color:var(--accent);border:1px solid var(--accent);padding:0.5rem 1.5rem;cursor:pointer;background:transparent;transition:all 0.25s}
+.success-back:hover{background:var(--glow)}
+
+/* ACTIVATION BADGE */
+.fs-badge{display:flex;align-items:flex-start;gap:0.9rem;background:var(--bg2);border:1px solid var(--border);border-left:3px solid var(--accent);padding:1rem 1.2rem;margin-bottom:2rem;font-family:'DM Mono',monospace;font-size:0.71rem;color:var(--muted);line-height:1.65}
+.fs-badge strong{color:var(--accent);display:block;margin-bottom:0.2rem}
+.fs-badge-icon{font-size:1.1rem;flex-shrink:0;margin-top:2px}
+
+/* LOCATION */
+#location{background:var(--bg2);padding:6rem 4rem}
+.map-container{background:var(--card);border:1px solid var(--border);height:280px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;margin-top:3rem}
+.map-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:40px 40px;opacity:0.5}
+.map-pin{position:relative;z-index:2;text-align:center}
+.map-pin-dot{width:20px;height:20px;border-radius:50%;background:var(--accent);margin:0 auto 1rem;animation:avPulse 2s infinite}
+.map-pin-label{font-family:'DM Mono',monospace;font-size:0.82rem;color:var(--text);font-weight:700}
+.map-pin-sub{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);margin-top:0.3rem}
+.map-dots{position:absolute;inset:0;pointer-events:none}
+.map-dot{position:absolute;width:4px;height:4px;border-radius:50%;background:var(--border)}
+
+@media(max-width:900px){
+  #contact-main{padding:4rem 1.5rem}
+  .contact-grid{grid-template-columns:1fr;gap:3rem}
+  .form-row{grid-template-columns:1fr}
+  .budget-grid{grid-template-columns:repeat(2,1fr)}
+  .contact-form-wrap{padding:2rem 1.5rem}
+  #location{padding:4rem 1.5rem}
+}
+@media(max-width:540px){
+  .budget-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+<div id="page-transition"><div class="pt-panel"></div><div class="pt-label" id="pt-label">Loading...</div></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo" data-page="Home">Pixel<span>Pair</span></a>
+  <ul class="nav-links">
+    <li><a href="services.html" data-page="Services">Services</a></li>
+    <li><a href="portfolio.html" data-page="Portfolio">Works</a></li>
+    <li><a href="about.html" data-page="About">About</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="theme-switcher">
+      <div class="theme-btn t-green" onclick="setTheme('')"></div>
+      <div class="theme-btn t-cyan" onclick="setTheme('theme-cyan')"></div>
+      <div class="theme-btn t-purple" onclick="setTheme('theme-purple')"></div>
+      <div class="theme-btn t-orange" onclick="setTheme('theme-orange')"></div>
+      <div class="theme-btn t-pink" onclick="setTheme('theme-pink')"></div>
+      <div class="theme-btn t-gold" onclick="setTheme('theme-gold')"></div>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" data-page="Home">Home</a>
+    <a href="services.html" data-page="Services">Services</a>
+    <a href="portfolio.html" data-page="Portfolio">Portfolio</a>
+    <a href="about.html" data-page="About">About</a>
+    <a href="contact.html">Contact</a>
+    <div class="mobile-menu-divider"></div>
+    <div class="mobile-theme-row">
+      <span class="mobile-theme-label">Theme</span>
+      <div class="theme-btn t-green" onclick="setTheme('')"></div>
+      <div class="theme-btn t-cyan" onclick="setTheme('theme-cyan')"></div>
+      <div class="theme-btn t-purple" onclick="setTheme('theme-purple')"></div>
+      <div class="theme-btn t-orange" onclick="setTheme('theme-orange')"></div>
+      <div class="theme-btn t-pink" onclick="setTheme('theme-pink')"></div>
+      <div class="theme-btn t-gold" onclick="setTheme('theme-gold')"></div>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-orb orb-a"></div>
+  <div class="page-hero-orb orb-b"></div>
+  <div class="page-tag">Get In Touch</div>
+  <h1 class="page-title">Let's <span>Talk</span></h1>
+  <p class="page-desc">Got a project in mind? We respond to every message within 24 hours. Let's figure out if we're a good fit.</p>
+</div>
+
+<section id="contact-main">
+  <div class="contact-grid">
+
+    <!-- ── INFO SIDE ── -->
+    <div class="reveal">
+      <div class="contact-info-title">We'd Love to Hear From You</div>
+      <p class="contact-info-desc">Whether you have a fully scoped project or just an idea on a napkin — reach out. We're great at turning vague ideas into clear plans.</p>
+
+      <div class="contact-details">
+        <div class="contact-detail-item">
+          <div class="cd-icon">✉</div>
+          <div><div class="cd-label">Email</div><div class="cd-value"><a href="mailto:contactpixelpair@gmail.com">contactpixelpair@gmail.com</a></div></div>
+        </div>
+        <div class="contact-detail-item">
+          <div class="cd-icon">📞</div>
+          <div><div class="cd-label">Phone / WhatsApp</div><div class="cd-value"><a href="tel:6002443038">+91 6002443038</a></div></div>
+        </div>
+        <div class="contact-detail-item">
+          <div class="cd-icon">⏱</div>
+          <div><div class="cd-label">Working Hours</div><div class="cd-value">Monday – Sunday, 24*7 IST</div></div>
+        </div>
+        <div class="contact-detail-item">
+          <div class="cd-icon">🌍</div>
+          <div><div class="cd-label">Location</div><div class="cd-value">Remote — Available Worldwide</div></div>
+        </div>
+        <div class="contact-detail-item">
+          <div class="cd-icon">📅</div>
+          <div><div class="cd-label">Booking</div><div class="cd-value"><a href="#contactForm">Fill the form ↗</a></div></div>
+        </div>
+      </div>
+
+      <div class="availability-bar">
+        <div class="avail-label">Current Status</div>
+        <div class="avail-status">
+          <div class="avail-dot"></div>
+          <span class="avail-text">Available for new projects</span>
+        </div>
+      </div>
+
+      <div class="social-links-block">
+        <div class="social-links-label">Find Us Online</div>
+        <div class="social-row">
+          <a href="#" class="soc-btn">Twitter / X</a>
+          <a href="#" class="soc-btn">GitHub</a>
+          <a href="#" class="soc-btn">LinkedIn</a>
+          <a href="#" class="soc-btn">Dribbble</a>
+          <a href="#" class="soc-btn">Instagram</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── FORM SIDE ── -->
+    <div class="contact-form-wrap reveal">
+
+      <div class="form-title">Start a Project</div>
+      <div class="form-subtitle">Fill in the details and we'll get back to you within 24 hours.</div>
+
+      
+
+      <!--
+      ┌─────────────────────────────────────────────────────────┐
+      │  ONLY ONE THING TO CHANGE IN THIS ENTIRE FILE:          │
+      │  In the <form action="..."> below, replace              │
+      │  hello@pixelpair.dev  with your actual email address.   │
+      │                                                         │
+      │  That's it. FormSubmit handles everything else.         │
+      └─────────────────────────────────────────────────────────┘
+      -->
+      <form
+        class="contact-form"
+        id="contactForm"
+        action="https://formsubmit.co/contactpixelpair@gmail.com"
+        method="POST"
+        onsubmit="return handleSubmit(event)"
+        novalidate
+      >
+        <!-- ── FormSubmit configuration (hidden fields) ─────── -->
+
+        <!-- Where to redirect after success — update YOUR_DOMAIN to your live URL -->
+        <!-- <input type="hidden" name="_next" value="https://YOUR_DOMAIN/contact.html?sent=1"> -->
+        <input type="hidden" name="_next" value="http://127.0.0.1:3000/contact.html">
+
+
+        <!-- Email subject line in your inbox -->
+        <input type="hidden" name="_subject" value="New Project Inquiry — PixelPair">
+
+        <!-- Disable FormSubmit's built-in captcha page (we use honeypot below) -->
+        <input type="hidden" name="_captcha" value="false">
+
+        <!-- Use a clean table layout in the email body -->
+        <input type="hidden" name="_template" value="table">
+
+        <!-- Honeypot — invisible to real users, bots fill it → submission silently blocked -->
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+
+        <!-- Budget (filled by JS when user clicks a budget button) -->
+        <input type="hidden" id="budget-input" name="budget" value="Not specified">
+
+        <!-- ── Visible form fields ───────────────────────────── -->
+        <div class="form-row">
+          <div class="form-field">
+            <label>Your Name *</label>
+            <input type="text" name="name" id="f-name" placeholder="Your Name" required minlength="2" autocomplete="name">
+            <div class="form-error" id="err-name">Please enter your name (min 2 characters)</div>
+          </div>
+          <div class="form-field">
+            <label>Email Address *</label>
+            <input type="email" name="email" id="f-email" placeholder="your@email.com" required autocomplete="email">
+            <div class="form-error" id="err-email">Please enter a valid email address</div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label>Company / Project Name</label>
+            <input type="text" name="company" placeholder="Acme Inc." autocomplete="organization">
+          </div>
+          <div class="form-field">
+            <label>Phone / WhatsApp</label>
+            <input type="tel" name="phone" placeholder="+91 9954123456" autocomplete="tel">
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label>Service Needed *</label>
+          <select name="service" id="f-service" required>
+            <option value="">Select a service...</option>
+            <option>Web Development</option>
+            <option>E-Commerce Store</option>
+            <option>Web Application</option>
+            <option>UI/UX Design</option>
+            <option>Responsive Design</option>
+            <option>Portfolio websites</option>
+            <option>Full Package</option>
+            <option>Not Sure Yet</option>
+          </select>
+          <div class="form-error" id="err-service">Please select a service</div>
+        </div>
+
+        <div class="form-field">
+          <label>Estimated Budget</label>
+          <div class="budget-grid">
+            <button type="button" class="budget-btn" onclick="selectBudget(this)">₹500–1K</button>
+            <button type="button" class="budget-btn" onclick="selectBudget(this)">₹1K–3K</button>
+            <button type="button" class="budget-btn" onclick="selectBudget(this)">₹3K–8K</button>
+            <button type="button" class="budget-btn" onclick="selectBudget(this)">₹8K–15K</button>
+            <button type="button" class="budget-btn" onclick="selectBudget(this)">₹15K+</button>
+            <button type="button" class="budget-btn" onclick="selectBudget(this)">Not Sure</button>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label>Timeline</label>
+          <select name="timeline">
+            <option value="">When do you need it?</option>
+            <option>ASAP (Rush Project)</option>
+            <option>Within 1 Month</option>
+            <option>1–3 Months</option>
+            <option>3–6 Months</option>
+            <option>Flexible</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label>Tell Us About Your Project *</label>
+          <textarea name="message" id="f-message" rows="5" placeholder="What are you building? Who's it for? What's the goal?" required minlength="20"></textarea>
+          <div class="form-error" id="err-message">Please describe your project (at least 20 characters)</div>
+        </div>
+
+        <div class="form-field">
+          <label>How Did You Find Us?</label>
+          <select name="source">
+            <option value="">Select...</option>
+            <option>Google Search</option>
+            <option>Social Media</option>
+            <option>Word of Mouth / Referral</option>
+            <option>GitHub</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        <button type="submit" class="form-submit" id="submit-btn">
+          <span>Send Message →</span>
+        </button>
+      </form>
+
+      <!-- Success overlay — shown when ?sent=1 appears in URL after redirect -->
+      <div class="success-overlay" id="success-overlay">
+        <div class="success-icon">✅</div>
+        <div class="success-title">Message Sent!</div>
+        <p class="success-desc">Thanks for reaching out! We'll review your project and get back to you within 24 hours.</p>
+        <button class="success-back" onclick="hideSuccess()">Send Another Message</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section id="location">
+  <div class="section-label reveal">Where We Are</div>
+  <h2 class="section-title reveal">Remote-First,<br>Worldwide Ready</h2>
+  <div class="map-container reveal">
+    <div class="map-grid"></div>
+    <div class="map-dots" id="mapDots"></div>
+    <div class="map-pin">
+      <div class="map-pin-dot"></div>
+      <div class="map-pin-label">PixelPair Studio</div>
+      <div class="map-pin-sub">Remote — Available Worldwide 🌍</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">Pixel<span>Pair</span></div>
+      <p>Two CS graduates building fast, beautiful, and functional web experiences. From landing pages to full-stack apps.</p>
+      <div class="footer-social">
+        <a href="#" class="social-btn">𝕏</a><a href="#" class="social-btn">⌥</a>
+        <a href="#" class="social-btn">in</a><a href="#" class="social-btn">⊙</a>
+        <a href="#" class="social-btn">◎</a><a href="#" class="social-btn">▷</a>
+      </div>
+    </div>
+    <div class="footer-col"><h4>Navigation</h4><ul>
+      <li><a href="index.html" data-page="Home">Home</a></li>
+      <li><a href="services.html" data-page="Services">Services</a></li>
+      <li><a href="portfolio.html" data-page="Portfolio">Portfolio</a></li>
+      <li><a href="about.html" data-page="About">About Us</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Services</h4><ul>
+      <li><a href="services.html">Web Development</a></li>
+      <li><a href="services.html">E-Commerce</a></li>
+      <li><a href="services.html">Web Applications</a></li>
+      <li><a href="services.html">UI/UX Design</a></li>
+      <li><a href="services.html">Responsive Design</a></li>
+      <li><a href="services.html">Portfolio websites</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Contact</h4>
+      <div class="footer-contact-item"><span class="icon">✉</span><span>contactpixelpair@gmail.com</span></div>
+      <div class="footer-contact-item"><span class="icon">◎</span><span>Available Worldwide<br>Remote &amp; On-site</span></div>
+      <div class="footer-contact-item"><span class="icon">⏱</span><span>Mon – Sun, 24*7</span></div>
+      <div class="footer-contact-item"><span class="icon">⚡</span><span>Avg. response: &lt; 24hrs</span></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 <span>PixelPair</span>. All rights reserved.</div>
+    <div class="footer-badge">Crafted with ☕ &amp; 💻</div>
+  </div>
+</footer>
+
+<script src="pixelpair.js"></script>
+<script>
+// ── BUDGET SELECTOR ──────────────────────────────────────────
+function selectBudget(btn) {
+  document.querySelectorAll('.budget-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('budget-input').value = btn.textContent.trim();
+}
+
+// ── VALIDATION ───────────────────────────────────────────────
+function showError(id, show) {
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('show', show);
+}
+
+function validateForm(form) {
+  let valid = true;
+  const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const name    = form.querySelector('#f-name').value.trim();
+  const email   = form.querySelector('#f-email').value.trim();
+  const service = form.querySelector('#f-service').value;
+  const message = form.querySelector('#f-message').value.trim();
+
+  if (name.length < 2)      { showError('err-name',    true);  valid = false; } else showError('err-name',    false);
+  if (!emailRx.test(email)) { showError('err-email',   true);  valid = false; } else showError('err-email',   false);
+  if (!service)             { showError('err-service', true);  valid = false; } else showError('err-service', false);
+  if (message.length < 20)  { showError('err-message', true);  valid = false; } else showError('err-message', false);
+
+  return valid;
+}
+
+// ── SUBMIT ───────────────────────────────────────────────────
+// Runs client-side validation first, then lets the native HTML
+// POST submit to FormSubmit — no JS API calls needed.
+function handleSubmit(e) {
+  if (!validateForm(e.target)) {
+    e.preventDefault(); // block submission if invalid
+    return false;
+  }
+  // Show loading state while the page POSTs
+  const btn = document.getElementById('submit-btn');
+  btn.querySelector('span').textContent = 'Sending…';
+  btn.disabled = true;
+  return true; // allow the native form POST to proceed
+}
+
+// ── SUCCESS STATE ────────────────────────────────────────────
+// FormSubmit redirects to _next URL with ?sent=1 appended.
+// We detect that and show the overlay instead of a blank page.
+(function checkIfSent() {
+  if (new URLSearchParams(window.location.search).get('sent') === '1') {
+    document.getElementById('success-overlay').classList.add('show');
+    // Remove ?sent=1 from URL without a page reload
+    history.replaceState({}, '', window.location.pathname);
+  }
+})();
+
+function hideSuccess() {
+  document.getElementById('success-overlay').classList.remove('show');
+  document.getElementById('contactForm').reset();
+  document.querySelectorAll('.budget-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('budget-input').value = 'Not specified';
+}
+
+// ── DECORATIVE MAP DOTS ──────────────────────────────────────
+(function generateMapDots() {
+  const container = document.getElementById('mapDots');
+  if (!container) return;
+  for (let i = 0; i < 32; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'map-dot';
+    dot.style.left    = (Math.random() * 95).toFixed(1) + '%';
+    dot.style.top     = (Math.random() * 90).toFixed(1) + '%';
+    dot.style.opacity = (Math.random() * 0.45 + 0.15).toFixed(2);
+    container.appendChild(dot);
+  }
+})();
+</script>
+</body>
+</html>
