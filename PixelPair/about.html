@@ -1,747 +1,803 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="About PixelPair — Two developers, one studio."
-    />
-    <title>About — PixelPair</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=DM+Mono:wght@300;400;500&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="pixelpair.css" />
-    <style>
-      /* STORY */
-      #story {
-        background: var(--bg);
-      }
-      .story-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8rem;
-        align-items: start;
-        margin-top: 4rem;
-      }
-      .story-text p {
-        font-family: "DM Mono", monospace;
-        font-size: 0.88rem;
-        color: var(--muted);
-        line-height: 1.9;
-        margin-bottom: 1.5rem;
-      }
-      .story-text p strong {
-        color: var(--text);
-      }
-      .story-text .hl {
-        color: var(--accent);
-      }
-      .story-aside {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-      }
-      .story-stat-card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        padding: 2rem 2.5rem;
-        display: flex;
-        align-items: center;
-        gap: 2rem;
-        transition: all 0.3s;
-      }
-      .story-stat-card:hover {
-        border-color: var(--accent);
-        transform: translateX(6px);
-      }
-      .story-stat-num {
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: var(--accent);
-        min-width: 80px;
-      }
-      .story-stat-label {
-        font-family: "DM Mono", monospace;
-        font-size: 0.78rem;
-        color: var(--muted);
-        line-height: 1.5;
-      }
 
-      /* TEAM */
-      #team {
-        background: var(--bg2);
-      }
-      .team-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 3rem;
-        margin-top: 4rem;
-      }
-      .team-big-card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        overflow: hidden;
-        transition: all 0.4s;
-      }
-      .team-big-card:hover {
-        border-color: var(--accent);
-        box-shadow: 0 20px 60px var(--glow);
-      }
-      .team-card-header {
-        padding: 3.5rem 3rem 2rem;
-        position: relative;
-        background: var(--bg);
-        border-bottom: 1px solid var(--border);
-      }
-      .team-card-header::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: var(--accent);
-      }
-      .team-emoji-avatar {
-        font-size: 4rem;
-        margin-bottom: 1.5rem;
-        display: block;
-      }
-      .team-card-name {
-        font-size: 1.8rem;
-        font-weight: 700;
-        letter-spacing: -0.02em;
-        margin-bottom: 0.4rem;
-      }
-      .team-card-role {
-        font-family: "DM Mono", monospace;
-        font-size: 0.75rem;
-        color: var(--accent);
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        margin-bottom: 1rem;
-      }
-      .team-card-body {
-        padding: 2.5rem 3rem;
-      }
-      .team-card-bio {
-        font-family: "DM Mono", monospace;
-        font-size: 0.82rem;
-        color: var(--muted);
-        line-height: 1.8;
-        margin-bottom: 1.2rem;
-      }
-      .skills-section-label {
-        font-family: "DM Mono", monospace;
-        font-size: 0.68rem;
-        color: var(--muted);
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        margin-bottom: 0.8rem;
-        margin-top: 1.5rem;
-      }
-      .skills-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-        margin-bottom: 2rem;
-      }
-      .skill-chip {
-        font-family: "DM Mono", monospace;
-        font-size: 0.7rem;
-        color: var(--muted);
-        background: var(--bg2);
-        border: 1px solid var(--border);
-        padding: 0.35rem 0.8rem;
-        transition: all 0.2s;
-      }
-      .skill-chip:hover {
-        border-color: var(--accent);
-        color: var(--accent);
-      }
-      .team-links {
-        display: flex;
-        gap: 0.8rem;
-      }
-      .team-link {
-        font-family: "DM Mono", monospace;
-        font-size: 0.72rem;
-        color: var(--muted);
-        border: 1px solid var(--border);
-        padding: 0.4rem 1rem;
-        text-decoration: none;
-        transition: all 0.25s;
-      }
-      .team-link:hover {
-        border-color: var(--accent);
-        color: var(--accent);
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="About PixelPair — Developers, one studio." />
+  <title>About — PixelPair</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=DM+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="pixelpair.css" />
+  <style>
+    /* STORY */
+    #story {
+      background: var(--bg);
+    }
 
-      /* TIMELINE */
-      #journey {
-        background: var(--bg);
-      }
-      .timeline {
-        max-width: 700px;
-        margin: 4rem auto 0;
-        position: relative;
-      }
-      .timeline::before {
-        content: "";
-        position: absolute;
-        left: 20px;
-        top: 0;
-        bottom: 0;
-        width: 1px;
-        background: linear-gradient(
-          to bottom,
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8rem;
+      align-items: start;
+      margin-top: 4rem;
+    }
+
+    .story-text p {
+      font-family: "DM Mono", monospace;
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 1.5rem;
+    }
+
+    .story-text p strong {
+      color: var(--text);
+    }
+
+    .story-text .hl {
+      color: var(--accent);
+    }
+
+    .story-aside {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .story-stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 2rem 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      transition: all 0.3s;
+    }
+
+    .story-stat-card:hover {
+      border-color: var(--accent);
+      transform: translateX(6px);
+    }
+
+    .story-stat-num {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--accent);
+      min-width: 80px;
+    }
+
+    .story-stat-label {
+      font-family: "DM Mono", monospace;
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* TEAM */
+    #team {
+      background: var(--bg2);
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 4rem;
+    }
+
+    .team-big-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: all 0.4s;
+    }
+
+    .team-big-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 20px 60px var(--glow);
+    }
+
+    .team-card-header {
+      padding: 3.5rem 3rem 2rem;
+      position: relative;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .team-card-header::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--accent);
+    }
+
+    .team-img-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid var(--accent);
+      margin-bottom: 1.5rem;
+      background: var(--bg2);
+    }
+
+    .team-img-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .team-card-name {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.4rem;
+    }
+
+    .team-card-role {
+      font-family: "DM Mono", monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .team-card-body {
+      padding: 2.5rem 3rem;
+    }
+
+    .team-card-bio {
+      font-family: "DM Mono", monospace;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+    }
+
+    .skills-section-label {
+      font-family: "DM Mono", monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+      margin-top: 1.5rem;
+    }
+
+    .skills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .skill-chip {
+      font-family: "DM Mono", monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.8rem;
+      transition: all 0.2s;
+    }
+
+    .skill-chip:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .team-links {
+      display: flex;
+      gap: 0.8rem;
+    }
+
+    .team-link {
+      font-family: "DM Mono", monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 0.4rem 1rem;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+
+    .team-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* TIMELINE */
+    #journey {
+      background: var(--bg);
+    }
+
+    .timeline {
+      max-width: 700px;
+      margin: 4rem auto 0;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 20px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom,
           transparent,
           var(--accent),
           var(--border),
-          transparent
-        );
-      }
-      .tl-item {
-        padding: 0 0 3rem 5rem;
-        position: relative;
-      }
-      .tl-dot {
-        position: absolute;
-        left: 14px;
-        top: 4px;
-        width: 13px;
-        height: 13px;
-        border-radius: 50%;
-        background: var(--bg);
-        border: 2px solid var(--accent);
-        transition: background 0.3s;
-      }
-      .tl-item:hover .tl-dot {
-        background: var(--accent);
-      }
-      .tl-year {
-        font-family: "DM Mono", monospace;
-        font-size: 0.68rem;
-        color: var(--accent);
-        letter-spacing: 0.15em;
-        margin-bottom: 0.5rem;
-      }
-      .tl-title {
-        font-size: 1.1rem;
-        font-weight: 700;
-        margin-bottom: 0.5rem;
-      }
-      .tl-desc {
-        font-family: "DM Mono", monospace;
-        font-size: 0.78rem;
-        color: var(--muted);
-        line-height: 1.7;
+          transparent);
+    }
+
+    .tl-item {
+      padding: 0 0 3rem 5rem;
+      position: relative;
+    }
+
+    .tl-dot {
+      position: absolute;
+      left: 14px;
+      top: 4px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2px solid var(--accent);
+      transition: background 0.3s;
+    }
+
+    .tl-item:hover .tl-dot {
+      background: var(--accent);
+    }
+
+    .tl-year {
+      font-family: "DM Mono", monospace;
+      font-size: 0.68rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      margin-bottom: 0.5rem;
+    }
+
+    .tl-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .tl-desc {
+      font-family: "DM Mono", monospace;
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* VALUES */
+    #values {
+      background: var(--bg2);
+    }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-top: 4rem;
+    }
+
+    .value-card {
+      background: var(--bg2);
+      padding: 3rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+
+    .value-card:hover {
+      background: var(--card);
+    }
+
+    .value-card::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+
+    .value-card:hover::after {
+      transform: scaleX(1);
+    }
+
+    .value-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1.2rem;
+      display: block;
+    }
+
+    .value-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+    }
+
+    .value-desc {
+      font-family: "DM Mono", monospace;
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .cta-banner {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 6rem 4rem;
+      text-align: center;
+    }
+
+    .cta-title {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .cta-title span {
+      color: var(--accent);
+    }
+
+    .cta-sub {
+      font-family: "DM Mono", monospace;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 3rem;
+    }
+
+    .cta-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      .story-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
       }
 
-      /* VALUES */
-      #values {
-        background: var(--bg2);
+      .team-grid {
+        grid-template-columns: 1fr;
       }
+
       .values-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1px;
-        background: var(--border);
-        margin-top: 4rem;
-      }
-      .value-card {
-        background: var(--bg2);
-        padding: 3rem 2.5rem;
-        position: relative;
-        overflow: hidden;
-        transition: background 0.3s;
-      }
-      .value-card:hover {
-        background: var(--card);
-      }
-      .value-card::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: var(--accent);
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 0.4s;
-      }
-      .value-card:hover::after {
-        transform: scaleX(1);
-      }
-      .value-icon {
-        font-size: 2.2rem;
-        margin-bottom: 1.2rem;
-        display: block;
-      }
-      .value-name {
-        font-size: 1.1rem;
-        font-weight: 700;
-        margin-bottom: 0.8rem;
-      }
-      .value-desc {
-        font-family: "DM Mono", monospace;
-        font-size: 0.78rem;
-        color: var(--muted);
-        line-height: 1.7;
+        grid-template-columns: 1fr;
       }
 
       .cta-banner {
-        background: var(--bg2);
-        border-top: 1px solid var(--border);
-        border-bottom: 1px solid var(--border);
-        padding: 6rem 4rem;
-        text-align: center;
+        padding: 4rem 1.5rem;
       }
-      .cta-title {
-        font-size: clamp(2rem, 4vw, 3.5rem);
-        font-weight: 700;
-        letter-spacing: -0.02em;
-        margin-bottom: 1rem;
-      }
-      .cta-title span {
-        color: var(--accent);
-      }
-      .cta-sub {
-        font-family: "DM Mono", monospace;
-        font-size: 0.85rem;
-        color: var(--muted);
-        margin-bottom: 3rem;
-      }
-      .cta-btns {
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-        flex-wrap: wrap;
-      }
+    }
+  </style>
+</head>
 
-      @media (max-width: 900px) {
-        .story-grid {
-          grid-template-columns: 1fr;
-          gap: 3rem;
-        }
-        .team-grid {
-          grid-template-columns: 1fr;
-        }
-        .values-grid {
-          grid-template-columns: 1fr;
-        }
-        .cta-banner {
-          padding: 4rem 1.5rem;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="page-transition">
-      <div class="pt-panel"></div>
-      <div class="pt-label" id="pt-label">Loading...</div>
+<body>
+  <div id="page-transition">
+    <div class="pt-panel"></div>
+    <div class="pt-label" id="pt-label">Loading...</div>
+  </div>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo" data-page="Home">Pixel<span>Pair</span></a>
+    <ul class="nav-links">
+      <li><a href="services.html" data-page="Services">Services</a></li>
+      <li><a href="portfolio.html" data-page="Portfolio">Works</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="contact.html" data-page="Contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="theme-switcher">
+        <div class="theme-btn t-green" onclick="setTheme('')"></div>
+        <div class="theme-btn t-cyan" onclick="setTheme('theme-cyan')"></div>
+        <div class="theme-btn t-purple" onclick="setTheme('theme-purple')"></div>
+        <div class="theme-btn t-orange" onclick="setTheme('theme-orange')"></div>
+        <div class="theme-btn t-pink" onclick="setTheme('theme-pink')"></div>
+        <div class="theme-btn t-gold" onclick="setTheme('theme-gold')"></div>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-    <div class="cursor" id="cursor"></div>
-    <div class="cursor-follower" id="cursorFollower"></div>
-
-    <nav id="navbar">
-      <a href="index.html" class="nav-logo" data-page="Home"
-        >Pixel<span>Pair</span></a
-      >
-      <ul class="nav-links">
-        <li><a href="services.html" data-page="Services">Services</a></li>
-        <li><a href="portfolio.html" data-page="Portfolio">Works</a></li>
-        <li><a href="about.html" class="active">About</a></li>
-        <li><a href="contact.html" data-page="Contact">Contact</a></li>
-      </ul>
-      <div class="nav-right">
-        <div class="theme-switcher">
-          <div class="theme-btn t-green" onclick="setTheme('')"></div>
-          <div class="theme-btn t-cyan" onclick="setTheme('theme-cyan')"></div>
-          <div
-            class="theme-btn t-purple"
-            onclick="setTheme('theme-purple')"
-          ></div>
-          <div
-            class="theme-btn t-orange"
-            onclick="setTheme('theme-orange')"
-          ></div>
-          <div class="theme-btn t-pink" onclick="setTheme('theme-pink')"></div>
-          <div class="theme-btn t-gold" onclick="setTheme('theme-gold')"></div>
-        </div>
-        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-      <div class="mobile-menu" id="mobileMenu">
-        <a href="index.html" data-page="Home">Home</a>
-        <a href="services.html" data-page="Services">Services</a>
-        <a href="portfolio.html" data-page="Portfolio">Portfolio</a>
-        <a href="about.html" data-page="About">About</a>
-        <a href="contact.html" data-page="Contact">Contact</a>
-        <div class="mobile-menu-divider"></div>
-        <div class="mobile-theme-row">
-          <span class="mobile-theme-label">Theme</span>
-          <div class="theme-btn t-green" onclick="setTheme('')"></div>
-          <div class="theme-btn t-cyan" onclick="setTheme('theme-cyan')"></div>
-          <div
-            class="theme-btn t-purple"
-            onclick="setTheme('theme-purple')"
-          ></div>
-          <div
-            class="theme-btn t-orange"
-            onclick="setTheme('theme-orange')"
-          ></div>
-          <div class="theme-btn t-pink" onclick="setTheme('theme-pink')"></div>
-          <div class="theme-btn t-gold" onclick="setTheme('theme-gold')"></div>
-        </div>
-      </div>
-    </nav>
-
-    <div class="page-hero">
-      <div class="page-hero-grid"></div>
-      <div class="page-hero-orb orb-a"></div>
-      <div class="page-hero-orb orb-b"></div>
-      <div class="page-tag">The Studio</div>
-      <h1 class="page-title">About <span>Us</span></h1>
-      <p class="page-desc">
-        Two developers. One studio. A shared obsession with building web things
-        that actually work beautifully.
-      </p>
-    </div>
-
-    <section id="story">
-      <div class="section-label reveal">Origin Story</div>
-      <h2 class="section-title reveal">How PixelPair<br />Was Born</h2>
-      <div class="story-grid">
-        <div class="story-text reveal">
-          <p>
-            We met on our first day of Computer Science class and immediately
-            bonded over a mutual obsession:
-            <span class="hl">making things on the internet</span>. While other
-            students debated algorithms for fun, we were staying late building
-            side projects.
-          </p>
-          <p>
-            By our second year, we were already freelancing — landing our first
-            real client through a cold email that somehow worked. We built their
-            website over a weekend. They paid us $150. We thought we were
-            millionaires.
-          </p>
-          <p>
-            <strong>Fast forward two years from graduation</strong> — we've
-            delivered over 20 projects, worked with clients across 8 countries,
-            and built a small but mighty reputation for shipping fast, building
-            clean, and never disappearing on a deadline.
-          </p>
-          <p>
-            PixelPair isn't just a name. It's our philosophy:
-            <span class="hl">two minds are better than one</span>. Every project
-            gets both of us — one obsessing over pixels and polish, the other
-            obsessing over architecture and performance.
-          </p>
-        </div>
-        <div class="story-aside reveal">
-          <div class="story-stat-card">
-            <div class="story-stat-num" data-target="10">0+</div>
-            <div class="story-stat-label">
-              Projects delivered<br />since graduation
-            </div>
-          </div>
-          <div class="story-stat-card">
-            <div class="story-stat-num" data-target="6">0</div>
-            <div class="story-stat-label">
-              States our clients<br />are based in
-            </div>
-          </div>
-          <div class="story-stat-card">
-            <div class="story-stat-num" data-target="100">0%</div>
-            <div class="story-stat-label">
-              On-time project<br />delivery rate
-            </div>
-          </div>
-          <div class="story-stat-card">
-            <div class="story-stat-num" data-target="2">0</div>
-            <div class="story-stat-label">
-              Years of combined<br />professional experience
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="team">
-      <div class="section-label reveal">The Duo</div>
-      <h2 class="section-title reveal">Meet The Team</h2>
-      <div class="team-grid">
-        <div class="team-big-card reveal">
-          <div class="team-card-header">
-            <span class="team-emoji-avatar">👨‍💻</span>
-            <div class="team-card-name">Deepanjan Paul</div>
-            <div class="team-card-role">
-              Backend Engineer & Database Designer
-            </div>
-          </div>
-          <div class="team-card-body">
-            <p class="team-card-bio">
-              Deepanjan is the engine behind the scenes. APIs, databases, server
-              architecture, deployment pipelines — the invisible layer that
-              makes everything run fast, secure, and at scale. He loves nothing
-              more than a clean database schema and a properly indexed query.
-            </p>
-            <p class="team-card-bio">
-              When he's not coding, he's reverse-engineering beautiful sites for
-              fun — which his friends find concerning and his clients find
-              incredibly useful.
-            </p>
-            <div class="skills-section-label">// Backend Skills</div>
-            <div class="skills-row">
-              <span class="skill-chip">Node.js</span
-              ><span class="skill-chip">PostgreSQL</span
-              ><span class="skill-chip">MongoDB</span
-              ><span class="skill-chip">AWS</span
-              ><span class="skill-chip">Docker</span
-              ><span class="skill-chip">Redis</span
-              ><span class="skill-chip">GraphQL</span
-              ><span class="skill-chip">NestJS</span>
-            </div>
-            
-            <div class="team-links">
-              <a href="https://github.com/Deepanjan27" class="team-link">GitHub ↗</a
-              ><a href="#" class="team-link">LinkedIn ↗</a
-              ><a href="https://deepanjanpaul.vercel.app" class="team-link">Portfolio ↗</a>
-            </div>
-          </div>
-        </div>
-        <div class="team-big-card reveal">
-          <div class="team-card-header">
-            <span class="team-emoji-avatar">👨‍💻</span>
-            <div class="team-card-name">Subham Das</div>
-            <div class="team-card-role">
-              Frontend Engineer & Design Architect
-            </div>
-          </div>
-          <div class="team-card-body">
-            <p class="team-card-bio">
-              Subham is the pixel-pusher of the pair. He stays up too late
-              arguing about font sizes and animation easing curves. With a deep
-              passion for design systems, micro-interactions, and React
-              architecture, he turns wireframes into polished, memorable
-              interfaces.
-            </p>
-            <p class="team-card-bio">
-              Subham has a superpower: he can spot a N+1 query problem from
-              across the room. He also makes excellent coffee, which keeps the
-              whole operation running.
-            </p>
-            <div class="skills-section-label">// Frontend Skills</div>
-            <div class="skills-row">
-              <span class="skill-chip">React</span
-              ><span class="skill-chip">Next.js</span
-              ><span class="skill-chip">TypeScript</span
-              ><span class="skill-chip">Tailwind CSS</span
-              ><span class="skill-chip">Figma</span
-              ><span class="skill-chip">GSAP</span
-              ><span class="skill-chip">Framer Motion</span
-              ><span class="skill-chip">Css</span
-              ><span class="skill-chip">Html</span>
-            </div>
-            <div class="team-links">
-              <a href="#" class="team-link">GitHub ↗</a
-              ><a href="#" class="team-link">LinkedIn ↗</a
-              ><a href="#" class="team-link">Twitter ↗</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="journey">
-      <div class="section-label reveal">Timeline</div>
-      <h2 class="section-title reveal">Our Journey</h2>
-      <div class="timeline">
-        <div class="tl-item reveal">
-          <div class="tl-dot"></div>
-          <div class="tl-year">// 2024</div>
-          <div class="tl-title">Day One — CS Class</div>
-          <p class="tl-desc">
-            We met on the first day of university. Bonded over a shared
-            obsession with building things on the internet. Our first "collab"
-            was a terrible HTML page that somehow got 80/100.
-          </p>
-        </div>
-        <div class="tl-item reveal">
-          <div class="tl-dot"></div>
-          <div class="tl-year">// 2024</div>
-          <div class="tl-title">First Paid Project</div>
-          <p class="tl-desc">
-            Landed our first real client through a cold email. Built a
-            restaurant website for Rs 1000. Took 3 weeks, burned through countless
-            cups of coffee. They're still a client today.
-          </p>
-        </div>
-        <div class="tl-item reveal">
-          <div class="tl-dot"></div>
-          <div class="tl-year">// 2025</div>
-          <div class="tl-title">PixelPair Is Born</div>
-          <p class="tl-desc">
-            Officially launched PixelPair as a studio. Got our first
-            client. Delivered a full-stack
-            web app. Realized we could do this for real.
-          </p>
-        </div>
-        <div class="tl-item reveal">
-          <div class="tl-dot"></div>
-          <div class="tl-year">// 2025 – Now</div>
-          <div class="tl-title">10+ Projects & Growing</div>
-          <p class="tl-desc">
-            Over 10 projects delivered across e-commerce, SaaS, web apps, and
-            design. Clients in 8 states. Still just the two of us — and we
-            prefer it that way.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section id="values">
-      <div class="section-label reveal">What We Stand For</div>
-      <h2 class="section-title reveal">Our Values</h2>
-      <div class="values-grid">
-        <div class="value-card reveal">
-          <span class="value-icon">⚡</span>
-          <div class="value-name">Speed Without Sacrifice</div>
-          <p class="value-desc">
-            We move fast — but never at the cost of quality. Clean code, clear
-            communication, and realistic timelines. No corner-cutting, ever.
-          </p>
-        </div>
-        <div class="value-card reveal">
-          <span class="value-icon">🎯</span>
-          <div class="value-name">Intentional Design</div>
-          <p class="value-desc">
-            Every pixel exists for a reason. We don't add animations to show
-            off. We design for your users, your goals, and your brand.
-          </p>
-        </div>
-        <div class="value-card reveal">
-          <span class="value-icon">🤝</span>
-          <div class="value-name">Radical Transparency</div>
-          <p class="value-desc">
-            You'll always know exactly where your project stands. Real updates,
-            real timelines, real feedback — even when it's hard to hear.
-          </p>
-        </div>
-        <div class="value-card reveal">
-          <span class="value-icon">📐</span>
-          <div class="value-name">Code That Lasts</div>
-          <p class="value-desc">
-            We write code you can maintain, scale, and build on. No spaghetti,
-            no magic numbers, no "it works, don't touch it" moments.
-          </p>
-        </div>
-        <div class="value-card reveal">
-          <span class="value-icon">🌍</span>
-          <div class="value-name">Accessible by Default</div>
-          <p class="value-desc">
-            Performant, accessible, and responsive is the baseline — not a
-            premium feature. Every site works for every user on every device.
-          </p>
-        </div>
-        <div class="value-card reveal">
-          <span class="value-icon">🔁</span>
-          <div class="value-name">Long-Term Partnership</div>
-          <p class="value-desc">
-            We want to be your team for years, not just a project. Most of our
-            clients come back. That makes us more proud than any award could.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <div class="cta-banner">
-      <h2 class="cta-title reveal">Want to Work<br /><span>With Us?</span></h2>
-      <p class="cta-sub reveal">
-        We'd love to hear about your project. Let's build something great
-        together.
-      </p>
-      <div class="cta-btns reveal">
-        <a href="contact.html" class="btn-primary" data-page="Contact"
-          ><span>Get In Touch</span></a
-        >
-        <a href="portfolio.html" class="btn-outline" data-page="Portfolio"
-          >See Our Work</a
-        >
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html" data-page="Home">Home</a>
+      <a href="services.html" data-page="Services">Services</a>
+      <a href="portfolio.html" data-page="Portfolio">Portfolio</a>
+      <a href="about.html" data-page="About">About</a>
+      <a href="contact.html" data-page="Contact">Contact</a>
+      <div class="mobile-menu-divider"></div>
+      <div class="mobile-theme-row">
+        <span class="mobile-theme-label">Theme</span>
+        <div class="theme-btn t-green" onclick="setTheme('')"></div>
+        <div class="theme-btn t-cyan" onclick="setTheme('theme-cyan')"></div>
+        <div class="theme-btn t-purple" onclick="setTheme('theme-purple')"></div>
+        <div class="theme-btn t-orange" onclick="setTheme('theme-orange')"></div>
+        <div class="theme-btn t-pink" onclick="setTheme('theme-pink')"></div>
+        <div class="theme-btn t-gold" onclick="setTheme('theme-gold')"></div>
       </div>
     </div>
+  </nav>
 
-    <footer>
-      <div class="footer-top">
-        <div class="footer-brand">
-          <div class="footer-logo">Pixel<span>Pair</span></div>
-          <p>
-            Two CS graduates building fast, beautiful, and functional web
-            experiences. From landing pages to full-stack apps.
+  <div class="page-hero">
+    <div class="page-hero-grid"></div>
+    <div class="page-hero-orb orb-a"></div>
+    <div class="page-hero-orb orb-b"></div>
+    <div class="page-tag">The Studio</div>
+    <h1 class="page-title">About <span>Us</span></h1>
+    <p class="page-desc">
+      Developers. One studio. A shared obsession with building web things
+      that actually work beautifully.
+    </p>
+  </div>
+
+  <section id="story">
+    <div class="section-label reveal">Origin Story</div>
+    <h2 class="section-title reveal">How PixelPair<br />Was Born</h2>
+    <div class="story-grid">
+      <div class="story-text reveal">
+        <p>
+          We met on our first day of Computer Science class and immediately
+          bonded over a mutual obsession:
+          <span class="hl">making things on the internet</span>. While other
+          students debated algorithms for fun, we were staying late building
+          side projects.
+        </p>
+        <p>
+          By our second year, we were already freelancing — landing our first
+          real client through a cold email that somehow worked. We built their
+          website over a weekend. They paid us $150. We thought we were
+          millionaires.
+        </p>
+        <p>
+          <strong>Fast forward two years from graduation</strong> — we've
+          delivered over 20 projects, worked with clients across 8 countries,
+          and built a small but mighty reputation for shipping fast, building
+          clean, and never disappearing on a deadline.
+        </p>
+        <p>
+          PixelPair isn't just a name. It's our philosophy:
+          <span class="hl">two minds are better than one</span>. Every project
+          gets both of us — one obsessing over pixels and polish, the other
+          obsessing over architecture and performance.
+        </p>
+      </div>
+      <div class="story-aside reveal">
+        <div class="story-stat-card">
+          <div class="story-stat-num" data-target="10">0+</div>
+          <div class="story-stat-label">
+            Projects delivered<br />since PixelPair born
+          </div>
+        </div>
+        <div class="story-stat-card">
+          <div class="story-stat-num" data-target="6">0</div>
+          <div class="story-stat-label">
+            States our clients<br />are based in
+          </div>
+        </div>
+        <div class="story-stat-card">
+          <div class="story-stat-num" data-target="100">0%</div>
+          <div class="story-stat-label">
+            On-time project<br />delivery rate
+          </div>
+        </div>
+        <div class="story-stat-card">
+          <div class="story-stat-num" data-target="3">0+</div>
+          <div class="story-stat-label">
+            Years of professional<br />experience
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="team">
+    <div class="section-label reveal">The Team</div>
+    <h2 class="section-title reveal">Meet The Team</h2>
+    <div class="team-grid">
+      <div class="team-big-card reveal">
+        <div class="team-card-header">
+          <div class="team-img-avatar"><img src="assets/deepanjan.png" alt="Deepanjan Paul"
+              onerror="this.src='https://ui-avatars.com/api/?name=Deepanjan+Paul&background=random'"></div>
+          <div class="team-card-name">Deepanjan Paul</div>
+          <div class="team-card-role">
+            Backend Dev & Founder
+          </div>
+        </div>
+        <div class="team-card-body">
+          <p class="team-card-bio">
+            Deepanjan is the engine behind the scenes. APIs, databases, server
+            architecture, deployment pipelines — the invisible layer that
+            makes everything run fast, secure, and at scale. He loves nothing
+            more than a clean database schema and a properly indexed query.
           </p>
-          <!-- <div class="footer-social">
-            <a href="#" class="social-btn">𝕏</a
-            ><a href="#" class="social-btn">⌥</a>
-            <a href="#" class="social-btn">in</a
-            ><a href="#" class="social-btn">⊙</a>
-            <a href="#" class="social-btn">◎</a
-            ><a href="#" class="social-btn">▷</a>
-          </div> -->
-        </div>
-        <div class="footer-col">
-          <h4>Navigation</h4>
-          <ul>
-            <li><a href="index.html" data-page="Home">Home</a></li>
-            <li><a href="services.html" data-page="Services">Services</a></li>
-            <li>
-              <a href="portfolio.html" data-page="Portfolio">Portfolio</a>
-            </li>
-            <li><a href="about.html" data-page="About">About Us</a></li>
-            <li><a href="contact.html" data-page="Contact">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Services</h4>
-          <ul>
-            <li><a href="services.html">Web Development</a></li>
-            <li><a href="services.html">E-Commerce</a></li>
-            <li><a href="services.html">Web Applications</a></li>
-            <li><a href="services.html">UI/UX Design</a></li>
-            <li><a href="services.html">Responsive Design</a></li>
-            <li><a href="services.html">SEO & Performance</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Contact</h4>
-          <div class="footer-contact-item">
-            <span class="icon">✉</span><span>contact@pixelpair.dev</span>
+          <p class="team-card-bio">
+            When he's not coding, he's reverse-engineering beautiful sites for
+            fun — which his friends find concerning and his clients find
+            incredibly useful.
+          </p>
+          <div class="skills-section-label">// Backend Skills</div>
+          <div class="skills-row">
+            <span class="skill-chip">Node.js</span><span class="skill-chip">PostgreSQL</span><span
+              class="skill-chip">MongoDB</span><span class="skill-chip">AWS</span><span
+              class="skill-chip">Docker</span><span class="skill-chip">Redis</span><span
+              class="skill-chip">GraphQL</span><span class="skill-chip">NestJS</span>
           </div>
-          <div class="footer-contact-item">
-            <span class="icon">◎</span
-            ><span>Available Worldwide<br />Remote &amp; On-site</span>
-          </div>
-          <div class="footer-contact-item">
-            <span class="icon">⏱</span><span>Mon – Sun, 24*7</span>
-          </div>
-          <div class="footer-contact-item">
-            <span class="icon">⚡</span><span>Avg. response: &lt; 24hrs</span>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <div class="footer-copy">
-          © 2025 <span>PixelPair</span>. All rights reserved.
-        </div>
-        <div class="footer-badge">Crafted with ☕ &amp; 💻</div>
-      </div>
-    </footer>
 
-    <script src="pixelpair.js"></script>
-  </body>
+          <div class="team-links">
+            <a href="https://github.com/Deepanjan27" class="team-link">GitHub ↗</a><a
+              href="https://www.linkedin.com/in/deepanjan-paul-638798323/" class="team-link">LinkedIn ↗</a><a
+              href="https://deepanjanpaul.vercel.app/" class="team-link">Portfolio
+              ↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="team-big-card reveal">
+        <div class="team-card-header">
+          <div class="team-img-avatar"><img src="assets/subham.png" alt="Subham Das"
+              onerror="this.src='https://ui-avatars.com/api/?name=Subham+Das&background=random'"></div>
+          <div class="team-card-name">Subham Das</div>
+          <div class="team-card-role">
+            Co-founder & Frontend Dev, UI/UX
+          </div>
+        </div>
+        <div class="team-card-body">
+          <p class="team-card-bio">
+            Subham is the pixel-pusher of the pair. He stays up too late
+            arguing about font sizes and animation easing curves. With a deep
+            passion for design systems, micro-interactions, and React
+            architecture, he turns wireframes into polished, memorable
+            interfaces.
+          </p>
+          <p class="team-card-bio">
+            Subham has a superpower: he can spot a N+1 query problem from
+            across the room. He also makes excellent coffee, which keeps the
+            whole operation running.
+          </p>
+          <div class="skills-section-label">// Frontend Skills</div>
+          <div class="skills-row">
+            <span class="skill-chip">React</span><span class="skill-chip">Next.js</span><span
+              class="skill-chip">TypeScript</span><span class="skill-chip">Tailwind CSS</span><span
+              class="skill-chip">Figma</span><span class="skill-chip">GSAP</span><span class="skill-chip">Framer
+              Motion</span><span class="skill-chip">Css</span><span class="skill-chip">Html</span>
+          </div>
+          <div class="team-links">
+            <a href="https://github.com/subham3das/" class="team-link">GitHub ↗</a><a
+              href="https://www.linkedin.com/in/subham-das-993985363/" class="team-link">LinkedIn ↗</a><a
+              href="https://subham26das.netlify.app/" class="team-link">Poertfolio
+              ↗</a>
+          </div>
+        </div>
+      </div>
+      <div class="team-big-card reveal">
+        <div class="team-card-header">
+          <div class="team-img-avatar"><img src="assets/img/team/ashish.jpg" alt="Ashish Verma"
+              onerror="this.src='https://ui-avatars.com/api/?name=Ashish+Verma&background=random'"></div>
+          <div class="team-card-name">Ashish Verma</div>
+          <div class="team-card-role">
+            Co-founder, Sales & Marketing Expert
+          </div>
+        </div>
+        <div class="team-card-body">
+          <p class="team-card-bio">
+            Ashish is the strategic force at PixelPair. He bridges the gap between complex technology and business
+            goals, ensuring every solution we build drives real results for our clients. His expertise in market trends
+            and client relations is the cornerstone of our growth.
+          </p>
+          <p class="team-card-bio">
+            With a keen eye for branding and a deep understanding of digital ecosystems, Ashish helps startups and
+            businesses scale their presence effectively in a competitive landscape.
+          </p>
+          <div class="skills-section-label">// Business Skills</div>
+          <div class="skills-row">
+            <span class="skill-chip">Sales</span><span class="skill-chip">Marketing</span><span
+              class="skill-chip">Branding</span><span class="skill-chip">Strategy</span><span
+              class="skill-chip">Growth</span><span class="skill-chip">Relations</span><span
+              class="skill-chip">Analysis</span>
+          </div>
+          <div class="team-links">
+            <a href="#" class="team-link">LinkedIn ↗</a><a href="#" class="team-link">Twitter ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="journey">
+    <div class="section-label reveal">Timeline</div>
+    <h2 class="section-title reveal">Our Journey</h2>
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-year">// 2024</div>
+        <div class="tl-title">Day One — CS Class</div>
+        <p class="tl-desc">
+          We met on the first day of university. Bonded over a shared
+          obsession with building things on the internet. Our first "collab"
+          was a terrible HTML page that somehow got 80/100.
+        </p>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-year">// 2024</div>
+        <div class="tl-title">First Paid Project</div>
+        <p class="tl-desc">
+          Landed our first real client through a cold email. Built a
+          restaurant website for Rs 1000. Took 3 weeks, burned through countless
+          cups of coffee. They're still a client today.
+        </p>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-year">// 2025</div>
+        <div class="tl-title">PixelPair Is Born</div>
+        <p class="tl-desc">
+          Officially launched PixelPair as a studio. Got our first
+          client. Delivered a full-stack
+          web app. Realized we could do this for real.
+        </p>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-year">// 2025 – Now</div>
+        <div class="tl-title">10+ Projects & Growing</div>
+        <p class="tl-desc">
+          Over 10 projects delivered across e-commerce, SaaS, web apps, and
+          design. Clients in 8 states. Still just us — and we
+          prefer it that way.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="values">
+    <div class="section-label reveal">What We Stand For</div>
+    <h2 class="section-title reveal">Our Values</h2>
+    <div class="values-grid">
+      <div class="value-card reveal">
+        <span class="value-icon">⚡</span>
+        <div class="value-name">Speed Without Sacrifice</div>
+        <p class="value-desc">
+          We move fast — but never at the cost of quality. Clean code, clear
+          communication, and realistic timelines. No corner-cutting, ever.
+        </p>
+      </div>
+      <div class="value-card reveal">
+        <span class="value-icon">🎯</span>
+        <div class="value-name">Intentional Design</div>
+        <p class="value-desc">
+          Every pixel exists for a reason. We don't add animations to show
+          off. We design for your users, your goals, and your brand.
+        </p>
+      </div>
+      <div class="value-card reveal">
+        <span class="value-icon">🤝</span>
+        <div class="value-name">Radical Transparency</div>
+        <p class="value-desc">
+          You'll always know exactly where your project stands. Real updates,
+          real timelines, real feedback — even when it's hard to hear.
+        </p>
+      </div>
+      <div class="value-card reveal">
+        <span class="value-icon">📐</span>
+        <div class="value-name">Code That Lasts</div>
+        <p class="value-desc">
+          We write code you can maintain, scale, and build on. No spaghetti,
+          no magic numbers, no "it works, don't touch it" moments.
+        </p>
+      </div>
+      <div class="value-card reveal">
+        <span class="value-icon">🌍</span>
+        <div class="value-name">Accessible by Default</div>
+        <p class="value-desc">
+          Performant, accessible, and responsive is the baseline — not a
+          premium feature. Every site works for every user on every device.
+        </p>
+      </div>
+      <div class="value-card reveal">
+        <span class="value-icon">🔁</span>
+        <div class="value-name">Long-Term Partnership</div>
+        <p class="value-desc">
+          We want to be your team for years, not just a project. Most of our
+          clients come back. That makes us more proud than any award could.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-banner">
+    <h2 class="cta-title reveal">Want to Work<br /><span>With Us?</span></h2>
+    <p class="cta-sub reveal">
+      We'd love to hear about your project. Let's build something great
+      together.
+    </p>
+    <div class="cta-btns reveal">
+      <a href="contact.html" class="btn-primary" data-page="Contact"><span>Get In Touch</span></a>
+      <a href="portfolio.html" class="btn-outline" data-page="Portfolio">See Our Work</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">Pixel<span>Pair</span></div>
+        <p>
+          CS graduates building fast, beautiful, and functional web
+          experiences. From landing pages to full-stack apps.
+        </p>
+
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html" data-page="Home">Home</a></li>
+          <li><a href="services.html" data-page="Services">Services</a></li>
+          <li>
+            <a href="portfolio.html" data-page="Portfolio">Portfolio</a>
+          </li>
+          <li><a href="about.html" data-page="About">About Us</a></li>
+          <li><a href="contact.html" data-page="Contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="servicedetail.html?s=portfolio">Portfolio &amp; Landing</a></li>
+          <li><a href="servicedetail.html?s=basic">Basic Business Site</a></li>
+          <li><a href="servicedetail.html?s=premium">Premium Business Site</a></li>
+          <li><a href="servicedetail.html?s=ecommerce">E-Commerce</a></li>
+          <li><a href="servicedetail.html?s=uiux">UI/UX Design</a></li>
+          <li><a href="servicedetail.html?s=maintenance">Annual Maintenance</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item">
+          <span class="icon">✉</span><span>contact@pixelpair.dev</span>
+        </div>
+        <div class="footer-contact-item">
+          <span class="icon">◎</span><span>Available Worldwide<br />Remote &amp; On-site</span>
+        </div>
+        <div class="footer-contact-item">
+          <span class="icon">⏱</span><span>Mon – Sun, 24*7</span>
+        </div>
+        <div class="footer-contact-item">
+          <span class="icon">⚡</span><span>Avg. response: &lt; 24hrs</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        © 2025 <span>PixelPair</span>. All rights reserved.
+      </div>
+      <div class="footer-badge">Crafted with ☕ &amp; 💻</div>
+    </div>
+  </footer>
+
+  <script src="pixelpair.js"></script>
+</body>
+
 </html>

@@ -1,533 +1,1728 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="PixelPair — Web Development Studio. Two CS grads crafting fast, beautiful, and functional web experiences.">
-<title>PixelPair — Web Development Studio</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="pixelpair.css">
-<style>
-/* ── HERO ── */
-#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 4rem;position:relative;overflow:hidden;margin-top:0}
-.hero-bg-grid{position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:60px 60px;opacity:0.3;animation:gridPulse 4s ease-in-out infinite}
-@keyframes gridPulse{0%,100%{opacity:0.3}50%{opacity:0.5}}
-.hero-orb{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
-.orb1{width:500px;height:500px;background:var(--glow);top:-100px;right:-100px;animation:orbFloat 8s ease-in-out infinite}
-.orb2{width:300px;height:300px;background:var(--glow);bottom:50px;left:-50px;animation:orbFloat 6s ease-in-out infinite reverse}
-@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-30px) scale(1.1)}}
-.hero-tag{padding-top:5rem;font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--accent);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.8s 0.3s forwards;display:flex;align-items:center;gap:0.8rem}
-.hero-tag::before{content:'';width:40px;height:1px;background:var(--accent)}
-.hero-title{font-size:clamp(2.8rem,7vw,7rem);font-weight:700;line-height:1.05;letter-spacing:-0.02em;opacity:0;animation:fadeUp 0.8s 0.5s forwards}
-.hero-title .line2{color:transparent;-webkit-text-stroke:1px var(--accent)}
-.hero-sub{font-family:'DM Mono',monospace;font-size:1rem;color:var(--muted);max-width:500px;line-height:1.7;margin-top:2rem;opacity:0;animation:fadeUp 0.8s 0.7s forwards}
-.hero-cta{display:flex;gap:1.2rem;margin-top:3rem;opacity:0;animation:fadeUp 0.8s 0.9s forwards;flex-wrap:wrap}
-.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);letter-spacing:0.2em;display:flex;flex-direction:column;align-items:center;gap:0.8rem;animation:fadeUp 1s 1.5s both;cursor:pointer;text-decoration:none}
-.scroll-line{width:1px;height:50px;background:var(--border);position:relative;overflow:hidden}
-.scroll-line::after{content:'';position:absolute;top:-100%;width:100%;height:100%;background:var(--accent);animation:scrollDown 2s ease-in-out infinite}
-@keyframes scrollDown{0%{top:-100%}100%{top:100%}}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description"
+    content="PixelPair — Web Development Studio. CS grads crafting fast, beautiful, and functional web experiences.">
+  <title>PixelPair — Web Development Studio</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=DM+Mono:wght@300;400;500&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="pixelpair.css">
+  <style>
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 4rem;
+      position: relative;
+      overflow: hidden;
+      margin-top: 0
+    }
 
-/* ── SERVICES ── */
-#services{background:var(--bg)}
-.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);margin-top:5rem}
-.service-card{background:var(--bg);padding:3rem 2.5rem;position:relative;overflow:hidden;transition:all 0.4s;cursor:default}
-.service-card::before{content:'';position:absolute;inset:0;background:var(--glow);opacity:0;transition:opacity 0.4s}
-.service-card:hover::before{opacity:1}
-.service-card:hover{transform:translateY(-4px)}
-.service-num{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);letter-spacing:0.1em;margin-bottom:2rem}
-.service-icon{font-size:2.5rem;margin-bottom:1.5rem;display:block}
-.service-name{font-size:1.4rem;font-weight:700;margin-bottom:1rem}
-.service-desc{font-family:'DM Mono',monospace;font-size:0.82rem;color:var(--muted);line-height:1.7}
-.service-arrow{position:absolute;bottom:2.5rem;right:2.5rem;color:var(--accent);font-size:1.5rem;transform:translateX(-5px);opacity:0;transition:all 0.3s}
-.service-card:hover .service-arrow{transform:translateX(0);opacity:1}
+    .hero-bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.3;
+      animation: gridPulse 4s ease-in-out infinite
+    }
 
-/* ── WORK / PROJECT SHOWCASE ── */
-#work{background:var(--bg2);overflow:hidden;padding:8rem 0}
-.work-header{padding:0 4rem;margin-bottom:3rem}
-.work-hint-row{display:flex;align-items:center;justify-content:space-between;margin-top:1.5rem;padding-right:4rem}
-.work-scroll-hint{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--muted);display:flex;align-items:center;gap:0.8rem;letter-spacing:0.1em}
-.work-scroll-hint .hint-arrows{color:var(--accent);animation:hintSlide 1.5s ease-in-out infinite;display:flex;gap:3px}
-.work-scroll-hint .hint-arrows span{display:inline-block;animation:arrowPop 1.5s ease-in-out infinite}
-.work-scroll-hint .hint-arrows span:nth-child(2){animation-delay:0.15s}
-.work-scroll-hint .hint-arrows span:nth-child(3){animation-delay:0.3s}
-@keyframes arrowPop{0%,100%{opacity:0.3;transform:translateX(0)}50%{opacity:1;transform:translateX(5px)}}
-@keyframes hintSlide{0%,100%{opacity:0.7}50%{opacity:1}}
+    @keyframes gridPulse {
 
-/* CAROUSEL CONTAINER */
-.work-carousel-outer{position:relative}
-.work-carousel-track{
-  display:flex;gap:2.5rem;
-  padding:3rem 6rem 4rem;
-  overflow-x:auto;
-  scroll-snap-type:x mandatory;
-  scrollbar-width:none;-ms-overflow-style:none;
-  cursor:grab;user-select:none;
-  scroll-behavior:smooth;
-}
-.work-carousel-track::-webkit-scrollbar{display:none}
-.work-carousel-track.dragging{cursor:grabbing;scroll-behavior:auto}
+      0%,
+      100% {
+        opacity: 0.3
+      }
 
-/* SCROLL ARROW BUTTONS */
-.work-arrow{
-  position:absolute;top:50%;transform:translateY(-50%);
-  width:52px;height:52px;border:1px solid var(--border);
-  background:rgba(10,10,10,0.92);
-  backdrop-filter:blur(12px);
-  color:var(--muted);font-size:1.3rem;
-  display:flex;align-items:center;justify-content:center;
-  cursor:pointer;z-index:10;transition:all 0.3s;
-  border-radius:0;
-}
-.work-arrow:hover{border-color:var(--accent);color:var(--accent);background:var(--glow);box-shadow:0 0 20px var(--glow)}
-.work-arrow.left{left:1rem}
-.work-arrow.right{right:1rem}
-.work-arrow svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+      50% {
+        opacity: 0.5
+      }
+    }
 
-/* CARDS */
-.work-card{
-  flex:0 0 380px;scroll-snap-align:center;
-  background:var(--card);border:1px solid var(--border);
-  overflow:hidden;position:relative;
-  transition:all 0.5s cubic-bezier(0.4,0,0.2,1);
-  transform:scale(0.87);opacity:0.35;filter:brightness(0.6) saturate(0.7);
-}
-.work-card.active{transform:scale(1);opacity:1;filter:brightness(1) saturate(1);border-color:var(--accent);box-shadow:0 0 0 1px var(--accent),0 30px 90px var(--glow-strong),0 0 60px var(--glow)}
-.work-card.near-active{transform:scale(0.93);opacity:0.6;filter:brightness(0.8) saturate(0.85)}
-.work-img{height:250px;background:var(--bg);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-.work-img-bg{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:5rem;transition:transform 0.5s;background:linear-gradient(135deg,var(--bg2),var(--card))}
-.work-card.active .work-img-bg{transform:scale(1.06)}
-.work-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.9),transparent 55%);opacity:0;transition:opacity 0.35s;display:flex;align-items:flex-end;padding:1.5rem 2rem}
-.work-card.active:hover .work-overlay{opacity:1}
-.work-overlay-text{font-family:'DM Mono',monospace;font-size:0.8rem;color:var(--accent);letter-spacing:0.12em;display:flex;align-items:center;gap:0.5rem}
-.work-overlay-text::after{content:'→';transition:transform 0.2s}
-.work-card.active:hover .work-overlay-text::after{transform:translateX(4px)}
-.work-info{padding:2rem 2.5rem}
-.work-tags{display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:1rem}
-.work-tag{font-family:'DM Mono',monospace;font-size:0.67rem;color:var(--accent);background:var(--glow);padding:0.25rem 0.75rem;letter-spacing:0.05em}
-.work-title{font-size:1.2rem;font-weight:700;margin-bottom:0.5rem;line-height:1.3}
-.work-desc{font-family:'DM Mono',monospace;font-size:0.77rem;color:var(--muted);line-height:1.65}
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none
+    }
 
-/* CONTROLS */
-.work-carousel-controls{display:flex;align-items:center;justify-content:center;gap:1.2rem;padding:0.5rem 4rem 0}
-.carousel-dot{width:7px;height:7px;border-radius:50%;background:var(--border);cursor:pointer;transition:all 0.35s;border:none;padding:0}
-.carousel-dot.active{background:var(--accent);width:24px;border-radius:3px}
+    .orb1 {
+      width: 500px;
+      height: 500px;
+      background: var(--glow);
+      top: -100px;
+      right: -100px;
+      animation: orbFloat 8s ease-in-out infinite
+    }
 
-/* PROGRESS BAR */
-.work-progress-wrap{margin:1.5rem 4rem 0;height:2px;background:var(--border);position:relative;overflow:hidden;border-radius:2px}
-.work-progress-bar{position:absolute;left:0;top:0;height:100%;background:var(--accent);transition:width 0.4s cubic-bezier(0.4,0,0.2,1),background 0.3s;border-radius:2px}
+    .orb2 {
+      width: 300px;
+      height: 300px;
+      background: var(--glow);
+      bottom: 50px;
+      left: -50px;
+      animation: orbFloat 6s ease-in-out infinite reverse
+    }
 
-/* ── ABOUT ── */
-#about{background:var(--bg)}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:center;margin-top:5rem}
-.about-text p{font-family:'DM Mono',monospace;font-size:0.9rem;color:var(--muted);line-height:1.9;margin-bottom:1.5rem}
-.about-text p strong{color:var(--text);font-weight:500}
-.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--border);margin-top:3rem}
-.stat{background:var(--bg2);padding:2rem}
-.stat-num{font-size:3rem;font-weight:800;color:var(--accent);line-height:1;margin-bottom:0.5rem}
-.stat-label{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--muted);letter-spacing:0.05em}
-.team-cards{display:flex;flex-direction:column;gap:1.5rem}
-.team-card{background:var(--card);border:1px solid var(--border);padding:2rem;display:flex;gap:1.5rem;align-items:flex-start;position:relative;overflow:hidden;transition:all 0.3s}
-.team-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent)}
-.team-card:hover{border-color:var(--accent);transform:translateX(6px)}
-.team-avatar{width:60px;height:60px;border-radius:50%;background:var(--glow);border:2px solid var(--accent);display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0}
-.team-name{font-size:1rem;font-weight:700;margin-bottom:0.3rem}
-.team-role{font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--accent);letter-spacing:0.1em;margin-bottom:0.5rem}
-.team-bio{font-family:'DM Mono',monospace;font-size:0.76rem;color:var(--muted);line-height:1.6}
-.skills-row{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1rem}
-.skill-chip{font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--muted);background:var(--bg2);border:1px solid var(--border);padding:0.35rem 0.8rem;letter-spacing:0.05em;transition:all 0.2s}
-.skill-chip:hover{border-color:var(--accent);color:var(--accent)}
+    @keyframes orbFloat {
 
-/* ── CONTACT MINI ── */
-#contact{background:var(--bg2);text-align:center}
-.contact-inner{max-width:700px;margin:0 auto}
-.contact-big{font-size:clamp(2rem,5vw,4.5rem);font-weight:700;letter-spacing:-0.02em;line-height:1.05;margin:2rem 0 3rem}
-.contact-big span{color:transparent;-webkit-text-stroke:1px var(--accent)}
-.contact-form{display:flex;flex-direction:column;gap:1rem;text-align:left}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.form-field{display:flex;flex-direction:column;gap:0.4rem}
-.form-field label{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted);letter-spacing:0.1em;text-transform:uppercase}
-.form-field input,.form-field textarea,.form-field select{background:var(--card);border:1px solid var(--border);color:var(--text);padding:0.9rem 1.2rem;font-family:'DM Mono',monospace;font-size:0.85rem;outline:none;transition:border-color 0.3s,box-shadow 0.3s;resize:vertical;width:100%}
-.form-field input:focus,.form-field textarea:focus,.form-field select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--glow)}
-.form-field select option{background:var(--card)}
-.form-submit{padding:1rem 3rem;background:var(--accent);color:#000;font-family:'Space Mono',monospace;font-weight:800;font-size:1rem;border:none;cursor:pointer;letter-spacing:0.05em;align-self:flex-start;transition:all 0.3s;margin-top:1rem}
-.form-submit:hover{transform:translateY(-2px);box-shadow:0 10px 30px var(--glow)}
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1)
+      }
 
-/* ── LOADER ── */
-#loader{position:fixed;inset:0;background:var(--bg);z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1.8rem;transition:opacity 0.7s ease,visibility 0.7s ease}
-#loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
-.loader-logo{font-size:2.2rem;font-weight:800;letter-spacing:-0.03em;animation:loaderPulse 1.5s ease-in-out infinite}
-.loader-logo span{color:var(--accent)}
-.loader-tagline{font-family:'DM Mono',monospace;font-size:0.75rem;color:var(--muted);letter-spacing:0.2em;text-transform:uppercase;opacity:0;animation:fadeIn 0.5s 0.5s forwards}
-.loader-bar-wrap{width:220px;height:2px;background:var(--border)}
-.loader-bar{height:100%;background:var(--accent);width:0;animation:loadBar 1.9s cubic-bezier(0.4,0,0.2,1) forwards}
-@keyframes loadBar{0%{width:0}60%{width:75%}100%{width:100%}}
-@keyframes loaderPulse{0%,100%{opacity:1}50%{opacity:0.65}}
+      50% {
+        transform: translate(30px, -30px) scale(1.1)
+      }
+    }
 
-/* ── MOBILE ── */
-@media(max-width:900px){
-  #hero{padding:0 1.5rem}
-  .hero-title{font-size:clamp(2.2rem,10vw,4rem)}
-  .hero-sub{font-size:0.88rem}
-  .hero-scroll{display:none}
-  .orb1{width:280px;height:280px;top:-60px;right:-60px}
-  .orb2{width:160px;height:160px}
-  #work{padding:5rem 0}
-  .work-header{padding:0 1.5rem}
-  .work-hint-row{padding-right:1.5rem}
-  .work-carousel-track{padding:2rem 2.5rem 3rem;gap:1.5rem}
-  .work-card{flex:0 0 300px}
-  .work-progress-wrap{margin:1.2rem 1.5rem 0}
-  .work-arrow{display:none}
-  .services-grid{grid-template-columns:1fr;gap:0}
-  .about-grid{grid-template-columns:1fr;gap:3.5rem}
-  .form-row{grid-template-columns:1fr}
-  .form-submit{width:100%;align-self:stretch;text-align:center}
-}
-@media(max-width:540px){
-  .hero-title{font-size:clamp(2rem,12vw,3.2rem)}
-  .work-card{flex:0 0 270px}
-  .work-carousel-controls{padding:1rem 1.5rem 0}
-}
-</style>
+    .hero-tag {
+      padding-top: 5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.3s forwards;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: var(--accent)
+    }
+
+    .hero-title {
+      font-size: clamp(2.8rem, 7vw, 7rem);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.5s forwards
+    }
+
+    .hero-title .line2 {
+      color: transparent;
+      -webkit-text-stroke: 1px var(--accent)
+    }
+
+    .hero-sub {
+      font-family: 'DM Mono', monospace;
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 500px;
+      line-height: 1.7;
+      margin-top: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.7s forwards
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1.2rem;
+      margin-top: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.9s forwards;
+      flex-wrap: wrap
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      animation: fadeUp 1s 1.5s both;
+      cursor: pointer;
+      text-decoration: none
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: var(--border);
+      position: relative;
+      overflow: hidden
+    }
+
+    .scroll-line::after {
+      content: '';
+      position: absolute;
+      top: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--accent);
+      animation: scrollDown 2s ease-in-out infinite
+    }
+
+    @keyframes scrollDown {
+      0% {
+        top: -100%
+      }
+
+      100% {
+        top: 100%
+      }
+    }
+
+    /* ── SERVICES ── */
+    #services {
+      background: var(--bg)
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      margin-top: 5rem
+    }
+
+    .service-card {
+      background: var(--bg);
+      padding: 3rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s;
+      cursor: default
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--glow);
+      opacity: 0;
+      transition: opacity 0.4s
+    }
+
+    .service-card:hover::before {
+      opacity: 1
+    }
+
+    .service-card:hover {
+      transform: translateY(-4px)
+    }
+
+    .service-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 2rem
+    }
+
+    .service-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      display: block
+    }
+
+    .service-name {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1rem
+    }
+
+    .service-desc {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.7
+    }
+
+    .service-arrow {
+      position: absolute;
+      bottom: 2.5rem;
+      right: 2.5rem;
+      color: var(--accent);
+      font-size: 1.5rem;
+      transform: translateX(-5px);
+      opacity: 0;
+      transition: all 0.3s
+    }
+
+    .service-card:hover .service-arrow {
+      transform: translateX(0);
+      opacity: 1
+    }
+
+    /* ── WORK / PROJECT SHOWCASE ── */
+    #work {
+      background: var(--bg2);
+      overflow: hidden;
+      padding: 8rem 0
+    }
+
+    .work-header {
+      padding: 0 4rem;
+      margin-bottom: 3rem
+    }
+
+    .work-hint-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1.5rem;
+      padding-right: 4rem
+    }
+
+    .work-scroll-hint {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      letter-spacing: 0.1em
+    }
+
+    .work-scroll-hint .hint-arrows {
+      color: var(--accent);
+      animation: hintSlide 1.5s ease-in-out infinite;
+      display: flex;
+      gap: 3px
+    }
+
+    .work-scroll-hint .hint-arrows span {
+      display: inline-block;
+      animation: arrowPop 1.5s ease-in-out infinite
+    }
+
+    .work-scroll-hint .hint-arrows span:nth-child(2) {
+      animation-delay: 0.15s
+    }
+
+    .work-scroll-hint .hint-arrows span:nth-child(3) {
+      animation-delay: 0.3s
+    }
+
+    @keyframes arrowPop {
+
+      0%,
+      100% {
+        opacity: 0.3;
+        transform: translateX(0)
+      }
+
+      50% {
+        opacity: 1;
+        transform: translateX(5px)
+      }
+    }
+
+    @keyframes hintSlide {
+
+      0%,
+      100% {
+        opacity: 0.7
+      }
+
+      50% {
+        opacity: 1
+      }
+    }
+
+    /* CAROUSEL CONTAINER */
+    .work-carousel-outer {
+      position: relative;
+      perspective: 1200px;
+    }
+
+    .work-carousel-track {
+      display: flex;
+      gap: 3.5rem;
+      padding: 3rem 0 4rem;
+      overflow: visible;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      cursor: grab;
+      user-select: none;
+      touch-action: pan-y;
+      will-change: transform;
+    }
+
+    .work-carousel-outer {
+      position: relative;
+      perspective: 1500px;
+      overflow: hidden;
+      /* Contain the track */
+      padding: 0 2rem;
+    }
+
+    .work-carousel-track::-webkit-scrollbar {
+      display: none
+    }
+
+    .work-carousel-track.dragging {
+      cursor: grabbing;
+      scroll-behavior: auto
+    }
+
+    /* SCROLL ARROW BUTTONS */
+    .work-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 52px;
+      height: 52px;
+      border: 1px solid var(--border);
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(12px);
+      color: var(--muted);
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s;
+      border-radius: 0;
+    }
+
+    .work-arrow:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--glow);
+      box-shadow: 0 0 20px var(--glow)
+    }
+
+    .work-arrow.left {
+      left: 1rem
+    }
+
+    .work-arrow.right {
+      right: 1rem
+    }
+
+    .work-arrow svg {
+      width: 20px;
+      height: 20px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0
+    }
+
+    /* CARDS */
+    .work-card {
+      flex: 0 0 clamp(320px, 25vw, 420px);
+      background: var(--card);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      position: relative;
+      transition:
+        transform 0.8s cubic-bezier(0.2, 0, 0.2, 1),
+        opacity 0.8s cubic-bezier(0.2, 0, 0.2, 1),
+        filter 0.8s cubic-bezier(0.2, 0, 0.2, 1),
+        border-color 0.4s;
+      transform: scale(0.85) translateZ(-50px);
+      opacity: 0.2;
+      filter: grayscale(1) blur(4px);
+      will-change: transform, opacity, filter;
+      transform-style: preserve-3d;
+      pointer-events: auto;
+      /* Ensure hover works */
+      z-index: 1;
+    }
+
+    /* THE POP-OUT STATE (BOTH CENTERED AND HOVERED) */
+    .work-card.active,
+    .work-card.is-hovered {
+      transform: scale(1.12) translateZ(120px) !important;
+      opacity: 1 !important;
+      filter: grayscale(0) blur(0px) !important;
+      border-color: var(--accent);
+      box-shadow:
+        0 0 0 1px var(--accent),
+        0 40px 100px rgba(0, 0, 0, 0.8),
+        0 0 80px var(--glow-strong);
+      z-index: 100 !important;
+    }
+
+    /* IF HOVERED, DIM THE CENTERED ONE */
+    .work-carousel-track.is-any-hovered .work-card.active:not(.is-hovered) {
+      transform: scale(0.9) translateZ(0);
+      opacity: 0.4;
+      filter: grayscale(0.5) blur(2px);
+      box-shadow: none;
+    }
+
+    .work-img {
+      height: 250px;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform-style: preserve-3d;
+    }
+
+    .work-img-3d-wrap {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      pointer-events: none;
+    }
+
+    .work-img-bg {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.5s;
+      background: linear-gradient(135deg, var(--bg2), var(--card));
+      transform: translateZ(0);
+    }
+
+    .work-img-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 5.5rem;
+      transform: translateZ(60px);
+      transition: transform 0.3s cubic-bezier(0.2, 0, 0.2, 1);
+      text-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .work-card.active:hover .work-img-content {
+      transform: translateZ(90px) scale(1.1);
+    }
+
+    .work-card.active .work-img-bg {
+      transform: scale(1.06)
+    }
+
+    .work-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent 55%);
+      opacity: 0;
+      transition: opacity 0.35s;
+      display: flex;
+      align-items: flex-end;
+      padding: 1.5rem 2rem
+    }
+
+    .work-card.active:hover .work-overlay {
+      opacity: 1
+    }
+
+    .work-overlay-text {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem
+    }
+
+    .work-overlay-text::after {
+      content: '→';
+      transition: transform 0.2s
+    }
+
+    .work-card.active:hover .work-overlay-text::after {
+      transform: translateX(4px)
+    }
+
+    .work-info {
+      padding: 2rem 2.5rem
+    }
+
+    .work-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem
+    }
+
+    .work-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.67rem;
+      color: var(--accent);
+      background: var(--glow);
+      padding: 0.25rem 0.75rem;
+      letter-spacing: 0.05em
+    }
+
+    .work-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      line-height: 1.3
+    }
+
+    .work-desc {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.77rem;
+      color: var(--muted);
+      line-height: 1.65
+    }
+
+    /* CONTROLS */
+    .work-carousel-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      padding: 0.5rem 4rem 0
+    }
+
+    .carousel-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--border);
+      cursor: pointer;
+      transition: all 0.35s;
+      border: none;
+      padding: 0
+    }
+
+    .carousel-dot.active {
+      background: var(--accent);
+      width: 24px;
+      border-radius: 3px
+    }
+
+    /* PROGRESS BAR */
+    .work-progress-wrap {
+      margin: 1.5rem 4rem 0;
+      height: 2px;
+      background: var(--border);
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px
+    }
+
+    .work-progress-bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      background: var(--accent);
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s;
+      border-radius: 2px
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--bg)
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8rem;
+      align-items: center;
+      margin-top: 5rem
+    }
+
+    .about-text p {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 1.5rem
+    }
+
+    .about-text p strong {
+      color: var(--text);
+      font-weight: 500
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+      margin-top: 3rem
+    }
+
+    .stat {
+      background: var(--bg2);
+      padding: 2rem
+    }
+
+    .stat-num {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.5rem
+    }
+
+    .stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.05em
+    }
+
+    .team-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem
+    }
+
+    .team-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s
+    }
+
+    .team-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--accent)
+    }
+
+    .team-card:hover {
+      border-color: var(--accent);
+      transform: translateX(6px)
+    }
+
+    .team-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--bg2);
+      border: 2px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .team-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .team-name {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem
+    }
+
+    .team-role {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem
+    }
+
+    .team-bio {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.76rem;
+      color: var(--muted);
+      line-height: 1.6
+    }
+
+    .skills-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem
+    }
+
+    .skill-chip {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--muted);
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 0.35rem 0.8rem;
+      letter-spacing: 0.05em;
+      transition: all 0.2s
+    }
+
+    .skill-chip:hover {
+      border-color: var(--accent);
+      color: var(--accent)
+    }
+
+    /* ── CONTACT MINI ── */
+    #contact {
+      background: var(--bg2);
+      text-align: center
+    }
+
+    .contact-inner {
+      max-width: 700px;
+      margin: 0 auto
+    }
+
+    .contact-big {
+      font-size: clamp(2rem, 5vw, 4.5rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      margin: 2rem 0 3rem
+    }
+
+    .contact-big span {
+      color: transparent;
+      -webkit-text-stroke: 1px var(--accent)
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      text-align: left
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem
+    }
+
+    .form-field label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase
+    }
+
+    .form-field input,
+    .form-field textarea,
+    .form-field select {
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.9rem 1.2rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      resize: vertical;
+      width: 100%
+    }
+
+    .form-field input:focus,
+    .form-field textarea:focus,
+    .form-field select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--glow)
+    }
+
+    .form-field select option {
+      background: var(--card)
+    }
+
+    .form-submit {
+      padding: 1rem 3rem;
+      background: var(--accent);
+      color: #000;
+      font-family: 'Space Mono', monospace;
+      font-weight: 800;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      align-self: flex-start;
+      transition: all 0.3s;
+      margin-top: 1rem
+    }
+
+    .form-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px var(--glow)
+    }
+
+    /* ── LOADER ── */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 1.8rem;
+      transition: opacity 0.7s ease, visibility 0.7s ease
+    }
+
+    #loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none
+    }
+
+    .loader-logo {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      animation: loaderPulse 1.5s ease-in-out infinite
+    }
+
+    .loader-logo span {
+      color: var(--accent)
+    }
+
+    .loader-tagline {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeIn 0.5s 0.5s forwards
+    }
+
+    .loader-bar-wrap {
+      width: 220px;
+      height: 2px;
+      background: var(--border)
+    }
+
+    .loader-bar {
+      height: 100%;
+      background: var(--accent);
+      width: 0;
+      animation: loadBar 1.9s cubic-bezier(0.4, 0, 0.2, 1) forwards
+    }
+
+    @keyframes loadBar {
+      0% {
+        width: 0
+      }
+
+      60% {
+        width: 75%
+      }
+
+      100% {
+        width: 100%
+      }
+    }
+
+    @keyframes loaderPulse {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: 0.65
+      }
+    }
+
+    /* ── MOBILE ── */
+    @media(max-width:900px) {
+      #hero {
+        padding: 0 1.5rem
+      }
+
+      .hero-title {
+        font-size: clamp(2.2rem, 10vw, 4rem)
+      }
+
+      .hero-sub {
+        font-size: 0.88rem
+      }
+
+      .hero-scroll {
+        display: none
+      }
+
+      .orb1 {
+        width: 280px;
+        height: 280px;
+        top: -60px;
+        right: -60px
+      }
+
+      .orb2 {
+        width: 160px;
+        height: 160px
+      }
+
+      #work {
+        padding: 5rem 0
+      }
+
+      .work-header {
+        padding: 0 1.5rem
+      }
+
+      .work-hint-row {
+        padding-right: 1.5rem
+      }
+
+      .work-carousel-track {
+        padding: 2rem 2.5rem 3rem;
+        gap: 1.5rem
+      }
+
+      .work-card {
+        flex: 0 0 300px
+      }
+
+      .work-progress-wrap {
+        margin: 1.2rem 1.5rem 0
+      }
+
+      .work-arrow {
+        display: none
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+        gap: 0
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 3.5rem
+      }
+
+      .form-row {
+        grid-template-columns: 1fr
+      }
+
+      .form-submit {
+        width: 100%;
+        align-self: stretch;
+        text-align: center
+      }
+    }
+
+    @media(max-width:540px) {
+      .hero-title {
+        font-size: clamp(2rem, 12vw, 3.2rem)
+      }
+
+      .work-card {
+        flex: 0 0 270px
+      }
+
+      .work-carousel-controls {
+        padding: 1rem 1.5rem 0
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div id="page-transition"><div class="pt-panel"></div><div class="pt-label" id="pt-label">Loading...</div></div>
-
-<!-- LOADER -->
-<div id="loader">
-  <div class="loader-logo">Pixel<span>Pair</span></div>
-  <div class="loader-tagline">Two devs. One mission. Infinite pixels.</div>
-  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
-</div>
-
-<div class="cursor" id="cursor"></div>
-<div class="cursor-follower" id="cursorFollower"></div>
-
-<nav id="navbar">
-  <a href="index.html" class="nav-logo" data-page="Home">Pixel<span>Pair</span></a>
-  <ul class="nav-links">
-    <li><a href="services.html" data-page="Services">Services</a></li>
-    <li><a href="portfolio.html" data-page="Portfolio">Works</a></li>
-    <li><a href="about.html" data-page="About">About</a></li>
-    <li><a href="contact.html" data-page="Contact">Contact</a></li>
-  </ul>
-  <div class="nav-right">
-    <div class="theme-switcher">
-      <div class="theme-btn t-green active" onclick="setTheme('')"></div>
-      <div class="theme-btn t-cyan" onclick="setTheme('theme-cyan')"></div>
-      <div class="theme-btn t-purple" onclick="setTheme('theme-purple')"></div>
-      <div class="theme-btn t-orange" onclick="setTheme('theme-orange')"></div>
-      <div class="theme-btn t-pink" onclick="setTheme('theme-pink')"></div>
-      <div class="theme-btn t-gold" onclick="setTheme('theme-gold')"></div>
-    </div>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
+  <div id="page-transition">
+    <div class="pt-panel"></div>
+    <div class="pt-label" id="pt-label">Loading...</div>
   </div>
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="index.html" data-page="Home">Home</a>
-    <a href="services.html" data-page="Services">Services</a>
-    <a href="portfolio.html" data-page="Portfolio">Portfolio</a>
-    <a href="about.html" data-page="About">About</a>
-    <a href="contact.html" data-page="Contact">Contact</a>
-    <div class="mobile-menu-divider"></div>
-    <div class="mobile-theme-row">
-      <span class="mobile-theme-label">Theme</span>
-      <div class="theme-btn t-green" onclick="setTheme('')"></div>
-      <div class="theme-btn t-cyan" onclick="setTheme('theme-cyan')"></div>
-      <div class="theme-btn t-purple" onclick="setTheme('theme-purple')"></div>
-      <div class="theme-btn t-orange" onclick="setTheme('theme-orange')"></div>
-      <div class="theme-btn t-pink" onclick="setTheme('theme-pink')"></div>
-      <div class="theme-btn t-gold" onclick="setTheme('theme-gold')"></div>
-    </div>
-  </div>
-</nav>
 
-<!-- HERO -->
-<section id="hero">
-  <div class="hero-bg-grid"></div>
-  <div class="hero-orb orb1"></div>
-  <div class="hero-orb orb2"></div>
-  <div class="hero-tag">Web Development Studio</div>
-  <h1 class="hero-title">We Build<br><span class="line2">Digital</span><br>Experiences</h1>
-  <p class="hero-sub">Two CS grads. Two years of crafting fast, beautiful, and functional web experiences. From landing pages to full-stack apps, we build it all.</p>
-  <div class="hero-cta">
-    <a href="portfolio.html" class="btn-primary" data-page="Portfolio"><span>View Our Work</span></a>
-    <a href="contact.html" class="btn-outline" data-page="Contact">Start a Project</a>
-  </div>
-  <a href="#services" class="hero-scroll"><div class="scroll-line"></div>SCROLL</a>
-</section>
-
-<!-- MARQUEE -->
-<div class="marquee-wrap">
-  <div class="marquee-track">
-    <div class="marquee-item">React <span>✦</span></div>
-    <div class="marquee-item">Next.js <span>✦</span></div>
-    <div class="marquee-item">Node.js <span>✦</span></div>
-    <div class="marquee-item">UI/UX Design <span>✦</span></div>
-    <div class="marquee-item">E-Commerce <span>✦</span></div>
-    <div class="marquee-item">MongoDB <span>✦</span></div>
-    <div class="marquee-item">Tailwind CSS <span>✦</span></div>
-    <div class="marquee-item">PHP <span>✦</span></div>
-    <div class="marquee-item">SQL <span>✦</span></div>
-    <div class="marquee-item">TypeScript <span>✦</span></div>
-    <div class="marquee-item">React <span>✦</span></div>
-    <div class="marquee-item">Next.js <span>✦</span></div>
-    <div class="marquee-item">Node.js <span>✦</span></div>
-    <div class="marquee-item">UI/UX Design <span>✦</span></div>
-    <div class="marquee-item">E-Commerce <span>✦</span></div>
-    <div class="marquee-item">MongoDB <span>✦</span></div>
-    <div class="marquee-item">Tailwind CSS <span>✦</span></div>
-    <div class="marquee-item">PHP <span>✦</span></div>
-    <div class="marquee-item">SQL <span>✦</span></div>
-    <div class="marquee-item">TypeScript <span>✦</span></div>
-  </div>
-</div>
-
-<!-- SERVICES -->
-<section id="services">
-  <div class="section-label reveal">What We Do</div>
-  <h2 class="section-title reveal">Our Services</h2>
-  <div class="services-grid reveal">
-    <div class="service-card"><div class="service-num">01</div><span class="service-icon">🌐</span><div class="service-name">Web Development</div><p class="service-desc">Full-stack web applications built with modern frameworks. Clean code, fast performance, scalable architecture.</p><span class="service-arrow">→</span></div>
-    <div class="service-card"><div class="service-num">02</div><span class="service-icon">🛒</span><div class="service-name">E-Commerce</div><p class="service-desc">Custom online stores with seamless checkout flows, payment integration, and inventory management.</p><span class="service-arrow">→</span></div>
-    <div class="service-card"><div class="service-num">03</div><span class="service-icon">📱</span><div class="service-name">Responsive Design</div><p class="service-desc">Pixel-perfect designs that work flawlessly on every device — desktop, tablet, and mobile.</p><span class="service-arrow">→</span></div>
-    <div class="service-card"><div class="service-num">04</div><span class="service-icon">🎨</span><div class="service-name">UI/UX Design</div><p class="service-desc">User-centered design with stunning visuals. Wireframes, prototypes, and final polished interfaces.</p><span class="service-arrow">→</span></div>
-    <div class="service-card"><div class="service-num">05</div><span class="service-icon">⚡</span><div class="service-name">PortFolio sites</div><p class="service-desc">With all details of the person , with animations and full production level.</p><span 
-    class="service-arrow">→</span></div>
-    <div class="service-card"><div class="service-num">06</div><span class="service-icon">🔧</span><div class="service-name">Web Applications</div><p class="service-desc">Complex web apps with authentication, real-time data, dashboards, and custom business logic.</p><span class="service-arrow">→</span></div>
-  </div>
-</section>
-
-<!-- PROJECT SHOWCASE -->
-<section id="work">
-  <div class="work-header">
-    <div class="section-label reveal">Portfolio</div>
-    <h2 class="section-title reveal">Selected Work</h2>
-    <div class="work-hint-row reveal">
-      <div class="work-scroll-hint">
-        Drag, scroll or use arrows to explore
-        <div class="hint-arrows"><span>›</span><span>›</span><span>›</span></div>
-      </div>
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="loader-logo">Pixel<span>Pair</span></div>
+    <div class="loader-tagline">Devs. One mission. Infinite pixels.</div>
+    <div class="loader-bar-wrap">
+      <div class="loader-bar"></div>
     </div>
   </div>
 
-  <div class="work-carousel-outer">
-    <button class="work-arrow left" id="workPrev" aria-label="Previous project">
-      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-    </button>
-    <div class="work-carousel-track" id="workTrack">
-      <div class="work-card" data-index="0">
-        <div class="work-img"><div class="work-img-bg" style="background:linear-gradient(135deg,#0a2e1a,#0d1f14)">🏪</div><div class="work-overlay"><span class="work-overlay-text">View Project</span></div></div>
-        <div class="work-info"><div class="work-tags"><span class="work-tag">E-Commerce</span><span class="work-tag">React</span><span class="work-tag">Node.js</span></div><div class="work-title">ShopNest — Retail Platform</div><p class="work-desc">Full-stack e-commerce solution with real-time inventory, Stripe payments, and admin dashboard.</p></div>
-      </div>
-      <div class="work-card" data-index="1">
-        <div class="work-img"><div class="work-img-bg" style="background:linear-gradient(135deg,#0e1a2e,#0b1420)">📊</div><div class="work-overlay"><span class="work-overlay-text">View Project</span></div></div>
-        <div class="work-info"><div class="work-tags"><span class="work-tag">Dashboard</span><span class="work-tag">Next.js</span><span class="work-tag">PostgreSQL</span></div><div class="work-title">DataFlow — Analytics Dashboard</div><p class="work-desc">Real-time analytics platform with interactive charts, user management, and data export features.</p></div>
-      </div>
-      <div class="work-card" data-index="2">
-        <div class="work-img"><div class="work-img-bg" style="background:linear-gradient(135deg,#2e1a0e,#1f1409)">🍽️</div><div class="work-overlay"><span class="work-overlay-text">View Project</span></div></div>
-        <div class="work-info"><div class="work-tags"><span class="work-tag">Landing Page</span><span class="work-tag">HTML/CSS</span><span class="work-tag">SEO</span></div><div class="work-title">Savoria — Restaurant Website</div><p class="work-desc">Elegant restaurant website with online booking, menu management, and 98 Lighthouse score.</p></div>
-      </div>
-      <div class="work-card" data-index="3">
-        <div class="work-img"><div class="work-img-bg" style="background:linear-gradient(135deg,#1a0e2e,#130b20)">🎓</div><div class="work-overlay"><span class="work-overlay-text">View Project</span></div></div>
-        <div class="work-info"><div class="work-tags"><span class="work-tag">Web App</span><span class="work-tag">React</span><span class="work-tag">MongoDB</span></div><div class="work-title">LearnHub — EdTech Platform</div><p class="work-desc">Online learning platform with video streaming, quiz engine, and student progress tracking.</p></div>
-      </div>
-      <div class="work-card" data-index="4">
-        <div class="work-img"><div class="work-img-bg" style="background:linear-gradient(135deg,#0e2a2e,#091f22)">🏥</div><div class="work-overlay"><span class="work-overlay-text">View Project</span></div></div>
-        <div class="work-info"><div class="work-tags"><span class="work-tag">Healthcare</span><span class="work-tag">Next.js</span><span class="work-tag">AWS</span></div><div class="work-title">MediBook — Clinic System</div><p class="work-desc">Appointment booking with patient portal, SMS reminders, and full doctor dashboard.</p></div>
-      </div>
-      <div class="work-card" data-index="5">
-        <div class="work-img"><div class="work-img-bg" style="background:linear-gradient(135deg,#2e0e1f,#200b15)">🎵</div><div class="work-overlay"><span class="work-overlay-text">View Project</span></div></div>
-        <div class="work-info"><div class="work-tags"><span class="work-tag">SaaS</span><span class="work-tag">React</span><span class="work-tag">Stripe</span></div><div class="work-title">Wavely — Music SaaS</div><p class="work-desc">Music streaming SaaS with subscription billing, playlist management, and creator analytics.</p></div>
-      </div>
-    </div>
-    <button class="work-arrow right" id="workNext" aria-label="Next project">
-      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
-  </div>
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
 
-  <!-- DOTS + PROGRESS -->
-  <div class="work-carousel-controls" id="carouselDots"></div>
-  <div class="work-progress-wrap"><div class="work-progress-bar" id="workProgress"></div></div>
-</section>
-
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-label reveal">Who We Are</div>
-  <h2 class="section-title reveal">Two Devs,<br>One Vision</h2>
-  <div class="about-grid">
-    <div class="about-text reveal">
-      <p>We're <strong>PixelPair</strong> — a two-person web development studio born from a shared passion for building things on the internet.</p>
-      <p>Both CS students with <strong>2 years of hands-on experience</strong>From the very first day of our college, we've built everything from simple landing pages to complex full-stack applications.</p>
-      <p>We work with <strong>startups, small businesses, restaurants, agencies,</strong> and anyone who needs a web presence that actually converts and performs.</p>
-      <div class="stats-grid">
-        <div class="stat"><div class="stat-num" data-target="10">0+</div><div class="stat-label">Projects Delivered</div></div>
-        <div class="stat"><div class="stat-num" data-target="2">0+</div><div class="stat-label">Years Experience</div></div>
-        <div class="stat"><div class="stat-num" data-target="100">0</div><div class="stat-label">% Client Satisfaction</div></div>
-        <div class="stat"><div class="stat-num" data-target="9">0+</div><div class="stat-label">Happy Clients</div></div>
-      </div>
-    </div>
-    <div class="team-cards reveal">
-      <div class="team-card">
-        <div class="team-avatar">👨‍💻</div>
-        <div><a href="https://deepanjanpaul.vercel.app" style="color: inherit; text-decoration: none;"><div class="team-name">Deepanjan Paul</div></a><div class="team-role">Backend Engineer & Database Designer</div><div class="team-bio">Developer. Creator. Chronic overthinker of logical solutions. I build things people actually enjoy using.</div><div class="skills-row"><span class="skill-chip">Python</span><span class="skill-chip">node.js</span><span class="skill-chip">php</span><span class="skill-chip">MongoDB</span><span class="skill-chip">SQL</span></div></div>
-      </div>
-      <div class="team-card">
-        <div class="team-avatar">👨‍💻</div>
-        <div><div class="team-name">Subham Das</div><div class="team-role">Frontend Engineer & Architect</div><div class="team-bio">Specialize in frontend development, crafting high-performance, user-focused web interfaces that turn ideas into engaging digital products.</div><div class="skills-row"><span class="skill-chip">Html</span><span class="skill-chip">Css</span><span class="skill-chip">React</span><span class="skill-chip">Figma</span><span class="skill-chip">Animations</span><span class="skill-chip">Typescript</span></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT MINI -->
-<section id="contact">
-  <div class="contact-inner">
-    <div class="section-label reveal" style="justify-content:center">Get In Touch</div>
-    <div class="contact-big reveal">Let's Build<br><span>Together</span></div>
-      <a href="contact.html"><button class="form-submit">Send Message →</button></a>
-    </form>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-top">
-    <div class="footer-brand">
-      <div class="footer-logo">Pixel<span>Pair</span></div>
-      <p>Two CS graduates building fast, beautiful, and functional web experiences. From landing pages to full-stack apps, we craft digital products that perform.</p>
-      <div class="footer-social">
-        <a href="#" class="social-btn" title="Twitter/X">𝕏</a>
-        <a href="#" class="social-btn" title="GitHub">⌥</a>
-        <a href="#" class="social-btn" title="LinkedIn">in</a>
-        <a href="#" class="social-btn" title="Dribbble">⊙</a>
-        <a href="#" class="social-btn" title="Instagram">◎</a>
-        <a href="#" class="social-btn" title="YouTube">▷</a>
-      </div>
-    </div>
-    <div class="footer-col"><h4>Navigation</h4><ul>
-      <li><a href="index.html" data-page="Home">Home</a></li>
+  <nav id="navbar">
+    <a href="index.html" class="nav-logo" data-page="Home">Pixel<span>Pair</span></a>
+    <ul class="nav-links">
       <li><a href="services.html" data-page="Services">Services</a></li>
-      <li><a href="portfolio.html" data-page="Portfolio">Portfolio</a></li>
-      <li><a href="about.html" data-page="About">About Us</a></li>
+      <li><a href="portfolio.html" data-page="Portfolio">Works</a></li>
+      <li><a href="about.html" data-page="About">About</a></li>
       <li><a href="contact.html" data-page="Contact">Contact</a></li>
-    </ul></div>
-    <div class="footer-col"><h4>Services</h4><ul>
-      <li><a href="services.html">Web Development</a></li>
-      <li><a href="services.html">E-Commerce</a></li>
-      <li><a href="services.html">Web Applications</a></li>
-      <li><a href="services.html">UI/UX Design</a></li>
-      <li><a href="services.html">Responsive Design</a></li>
-      <li><a href="services.html">Portfolio websites</a></li>
-    </ul></div>
-    <div class="footer-col"><h4>Contact</h4>
-      <div class="footer-contact-item"><span class="icon">✉</span><span>contactpixelpair@gmail.com</span></div>
-      <div class="footer-contact-item"><span class="icon">◎</span><span>Available Worldwide<br>Remote &amp; On-site</span></div>
-      <div class="footer-contact-item"><span class="icon">⏱</span><span>Mon – Sun, 24*7</span></div>
-      <div class="footer-contact-item"><span class="icon">⚡</span><span>Avg. response: &lt; 24hrs</span></div>
+    </ul>
+    <div class="nav-right">
+      <div class="theme-switcher">
+        <div class="theme-btn t-green active" onclick="setTheme('')"></div>
+        <div class="theme-btn t-cyan" onclick="setTheme('theme-cyan')"></div>
+        <div class="theme-btn t-purple" onclick="setTheme('theme-purple')"></div>
+        <div class="theme-btn t-orange" onclick="setTheme('theme-orange')"></div>
+        <div class="theme-btn t-pink" onclick="setTheme('theme-pink')"></div>
+        <div class="theme-btn t-gold" onclick="setTheme('theme-gold')"></div>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html" data-page="Home">Home</a>
+      <a href="services.html" data-page="Services">Services</a>
+      <a href="portfolio.html" data-page="Portfolio">Portfolio</a>
+      <a href="about.html" data-page="About">About</a>
+      <a href="contact.html" data-page="Contact">Contact</a>
+      <div class="mobile-menu-divider"></div>
+      <div class="mobile-theme-row">
+        <span class="mobile-theme-label">Theme</span>
+        <div class="theme-btn t-green" onclick="setTheme('')"></div>
+        <div class="theme-btn t-cyan" onclick="setTheme('theme-cyan')"></div>
+        <div class="theme-btn t-purple" onclick="setTheme('theme-purple')"></div>
+        <div class="theme-btn t-orange" onclick="setTheme('theme-orange')"></div>
+        <div class="theme-btn t-pink" onclick="setTheme('theme-pink')"></div>
+        <div class="theme-btn t-gold" onclick="setTheme('theme-gold')"></div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-orb orb1"></div>
+    <div class="hero-orb orb2"></div>
+    <div class="hero-tag">Web Development Studio</div>
+    <h1 class="hero-title">We Build<br><span class="line2">Digital</span><br>Experiences</h1>
+    <p class="hero-sub">CS grads. Two years of crafting fast, beautiful, and functional web experiences. From landing
+      pages to full-stack apps, we build it all.</p>
+    <div class="hero-cta">
+      <a href="portfolio.html" class="btn-primary" data-page="Portfolio"><span>View Our Work</span></a>
+      <a href="contact.html" class="btn-outline" data-page="Contact">Start a Project</a>
+    </div>
+    <a href="#services" class="hero-scroll">
+      <div class="scroll-line"></div>SCROLL
+    </a>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
+    <div class="marquee-track">
+      <div class="marquee-item">React <span>✦</span></div>
+      <div class="marquee-item">Next.js <span>✦</span></div>
+      <div class="marquee-item">Node.js <span>✦</span></div>
+      <div class="marquee-item">UI/UX Design <span>✦</span></div>
+      <div class="marquee-item">E-Commerce <span>✦</span></div>
+      <div class="marquee-item">MongoDB <span>✦</span></div>
+      <div class="marquee-item">Tailwind CSS <span>✦</span></div>
+      <div class="marquee-item">PHP <span>✦</span></div>
+      <div class="marquee-item">SQL <span>✦</span></div>
+      <div class="marquee-item">TypeScript <span>✦</span></div>
+      <div class="marquee-item">React <span>✦</span></div>
+      <div class="marquee-item">Next.js <span>✦</span></div>
+      <div class="marquee-item">Node.js <span>✦</span></div>
+      <div class="marquee-item">UI/UX Design <span>✦</span></div>
+      <div class="marquee-item">E-Commerce <span>✦</span></div>
+      <div class="marquee-item">MongoDB <span>✦</span></div>
+      <div class="marquee-item">Tailwind CSS <span>✦</span></div>
+      <div class="marquee-item">PHP <span>✦</span></div>
+      <div class="marquee-item">SQL <span>✦</span></div>
+      <div class="marquee-item">TypeScript <span>✦</span></div>
     </div>
   </div>
-  <div class="footer-bottom">
-    <div class="footer-copy">© 2025 <span>PixelPair</span>. All rights reserved.</div>
-    
-    <div class="footer-badge">Crafted with ☕ &amp; 💻</div>
-  </div>
-</footer>
 
-<script src="pixelpair.js"></script>
-<script>
-// LOADER — only once per session
-const loader=document.getElementById('loader');
-if(sessionStorage.getItem('pp-loader-shown')){
-  loader.style.display='none';
-}else{
-  sessionStorage.setItem('pp-loader-shown','1');
-  window.addEventListener('load',()=>{
-    setTimeout(()=>{loader.classList.add('hidden');setTimeout(()=>{loader.style.display='none'},700)},2100);
-  });
-}
 
-// ── CAROUSEL ──────────────────────────────────────────────
-const track=document.getElementById('workTrack');
-const cards=[...track.querySelectorAll('.work-card')];
-const dotsWrap=document.getElementById('carouselDots');
-const progressBar=document.getElementById('workProgress');
-let curIdx=0;
 
-// Build dots
-cards.forEach((_,i)=>{
-  const dot=document.createElement('button');
-  dot.className='carousel-dot';
-  dot.setAttribute('aria-label','Go to project '+(i+1));
-  dot.addEventListener('click',()=>goTo(i));
-  dotsWrap.appendChild(dot);
-});
+  <!-- PROJECT SHOWCASE -->
+  <section id="work">
+    <div class="work-header">
+      <div class="section-label reveal">Portfolio</div>
+      <h2 class="section-title reveal">Selected Work</h2>
+      <div class="work-hint-row reveal">
+        <div class="work-scroll-hint">
+          Drag, scroll or use arrows to explore
+          <div class="hint-arrows"><span>›</span><span>›</span><span>›</span></div>
+        </div>
+      </div>
+    </div>
 
-function updateCarousel(idx){
-  curIdx=Math.max(0,Math.min(idx,cards.length-1));
-  cards.forEach((c,i)=>{
-    c.classList.remove('active','near-active');
-    const d=Math.abs(i-curIdx);
-    if(d===0)c.classList.add('active');
-    else if(d===1)c.classList.add('near-active');
-  });
-  dotsWrap.querySelectorAll('.carousel-dot').forEach((d,i)=>d.classList.toggle('active',i===curIdx));
-  // progress bar
-  if(progressBar) progressBar.style.width=((curIdx/(cards.length-1))*100)+'%';
-}
+    <div class="work-carousel-outer">
+      <button class="work-arrow left" id="workPrev" aria-label="Previous project">
+        <svg viewBox="0 0 24 24">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+      </button>
+      <div class="work-carousel-track" id="workTrack">
+        <div class="work-card" data-index="0">
+          <div class="work-img">
+            <div class="work-img-3d-wrap">
+              <div class="work-img-bg" style="background:linear-gradient(135deg,#0a2e1a,#0d1f14)"></div>
+              <div class="work-img-content">🏪</div>
+            </div>
+            <div class="work-overlay"><span class="work-overlay-text">View Project</span></div>
+          </div>
+          <div class="work-info">
+            <div class="work-tags"><span class="work-tag">E-Commerce</span><span class="work-tag">React</span><span
+                class="work-tag">Node.js</span></div>
+            <div class="work-title">ShopNest — Retail Platform</div>
+            <p class="work-desc">Full-stack e-commerce solution with real-time inventory, Stripe payments, and admin
+              dashboard.</p>
+          </div>
+        </div>
+        <div class="work-card" data-index="1">
+          <div class="work-img">
+            <div class="work-img-3d-wrap">
+              <div class="work-img-bg" style="background:linear-gradient(135deg,#0e1a2e,#0b1420)"></div>
+              <div class="work-img-content">📊</div>
+            </div>
+            <div class="work-overlay"><span class="work-overlay-text">View Project</span></div>
+          </div>
+          <div class="work-info">
+            <div class="work-tags"><span class="work-tag">Dashboard</span><span class="work-tag">Next.js</span><span
+                class="work-tag">PostgreSQL</span></div>
+            <div class="work-title">DataFlow — Analytics Dashboard</div>
+            <p class="work-desc">Real-time analytics platform with interactive charts, user management, and data export
+              features.</p>
+          </div>
+        </div>
+        <div class="work-card" data-index="2">
+          <div class="work-img">
+            <div class="work-img-3d-wrap">
+              <div class="work-img-bg" style="background:linear-gradient(135deg,#2e1a0e,#1f1409)"></div>
+              <div class="work-img-content">🍽️</div>
+            </div>
+            <div class="work-overlay"><span class="work-overlay-text">View Project</span></div>
+          </div>
+          <div class="work-info">
+            <div class="work-tags"><span class="work-tag">Landing Page</span><span class="work-tag">HTML/CSS</span><span
+                class="work-tag">SEO</span></div>
+            <div class="work-title">Savoria — Restaurant Website</div>
+            <p class="work-desc">Elegant restaurant website with online booking, menu management, and 98 Lighthouse
+              score.</p>
+          </div>
+        </div>
+        <div class="work-card" data-index="3">
+          <div class="work-img">
+            <div class="work-img-3d-wrap">
+              <div class="work-img-bg" style="background:linear-gradient(135deg,#1a0e2e,#130b20)"></div>
+              <div class="work-img-content">🎓</div>
+            </div>
+            <div class="work-overlay"><span class="work-overlay-text">View Project</span></div>
+          </div>
+          <div class="work-info">
+            <div class="work-tags"><span class="work-tag">Web App</span><span class="work-tag">React</span><span
+                class="work-tag">MongoDB</span></div>
+            <div class="work-title">LearnHub — EdTech Platform</div>
+            <p class="work-desc">Online learning platform with video streaming, quiz engine, and student progress
+              tracking.</p>
+          </div>
+        </div>
+        <div class="work-card" data-index="4">
+          <div class="work-img">
+            <div class="work-img-3d-wrap">
+              <div class="work-img-bg" style="background:linear-gradient(135deg,#0e2a2e,#091f22)"></div>
+              <div class="work-img-content">🏥</div>
+            </div>
+            <div class="work-overlay"><span class="work-overlay-text">View Project</span></div>
+          </div>
+          <div class="work-info">
+            <div class="work-tags"><span class="work-tag">Healthcare</span><span class="work-tag">Next.js</span><span
+                class="work-tag">AWS</span></div>
+            <div class="work-title">MediBook — Clinic System</div>
+            <p class="work-desc">Appointment booking with patient portal, SMS reminders, and full doctor dashboard.</p>
+          </div>
+        </div>
+        <div class="work-card" data-index="5">
+          <div class="work-img">
+            <div class="work-img-bg" style="background:linear-gradient(135deg,#2e0e1f,#200b15)">🎵</div>
+            <div class="work-overlay"><span class="work-overlay-text">View Project</span></div>
+          </div>
+          <div class="work-info">
+            <div class="work-tags"><span class="work-tag">SaaS</span><span class="work-tag">React</span><span
+                class="work-tag">Stripe</span></div>
+            <div class="work-title">Wavely — Music SaaS</div>
+            <p class="work-desc">Music streaming SaaS with subscription billing, playlist management, and creator
+              analytics.</p>
+          </div>
+        </div>
+      </div>
+      <button class="work-arrow right" id="workNext" aria-label="Next project">
+        <svg viewBox="0 0 24 24">
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
+      </button>
+    </div>
 
-function goTo(idx){
-  const ci=Math.max(0,Math.min(idx,cards.length-1));
-  const card=cards[ci];
-  const offset=card.offsetLeft-(track.clientWidth/2-card.offsetWidth/2);
-  track.scrollTo({left:Math.max(0,offset),behavior:'smooth'});
-  updateCarousel(ci);
-}
+    <!-- DOTS + PROGRESS -->
+    <div class="work-carousel-controls" id="carouselDots"></div>
+    <div class="work-progress-wrap">
+      <div class="work-progress-bar" id="workProgress"></div>
+    </div>
+  </section>
 
-// Arrow buttons
-document.getElementById('workPrev').addEventListener('click',()=>goTo(curIdx-1));
-document.getElementById('workNext').addEventListener('click',()=>goTo(curIdx+1));
+  <!-- SERVICES / PRICING -->
+  <section id="services" class="pricing-table-section">
+    <div class="pricing-header reveal">
+      <div class="pricing-brand">Pixel<span>Pair</span></div>
+      <span class="pricing-tagline">Web Development Studio</span>
+      <h2 class="pricing-title">Our Service Pricing</h2>
+      <p class="pricing-subtitle">Transparent pricing. Built for serious businesses.</p>
+    </div>
 
-// Scroll → update active
-let scrollTm;
-track.addEventListener('scroll',()=>{
-  clearTimeout(scrollTm);
-  scrollTm=setTimeout(()=>{
-    const center=track.scrollLeft+track.clientWidth/2;
-    let closest=0,minD=Infinity;
-    cards.forEach((c,i)=>{const cc=c.offsetLeft+c.offsetWidth/2,d=Math.abs(cc-center);if(d<minD){minD=d;closest=i}});
-    updateCarousel(closest);
-  },60);
-});
+    <div class="pricing-container reveal">
+      <div class="pricing-labels">
+        <span class="label-text">Service</span>
+        <span class="label-text">Upper Limit</span>
+      </div>
 
-// Keyboard navigation
-document.addEventListener('keydown',e=>{
-  if(e.key==='ArrowLeft')goTo(curIdx-1);
-  if(e.key==='ArrowRight')goTo(curIdx+1);
-});
+      <a href="servicedetail.html?s=portfolio" class="pricing-row">
+        <div class="row-info">
+          <h3>Portfolio / Landing Website</h3>
+          <p>Single Page <span>·</span> Fast Delivery</p>
+        </div>
+        <div class="row-price">
+          <span class="price-limit">Up to</span>
+          <div class="price-amount">₹7,000</div>
+        </div>
+      </a>
 
-// Drag to scroll
-let isDown=false,startX,startSL;
-track.addEventListener('mousedown',e=>{isDown=true;track.classList.add('dragging');startX=e.pageX-track.offsetLeft;startSL=track.scrollLeft});
-document.addEventListener('mouseup',()=>{isDown=false;track.classList.remove('dragging')});
-track.addEventListener('mousemove',e=>{if(!isDown)return;const x=e.pageX-track.offsetLeft;track.scrollLeft=startSL-(x-startX)});
+      <a href="servicedetail.html?s=basic" class="pricing-row">
+        <div class="row-info">
+          <h3>Basic Business Website</h3>
+          <p>Multi-Page <span>·</span> CMS Ready</p>
+        </div>
+        <div class="row-price">
+          <span class="price-limit">Up to</span>
+          <div class="price-amount">₹12,000</div>
+        </div>
+      </a>
 
-// Init
-setTimeout(()=>{goTo(0)},150);
+      <a href="servicedetail.html?s=premium" class="pricing-row">
+        <div class="row-info">
+          <h3>Premium Business Website</h3>
+          <p>Custom Design <span>·</span> Full Stack</p>
+        </div>
+        <div class="row-price">
+          <span class="price-limit">Up to</span>
+          <div class="price-amount">₹18,000</div>
+        </div>
+      </a>
 
-// Mini form
-let lastSubmit=0;
-function handleMiniSubmit(e){
-  e.preventDefault();
-  if(Date.now()-lastSubmit<5000)return;
-  lastSubmit=Date.now();
-  const btn=e.target.querySelector('.form-submit');
-  btn.textContent='Sending...';btn.disabled=true;
-  setTimeout(()=>{btn.textContent='Message Sent ✓';btn.style.background='var(--accent2)';
-    setTimeout(()=>{btn.textContent='Send Message →';btn.disabled=false;btn.style.background='';e.target.reset()},3000)},1200);
-}
-</script>
+      <a href="servicedetail.html?s=ecommerce" class="pricing-row">
+        <div class="row-info">
+          <h3>E-Commerce Website</h3>
+          <p>Store <span>·</span> Payments <span>·</span> Dashboard</p>
+        </div>
+        <div class="row-price">
+          <span class="price-limit">Up to</span>
+          <div class="price-amount">₹35,000</div>
+        </div>
+      </a>
+
+      <a href="servicedetail.html?s=uiux" class="pricing-row">
+        <div class="row-info">
+          <h3>UI / UX Design</h3>
+          <p>Figma Prototypes <span>·</span> WireFrames</p>
+        </div>
+        <div class="row-price">
+          <span class="price-limit">Up to</span>
+          <div class="price-amount">₹8,000</div>
+        </div>
+      </a>
+
+      <a href="servicedetail.html?s=maintenance" class="pricing-row">
+        <div class="row-info">
+          <h3>Annual Maintenance</h3>
+          <p>Updates <span>·</span> Support <span>·</span> Monitoring</p>
+        </div>
+        <div class="row-price">
+          <span class="price-limit">Up to</span>
+          <div class="price-amount">₹5,000</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="pricing-footer-info reveal">
+      <div class="info-box">
+        <h4>Hosting & Domain</h4>
+        <p>Not included in service fee. Providers shared on request.</p>
+      </div>
+      <div class="info-box">
+        <h4>Flexible Pricing</h4>
+        <p>Prices negotiable for serious clients. Let's talk.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label reveal">Who We Are</div>
+    <h2 class="section-title reveal">Devs,<br>One Vision</h2>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>We're <strong>PixelPair</strong> — a web development studio born from a shared passion for building things on
+          the internet.</p>
+        <p>CS students with <strong>hands-on experience</strong>. From the very first day of our college, we've
+          built everything from simple landing pages to complex full-stack applications.</p>
+        <p>We work with <strong>startups, small businesses, restaurants, agencies,</strong> and anyone who needs a web
+          presence that actually converts and performs.</p>
+        <div class="stats-grid">
+          <div class="stat">
+            <div class="stat-num" data-target="10">0+</div>
+            <div class="stat-label">Projects Delivered</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num" data-target="3">0+</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num" data-target="100">0</div>
+            <div class="stat-label">% Client Satisfaction</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num" data-target="9">0+</div>
+            <div class="stat-label">Happy Clients</div>
+          </div>
+        </div>
+      </div>
+      <div class="team-cards reveal">
+        <div class="team-card">
+          <div class="team-avatar"><img src="assets/deepanjan.png" alt="Deepanjan Paul"
+              onerror="this.src='https://ui-avatars.com/api/?name=Deepanjan+Paul&background=random'"></div>
+          <div><a href="https://deepanjanpaul.vercel.app" style="color: inherit; text-decoration: none;">
+              <div class="team-name">Deepanjan Paul</div>
+            </a>
+            <div class="team-role">Founder & Backend Dev</div>
+            <div class="team-bio">Developer. Creator. Chronic overthinker of logical solutions. I build things people
+              actually enjoy using.</div>
+            <div class="skills-row"><span class="skill-chip">Python</span><span class="skill-chip">node.js</span><span
+                class="skill-chip">php</span><span class="skill-chip">MongoDB</span><span class="skill-chip">SQL</span>
+            </div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar"><img src="assets/subham.png" alt="Subham Das"
+              onerror="this.src='https://ui-avatars.com/api/?name=Subham+Das&background=random'"></div>
+          <div>
+            <a href="https://subham26das.netlify.app/">
+              <div class="team-name">Subham Das</div>
+            </a>
+            <div class="team-role">Co-founder & Frontend Dev, UI/UX</div>
+            <div class="team-bio">Specialize in frontend development, crafting high-performance, user-focused web
+              interfaces that turn ideas into engaging digital products.</div>
+            <div class="skills-row"><span class="skill-chip">Html</span><span class="skill-chip">Css</span><span
+                class="skill-chip">React</span><span class="skill-chip">Figma</span><span
+                class="skill-chip">Animations</span><span class="skill-chip">Typescript</span></div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar"><img src="assets/img/team/ashish.jpg" alt="Ashish Verma"
+              onerror="this.src='https://ui-avatars.com/api/?name=Ashish+Verma&background=random'"></div>
+          <div>
+            <div class="team-name">Ashish Verma</div>
+            <div class="team-role">Co-founder, Sales & Marketing Expert</div>
+            <div class="team-bio">Driving growth and building strong client relationships. I ensure our digital
+              solutions reach the right audience and deliver maximum value.</div>
+            <div class="skills-row"><span class="skill-chip">Sales</span><span class="skill-chip">Marketing</span><span
+                class="skill-chip">Branding</span><span class="skill-chip">Strategy</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT MINI -->
+  <section id="contact">
+    <div class="contact-inner">
+      <div class="section-label reveal" style="justify-content:center">Get In Touch</div>
+      <div class="contact-big reveal">Let's Build<br><span>Together</span></div>
+      <a href="contact.html"><button class="form-submit">Send Message →</button></a>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">Pixel<span>Pair</span></div>
+        <p>CS graduates building fast, beautiful, and functional web experiences. From landing pages to full-stack apps,
+          we craft digital products that perform.</p>
+
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="index.html" data-page="Home">Home</a></li>
+          <li><a href="services.html" data-page="Services">Services</a></li>
+          <li><a href="portfolio.html" data-page="Portfolio">Portfolio</a></li>
+          <li><a href="about.html" data-page="About">About Us</a></li>
+          <li><a href="contact.html" data-page="Contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="servicedetail.html?s=portfolio">Portfolio &amp; Landing</a></li>
+          <li><a href="servicedetail.html?s=basic">Basic Business Site</a></li>
+          <li><a href="servicedetail.html?s=premium">Premium Business Site</a></li>
+          <li><a href="servicedetail.html?s=ecommerce">E-Commerce</a></li>
+          <li><a href="servicedetail.html?s=uiux">UI/UX Design</a></li>
+          <li><a href="servicedetail.html?s=maintenance">Annual Maintenance</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <div class="footer-contact-item"><span class="icon">✉</span><span>contactpixelpair@gmail.com</span></div>
+        <div class="footer-contact-item"><span class="icon">◎</span><span>Available Worldwide<br>Remote &amp;
+            On-site</span></div>
+        <div class="footer-contact-item"><span class="icon">⏱</span><span>Mon – Sun, 24*7</span></div>
+        <div class="footer-contact-item"><span class="icon">⚡</span><span>Avg. response: &lt; 24hrs</span></div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 <span>PixelPair</span>. All rights reserved.</div>
+
+      <div class="footer-badge">Crafted with ☕ &amp; 💻</div>
+    </div>
+  </footer>
+
+  <script src="pixelpair.js"></script>
+  <script>
+    // LOADER — only once per session
+    const loader = document.getElementById('loader');
+    if (sessionStorage.getItem('pp-loader-shown')) {
+      loader.style.display = 'none';
+    } else {
+      sessionStorage.setItem('pp-loader-shown', '1');
+      window.addEventListener('load', () => {
+        setTimeout(() => { loader.classList.add('hidden'); setTimeout(() => { loader.style.display = 'none' }, 700) }, 2100);
+      });
+    }
+
+    // ── PREMIUM 3D GALLERY ENGINE ───────────────────────────────
+    const track = document.getElementById('workTrack');
+    const cards = [...track.querySelectorAll('.work-card')];
+
+    let state = {
+      currentX: 0,
+      targetX: 0,
+      isDown: false,
+      startX: 0,
+      scrollXAtStart: 0,
+      isInteracting: false,
+      autoScrollSpeed: 0.6,
+      lerpAmount: 0.08,
+      viewportWidth: window.innerWidth,
+      cardWidth: 0,
+      activeIndex: 0,
+      hoveredIndex: -1
+    };
+
+    function init() {
+      state.viewportWidth = window.innerWidth;
+      state.cardWidth = cards[0].offsetWidth || 380; // Fallback
+
+      const gap = parseFloat(getComputedStyle(track).gap) || 0;
+      const sidePadding = (state.viewportWidth / 2) - (state.cardWidth / 2);
+      track.style.paddingLeft = `${sidePadding}px`;
+      track.style.paddingRight = `${sidePadding}px`;
+
+      // Ensure we stay on current index after resize
+      state.targetX = -(state.activeIndex * (state.cardWidth + gap));
+      state.currentX = state.targetX;
+
+      const dotsWrap = document.getElementById('carouselDots');
+      dotsWrap.innerHTML = '';
+      cards.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'carousel-dot';
+        dot.addEventListener('click', () => scrollToIndex(i));
+        dotsWrap.appendChild(dot);
+      });
+    }
+
+    function scrollToIndex(i) {
+      const idx = Math.max(0, Math.min(i, cards.length - 1));
+      const gap = parseFloat(getComputedStyle(track).gap) || 0;
+      state.targetX = -(idx * (state.cardWidth + gap));
+      state.isInteracting = true;
+      setTimeout(() => state.isInteracting = false, 3000);
+    }
+
+    function updateHighlights() {
+      const viewportMid = window.innerWidth / 2;
+      let closestIdx = 0;
+      let minDistance = Infinity;
+
+      cards.forEach((card, i) => {
+        const rect = card.getBoundingClientRect();
+        const cardMid = rect.left + rect.width / 2;
+        const dist = Math.abs(viewportMid - cardMid);
+
+        if (dist < minDistance) {
+          minDistance = dist;
+          closestIdx = i;
+        }
+        card.classList.toggle('is-hovered', i === state.hoveredIndex);
+      });
+
+      state.activeIndex = closestIdx;
+      cards.forEach((card, i) => {
+        card.classList.toggle('active', i === state.activeIndex);
+      });
+
+      track.classList.toggle('is-any-hovered', state.hoveredIndex !== -1);
+
+      const dots = document.querySelectorAll('.carousel-dot');
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === state.activeIndex));
+
+      const progress = document.getElementById('workProgress');
+      if (progress) progress.style.width = `${(state.activeIndex / (cards.length - 1)) * 100}%`;
+    }
+
+    function animate() {
+      // Auto-scroll logic (Corrected condition)
+      if (!state.isDown && !state.isInteracting && state.hoveredIndex === -1) {
+        state.targetX -= state.autoScrollSpeed;
+        const gap = parseFloat(getComputedStyle(track).gap) || 0;
+        const totalW = (cards.length - 1) * (state.cardWidth + gap);
+        if (state.targetX < -(totalW + 100)) state.targetX = 100; // Reset
+      }
+
+      // Smooth interpolation
+      state.currentX += (state.targetX - state.currentX) * state.lerpAmount;
+
+      // Boundaries
+      const gap = parseFloat(getComputedStyle(track).gap) || 0;
+      const maxScroll = (cards.length - 1) * (state.cardWidth + gap);
+      state.targetX = Math.min(200, Math.max(state.targetX, -maxScroll - 200));
+
+      track.style.transform = `translate3d(${state.currentX}px, 0, 0)`;
+      updateHighlights();
+      requestAnimationFrame(animate);
+    }
+
+    track.addEventListener('mousedown', (e) => {
+      state.isDown = true;
+      state.isInteracting = true;
+      state.startX = e.pageX;
+      state.scrollXAtStart = state.targetX;
+      track.classList.add('dragging');
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!state.isDown) return;
+      const walk = (e.pageX - state.startX) * 1.5;
+      state.targetX = state.scrollXAtStart + walk;
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (!state.isDown) return;
+      state.isDown = false;
+      track.classList.remove('dragging');
+      const gap = parseFloat(getComputedStyle(track).gap) || 0;
+      const nearestIdx = Math.round(Math.abs(state.targetX) / (state.cardWidth + gap));
+      scrollToIndex(nearestIdx);
+    });
+
+    // Touch Support
+    track.addEventListener('touchstart', (e) => {
+      state.isDown = true;
+      state.isInteracting = true;
+      state.startX = e.touches[0].pageX;
+      state.scrollXAtStart = state.targetX;
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+      if (!state.isDown) return;
+      const walk = (e.touches[0].pageX - state.startX) * 1.5;
+      state.targetX = state.scrollXAtStart + walk;
+    }, { passive: true });
+
+    window.addEventListener('touchend', () => {
+      if (!state.isDown) return;
+      state.isDown = false;
+      const gap = parseFloat(getComputedStyle(track).gap) || 0;
+      const nearestIdx = Math.round(Math.abs(state.targetX) / (state.cardWidth + gap));
+      scrollToIndex(nearestIdx);
+    });
+
+    cards.forEach((card, i) => {
+      card.addEventListener('mouseenter', () => state.hoveredIndex = i);
+      card.addEventListener('mouseleave', () => {
+        state.hoveredIndex = -1;
+        card.style.transform = '';
+      });
+
+      card.addEventListener('mousemove', (e) => {
+        if (i !== state.activeIndex && i !== state.hoveredIndex) return;
+        const rect = card.getBoundingClientRect();
+        const dx = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
+        const dy = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
+        card.style.transform = `scale(1.15) translateZ(120px) rotateX(${-dy * 10}deg) rotateY(${dx * 10}deg)`;
+      });
+    });
+
+    document.getElementById('workPrev').addEventListener('click', () => scrollToIndex(state.activeIndex - 1));
+    document.getElementById('workNext').addEventListener('click', () => scrollToIndex(state.activeIndex + 1));
+
+    window.addEventListener('resize', () => {
+      init();
+      updateHighlights();
+    });
+
+    // Final Init with small delay to ensure rendering
+    setTimeout(() => {
+      init();
+      animate();
+    }, 500);
+
+
+    // Mini form
+    let lastSubmit = 0;
+    function handleMiniSubmit(e) {
+      e.preventDefault();
+      if (Date.now() - lastSubmit < 5000) return;
+      lastSubmit = Date.now();
+      const btn = e.target.querySelector('.form-submit');
+      btn.textContent = 'Sending...'; btn.disabled = true;
+      setTimeout(() => {
+        btn.textContent = 'Message Sent ✓'; btn.style.background = 'var(--accent2)';
+        setTimeout(() => { btn.textContent = 'Send Message →'; btn.disabled = false; btn.style.background = ''; e.target.reset() }, 3000)
+      }, 1200);
+    }
+  </script>
 </body>
+
 </html>

@@ -205,16 +205,7 @@
         </div>
       </div>
 
-      <div class="social-links-block">
-        <div class="social-links-label">Find Us Online</div>
-        <div class="social-row">
-          <a href="#" class="soc-btn">Twitter / X</a>
-          <a href="#" class="soc-btn">GitHub</a>
-          <a href="#" class="soc-btn">LinkedIn</a>
-          <a href="#" class="soc-btn">Dribbble</a>
-          <a href="#" class="soc-btn">Instagram</a>
-        </div>
-      </div>
+
     </div>
 
     <!-- ── FORM SIDE ── -->
@@ -293,13 +284,14 @@
           <label>Service Needed *</label>
           <select name="service" id="f-service" required>
             <option value="">Select a service...</option>
-            <option>Web Development</option>
-            <option>E-Commerce Store</option>
-            <option>Web Application</option>
-            <option>UI/UX Design</option>
-            <option>Responsive Design</option>
-            <option>Portfolio websites</option>
+            <option>Portfolio / Landing Website</option>
+            <option>Basic Business Website</option>
+            <option>Premium Business Website</option>
+            <option>E-Commerce Website</option>
+            <option>UI / UX Design</option>
+            <option>Annual Maintenance</option>
             <option>Full Package</option>
+
             <option>Not Sure Yet</option>
           </select>
           <div class="form-error" id="err-service">Please select a service</div>
@@ -383,12 +375,8 @@
   <div class="footer-top">
     <div class="footer-brand">
       <div class="footer-logo">Pixel<span>Pair</span></div>
-      <p>Two CS graduates building fast, beautiful, and functional web experiences. From landing pages to full-stack apps.</p>
-      <div class="footer-social">
-        <a href="#" class="social-btn">𝕏</a><a href="#" class="social-btn">⌥</a>
-        <a href="#" class="social-btn">in</a><a href="#" class="social-btn">⊙</a>
-        <a href="#" class="social-btn">◎</a><a href="#" class="social-btn">▷</a>
-      </div>
+      <p>CS graduates building fast, beautiful, and functional web experiences. From landing pages to full-stack apps.</p>
+
     </div>
     <div class="footer-col"><h4>Navigation</h4><ul>
       <li><a href="index.html" data-page="Home">Home</a></li>
@@ -398,12 +386,12 @@
       <li><a href="contact.html">Contact</a></li>
     </ul></div>
     <div class="footer-col"><h4>Services</h4><ul>
-      <li><a href="services.html">Web Development</a></li>
-      <li><a href="services.html">E-Commerce</a></li>
-      <li><a href="services.html">Web Applications</a></li>
-      <li><a href="services.html">UI/UX Design</a></li>
-      <li><a href="services.html">Responsive Design</a></li>
-      <li><a href="services.html">Portfolio websites</a></li>
+      <li><a href="servicedetail.html?s=portfolio">Portfolio &amp; Landing</a></li>
+      <li><a href="servicedetail.html?s=basic">Basic Business Site</a></li>
+      <li><a href="servicedetail.html?s=premium">Premium Business Site</a></li>
+      <li><a href="servicedetail.html?s=ecommerce">E-Commerce</a></li>
+      <li><a href="servicedetail.html?s=uiux">UI/UX Design</a></li>
+      <li><a href="servicedetail.html?s=maintenance">Annual Maintenance</a></li>
     </ul></div>
     <div class="footer-col"><h4>Contact</h4>
       <div class="footer-contact-item"><span class="icon">✉</span><span>contactpixelpair@gmail.com</span></div>
@@ -493,6 +481,52 @@ function hideSuccess() {
     dot.style.top     = (Math.random() * 90).toFixed(1) + '%';
     dot.style.opacity = (Math.random() * 0.45 + 0.15).toFixed(2);
     container.appendChild(dot);
+  }
+})();
+
+// ── AUTO-FILL FROM URL ───────────────────────────────────────
+(function autoFill() {
+  const params = new URLSearchParams(window.location.search);
+  const service = params.get('service');
+  const price = parseInt(params.get('price'));
+
+  if (service) {
+    const serviceSelect = document.getElementById('f-service');
+    // Map the service tag to the dropdown option
+    const mapping = {
+      'Portfolio & Landing': 'Portfolio / Landing Website',
+      'Basic Business': 'Basic Business Website',
+      'Premium Business': 'Premium Business Website',
+      'E-Commerce': 'E-Commerce Website',
+      'UI / UX Design': 'UI / UX Design',
+      'Annual Maintenance': 'Annual Maintenance'
+    };
+    
+    const targetValue = mapping[service] || service;
+    
+    // Logic to select the right option
+    for (let i = 0; i < serviceSelect.options.length; i++) {
+      if (serviceSelect.options[i].text === targetValue) {
+        serviceSelect.selectedIndex = i;
+        break;
+      }
+    }
+  }
+
+  if (!isNaN(price)) {
+    let budgetBtnText = '';
+    if (price <= 1000) budgetBtnText = '₹500–1K';
+    else if (price <= 3000) budgetBtnText = '₹1K–3K';
+    else if (price <= 8000) budgetBtnText = '₹3K–8K';
+    else if (price <= 15000) budgetBtnText = '₹8K–15K';
+    else budgetBtnText = '₹15K+';
+
+    const btns = document.querySelectorAll('.budget-btn');
+    btns.forEach(btn => {
+      if (btn.textContent.trim() === budgetBtnText) {
+        selectBudget(btn);
+      }
+    });
   }
 })();
 </script>

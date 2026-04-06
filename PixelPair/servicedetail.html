@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelPair — Service Details</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=DM+Mono:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="pixelpair.css">
+    <style>
+        /* ── PAGE HERO ── */
+        .svc-hero {
+            min-height: 52vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 0 4rem 5rem;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border);
+            margin-top: var(--nav-h);
+        }
+
+        .svc-hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 60px 60px;
+            opacity: 0.2;
+        }
+
+        .svc-orb-a {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: var(--glow);
+            border-radius: 50%;
+            filter: blur(100px);
+            top: -200px;
+            right: -100px;
+            animation: orbF 8s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .svc-orb-b {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            background: var(--glow);
+            border-radius: 50%;
+            filter: blur(100px);
+            bottom: -50px;
+            left: 10%;
+            animation: orbF 6s ease-in-out infinite reverse;
+            pointer-events: none;
+        }
+
+        @keyframes orbF {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(20px, -20px) scale(1.08);
+            }
+        }
+
+        .svc-back {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--muted);
+            text-decoration: none;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2.5rem;
+            transition: color 0.3s;
+            position: relative;
+            z-index: 2;
+            animation: fadeUp 0.6s 0.1s both;
+        }
+
+        .svc-back:hover {
+            color: var(--accent);
+        }
+
+        .svc-tag {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--accent);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            position: relative;
+            z-index: 2;
+            animation: fadeUp 0.7s 0.2s both;
+        }
+
+        .svc-tag::before {
+            content: '//';
+            opacity: 0.5;
+        }
+
+        .svc-hero-title {
+            font-size: clamp(2.8rem, 7vw, 6rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.05;
+            position: relative;
+            z-index: 2;
+            animation: fadeUp 0.7s 0.35s both;
+        }
+
+        .svc-hero-title span {
+            color: var(--accent);
+        }
+
+        .svc-hero-meta {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.88rem;
+            color: var(--muted);
+            margin-top: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 2;
+            animation: fadeUp 0.7s 0.5s both;
+        }
+
+        .svc-hero-meta .meta-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: -0.03em;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .svc-hero-meta .meta-sep {
+            width: 1px;
+            height: 32px;
+            background: var(--border);
+        }
+
+        /* ── MAIN BODY ── */
+        .svc-body {
+            background: var(--bg);
+            padding: 6rem 4rem;
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 5rem;
+            align-items: start;
+        }
+
+        /* ── LEFT COL ── */
+        .svc-overview-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--accent);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .svc-overview-label::before {
+            content: '//';
+            opacity: 0.5;
+        }
+
+        .svc-overview-title {
+            font-size: clamp(1.6rem, 3vw, 2.4rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 2rem;
+        }
+
+        .svc-overview-text {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.88rem;
+            color: var(--muted);
+            line-height: 1.9;
+            margin-bottom: 3rem;
+        }
+
+        /* ── WHAT'S INCLUDED / NOT ── */
+        .svc-lists {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .svc-list-box {
+            border: 1px solid var(--border);
+            padding: 2rem;
+            position: relative;
+            background: var(--bg2);
+            transition: border-color 0.3s;
+        }
+
+        .svc-list-box:hover {
+            border-color: var(--accent);
+        }
+
+        .svc-list-box::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--accent);
+            transform: scaleY(0);
+            transition: transform 0.3s;
+        }
+
+        .svc-list-box:hover::before {
+            transform: scaleY(1);
+        }
+
+        .svc-list-box.not-included::before {
+            background: #444;
+        }
+
+        .svc-list-title {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .svc-list-title.yes {
+            color: var(--accent);
+        }
+
+        .svc-list-title.no {
+            color: var(--muted);
+        }
+
+        .svc-list ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .svc-list ul li {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--muted);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.7rem;
+            line-height: 1.5;
+        }
+
+        .svc-list ul li .li-icon {
+            flex-shrink: 0;
+            font-size: 0.7rem;
+            margin-top: 2px;
+        }
+
+        .li-icon.yes {
+            color: var(--accent);
+        }
+
+        .li-icon.no {
+            color: #444;
+        }
+
+        /* ── PROCESS ── */
+        .svc-process {
+            margin-bottom: 3rem;
+        }
+
+        .svc-process-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+            margin-top: 2rem;
+        }
+
+        .svc-process-step {
+            background: var(--bg2);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s;
+        }
+
+        .svc-process-step:hover {
+            background: var(--card);
+        }
+
+        .svc-process-step::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--glow);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .svc-process-step:hover::after {
+            opacity: 1;
+        }
+
+        .step-num {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--accent);
+            letter-spacing: 0.15em;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-desc {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--muted);
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ── TECH STACK ── */
+        .svc-tech {
+            margin-bottom: 1rem;
+        }
+
+        .tech-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 1.5rem;
+        }
+
+        .tech-chip {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--accent);
+            background: var(--glow);
+            border: 1px solid rgba(0, 255, 135, 0.2);
+            padding: 0.35rem 0.9rem;
+            letter-spacing: 0.05em;
+            transition: all 0.3s;
+        }
+
+        .tech-chip:hover {
+            background: var(--glow-strong);
+            transform: translateY(-2px);
+        }
+
+        /* ── RIGHT COL / STICKY CARD ── */
+        .svc-sticky {
+            position: sticky;
+            top: calc(var(--nav-h) + 2rem);
+        }
+
+        .svc-price-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 0.3s;
+        }
+
+        .svc-price-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--glow);
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+        }
+
+        .svc-price-card:hover::before {
+            opacity: 1;
+        }
+
+        .svc-price-card:hover {
+            border-color: var(--accent);
+        }
+
+        .card-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--muted);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .card-price-big {
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: -0.04em;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-price-note {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--muted);
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 1.5rem 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-quick-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-quick-list li {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.78rem;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .card-quick-list li::before {
+            content: '✦';
+            color: var(--accent);
+            font-size: 0.5rem;
+            flex-shrink: 0;
+        }
+
+        .card-cta {
+            display: block;
+            width: 100%;
+            padding: 1.1rem 2rem;
+            background: var(--accent);
+            color: #000;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.05em;
+            text-align: center;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            z-index: 1;
+        }
+
+        .card-cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: white;
+            transform: translateX(-100%);
+            transition: transform 0.3s;
+        }
+
+        .card-cta:hover::before {
+            transform: translateX(0);
+        }
+
+        .card-cta span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-secondary {
+            display: block;
+            width: 100%;
+            padding: 0.9rem 2rem;
+            background: transparent;
+            color: var(--text);
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 0.82rem;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            letter-spacing: 0.05em;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: 0.8rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .card-timeline {
+            margin-top: 1.8rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-item {
+            text-align: center;
+        }
+
+        .timeline-val {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent);
+            display: block;
+        }
+
+        .timeline-lbl {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--muted);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        /* ── FAQ ── */
+        .svc-faq {
+            margin-top: 3rem;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem 0;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            transition: color 0.3s;
+            user-select: none;
+        }
+
+        .faq-question:hover {
+            color: var(--accent);
+        }
+
+        .faq-icon {
+            color: var(--accent);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            transition: transform 0.3s;
+            font-style: normal;
+        }
+
+        .faq-item.open .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.82rem;
+            color: var(--muted);
+            line-height: 1.8;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s;
+        }
+
+        .faq-item.open .faq-answer {
+            max-height: 300px;
+            padding-bottom: 1.5rem;
+        }
+
+        /* ── OTHER SERVICES ── */
+        .svc-other {
+            background: var(--bg2);
+            padding: 6rem 4rem;
+        }
+
+        .other-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+            margin-top: 3rem;
+        }
+
+        .other-card {
+            background: var(--bg);
+            padding: 2.5rem 2rem;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            display: block;
+        }
+
+        .other-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--glow);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .other-card:hover::before {
+            opacity: 1;
+        }
+
+        .other-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .other-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 1.2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .other-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .other-price {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent);
+            position: relative;
+            z-index: 1;
+        }
+
+        .other-arrow {
+            position: absolute;
+            bottom: 2rem;
+            right: 2rem;
+            color: var(--accent);
+            font-size: 1.2rem;
+            opacity: 0;
+            transform: translateX(-5px);
+            transition: all 0.3s;
+        }
+
+        .other-card:hover .other-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ── MOBILE ── */
+        @media(max-width: 900px) {
+            .svc-hero {
+                padding: 0 1.5rem 3.5rem;
+            }
+
+            .svc-body {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+                padding: 4rem 1.5rem;
+            }
+
+            .svc-sticky {
+                position: static;
+            }
+
+            .svc-lists {
+                grid-template-columns: 1fr;
+            }
+
+            .svc-process-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .other-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .svc-other {
+                padding: 4rem 1.5rem;
+            }
+        }
+
+        @media(max-width: 540px) {
+            .svc-process-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .other-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- PAGE TRANSITION -->
+    <div id="page-transition">
+        <div class="pt-panel"></div>
+        <div class="pt-label" id="pt-label">Loading...</div>
+    </div>
+
+    <!-- CURSOR -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursorFollower"></div>
+
+    <!-- NAV -->
+    <nav id="navbar">
+        <a href="index.html" class="nav-logo" data-page="Home">Pixel<span>Pair</span></a>
+        <ul class="nav-links">
+            <li><a href="services.html" data-page="Services" class="active">Services</a></li>
+            <li><a href="portfolio.html" data-page="Portfolio">Works</a></li>
+            <li><a href="about.html" data-page="About">About</a></li>
+            <li><a href="contact.html" data-page="Contact">Contact</a></li>
+        </ul>
+        <div class="nav-right">
+            <div class="theme-switcher">
+                <div class="theme-btn t-green active" onclick="setTheme('')"></div>
+                <div class="theme-btn t-cyan" onclick="setTheme('theme-cyan')"></div>
+                <div class="theme-btn t-purple" onclick="setTheme('theme-purple')"></div>
+                <div class="theme-btn t-orange" onclick="setTheme('theme-orange')"></div>
+                <div class="theme-btn t-pink" onclick="setTheme('theme-pink')"></div>
+                <div class="theme-btn t-gold" onclick="setTheme('theme-gold')"></div>
+            </div>
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="index.html" data-page="Home">Home</a>
+            <a href="services.html" data-page="Services">Services</a>
+            <a href="portfolio.html" data-page="Portfolio">Portfolio</a>
+            <a href="about.html" data-page="About">About</a>
+            <a href="contact.html" data-page="Contact">Contact</a>
+            <div class="mobile-menu-divider"></div>
+            <div class="mobile-theme-row">
+                <span class="mobile-theme-label">Theme</span>
+                <div class="theme-btn t-green" onclick="setTheme('')"></div>
+                <div class="theme-btn t-cyan" onclick="setTheme('theme-cyan')"></div>
+                <div class="theme-btn t-purple" onclick="setTheme('theme-purple')"></div>
+                <div class="theme-btn t-orange" onclick="setTheme('theme-orange')"></div>
+                <div class="theme-btn t-pink" onclick="setTheme('theme-pink')"></div>
+                <div class="theme-btn t-gold" onclick="setTheme('theme-gold')"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="svc-hero" id="svcHero">
+        <div class="svc-hero-grid"></div>
+        <div class="svc-orb-a"></div>
+        <div class="svc-orb-b"></div>
+        <a href="index.html#services" class="svc-back" data-page="Home">← Back to Services</a>
+        <div class="svc-tag" id="heroTag">Web Development</div>
+        <h1 class="svc-hero-title" id="heroTitle">Service<br><span>Name</span></h1>
+        <div class="svc-hero-meta">
+            <div class="meta-price" id="heroPrice">₹0</div>
+            <div class="meta-sep"></div>
+            <span id="heroSubtag">Details loading...</span>
+        </div>
+    </section>
+
+    <!-- MAIN BODY -->
+    <div class="svc-body">
+
+        <!-- LEFT: Details -->
+        <div class="svc-left">
+
+            <!-- Overview -->
+            <div class="reveal">
+                <div class="svc-overview-label">Overview</div>
+                <h2 class="svc-overview-title" id="overviewTitle">About this service</h2>
+                <p class="svc-overview-text" id="overviewText">Loading...</p>
+            </div>
+
+            <!-- What's included / Not included -->
+            <div class="svc-lists reveal">
+                <div class="svc-list-box">
+                    <div class="svc-list-title yes">✦ What's Included</div>
+                    <div class="svc-list">
+                        <ul id="includedList"></ul>
+                    </div>
+                </div>
+                <div class="svc-list-box not-included">
+                    <div class="svc-list-title no">✕ Not Included</div>
+                    <div class="svc-list">
+                        <ul id="excludedList"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Process -->
+            <div class="svc-process reveal">
+                <div class="svc-overview-label">How We Work</div>
+                <h2 class="svc-overview-title" id="processTitle">Our Process</h2>
+                <div class="svc-process-grid" id="processGrid"></div>
+            </div>
+
+            <!-- Tech Stack -->
+            <div class="svc-tech reveal">
+                <div class="svc-overview-label">Tech Stack</div>
+                <h2 class="svc-overview-title">Tools & Technologies</h2>
+                <div class="tech-chips" id="techChips"></div>
+            </div>
+
+            <!-- FAQ -->
+            <div class="svc-faq reveal">
+                <div class="svc-overview-label">FAQs</div>
+                <h2 class="svc-overview-title">Common Questions</h2>
+                <div id="faqList"></div>
+            </div>
+
+        </div>
+
+        <!-- RIGHT: Sticky Card -->
+        <div class="svc-sticky">
+            <div class="svc-price-card reveal">
+                <div class="card-label">Starting price</div>
+                <div class="card-price-big" id="cardPrice">₹0</div>
+                <div class="card-price-note" id="cardPriceNote">Upper limit — final price depends on scope</div>
+                <div class="card-divider"></div>
+                <ul class="card-quick-list" id="cardQuickList"></ul>
+                <a href="contact.html" class="card-cta" id="bookNowBtn" data-page="Contact"><span>Book This Service →</span></a>
+                <a href="index.html#services" class="card-secondary" data-page="Home">Browse All Services</a>
+                <div class="card-timeline">
+                    <div class="timeline-item">
+                        <span class="timeline-val" id="cardDelivery">—</span>
+                        <span class="timeline-lbl">Est. Delivery</span>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-val" id="cardRevisions">3</span>
+                        <span class="timeline-lbl">Revisions</span>
+                    </div>
+                    <div class="timeline-item">
+                        <span class="timeline-val">24hr</span>
+                        <span class="timeline-lbl">Response</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- OTHER SERVICES -->
+    <section class="svc-other">
+        <div class="section-label reveal">Explore More</div>
+        <h2 class="section-title reveal">Other Services</h2>
+        <div class="other-grid reveal" id="otherGrid"></div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="footer-logo">Pixel<span>Pair</span></div>
+                <p>CS graduates building fast, beautiful, and functional web experiences. From landing pages to
+                    full-stack apps, we craft digital products that perform.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html" data-page="Home">Home</a></li>
+                    <li><a href="services.html" data-page="Services">Services</a></li>
+                    <li><a href="portfolio.html" data-page="Portfolio">Portfolio</a></li>
+                    <li><a href="about.html" data-page="About">About Us</a></li>
+                    <li><a href="contact.html" data-page="Contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="servicedetail.html?s=portfolio">Portfolio &amp; Landing</a></li>
+                    <li><a href="servicedetail.html?s=basic">Basic Business Sites</a></li>
+                    <li><a href="servicedetail.html?s=premium">Premium Business Sites</a></li>
+                    <li><a href="servicedetail.html?s=ecommerce">E-Commerce Solutions</a></li>
+                    <li><a href="servicedetail.html?s=uiux">UI / UX Design</a></li>
+                    <li><a href="servicedetail.html?s=maintenance">Annual Maintenance</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <div class="footer-contact-item"><span class="icon">✉</span><span>hello@pixelpair.in</span></div>
+                <div class="footer-contact-item"><span class="icon">◎</span><span>Available Worldwide<br>Remote &amp;
+                        On-site</span></div>
+                <div class="footer-contact-item"><span class="icon">⏱</span><span>Mon – Sun, 24*7</span></div>
+                <div class="footer-contact-item"><span class="icon">⚡</span><span>Avg. response: &lt; 24hrs</span></div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-copy">© 2025 <span>PixelPair</span>. All rights reserved.</div>
+            <div class="footer-badge">Crafted with ☕ &amp; 💻</div>
+        </div>
+    </footer>
+
+    <script src="pixelpair.js"></script>
+    <script>
+        // ─────────────────────────────────────────────
+        // SERVICE DATA
+        // ─────────────────────────────────────────────
+        const SERVICES = {
+            portfolio: {
+                tag: 'Portfolio & Landing',
+                titleLine1: 'Portfolio &',
+                titleAccent: 'Landing Page',
+                price: '₹7,000',
+                subtag: 'Single Page · Fast Delivery · SEO Optimised',
+                delivery: '3–5 days',
+                revisions: '3',
+                overview: {
+                    title: 'Make Your First Impression Count',
+                    text: `A portfolio or landing page is the sharpest tool in your digital arsenal. Whether you're a freelancer, creative professional, or a brand launching a product — this service gives you a pixel-perfect, blazing-fast single-page website designed to convert visitors into clients.\n\nWe handle everything from design to deployment, with mobile-first responsive layout, smooth animations, and SEO best practices baked in from day one.`
+                },
+                included: [
+                    'Custom single-page responsive design',
+                    'Smooth scroll animations & micro-interactions',
+                    'Contact form integration',
+                    'Basic on-page SEO (meta, OG tags, sitemap)',
+                    'Mobile & cross-browser tested',
+                    'Google PageSpeed score ≥ 90',
+                    'Source code handoff',
+                    '7-day post-launch support'
+                ],
+                excluded: [
+                    'Hosting & domain setup (we guide you)',
+                    'Backend / server-side logic',
+                    'Multi-page structure',
+                    'CMS integration',
+                    'Ongoing monthly maintenance',
+                    'Content writing / copywriting'
+                ],
+                process: [
+                    { num: '01', name: 'Discovery Call', desc: 'We understand your brand, goals, and target audience in a focused 30-min call.' },
+                    { num: '02', name: 'Design Draft', desc: 'A high-fidelity mockup in Figma for your review and approval before we code.' },
+                    { num: '03', name: 'Development', desc: 'Clean, semantic HTML/CSS/JS — fast, accessible, and built to last.' },
+                    { num: '04', name: 'Review Round', desc: 'Up to 3 revision rounds so the final result is exactly what you envisioned.' },
+                    { num: '05', name: 'QA & Testing', desc: 'Cross-device, cross-browser testing. Lighthouse audit before go-live.' },
+                    { num: '06', name: 'Launch', desc: 'We deploy to your hosting and hand off all source files. Done.' }
+                ],
+                tech: ['HTML5', 'CSS3', 'JavaScript', 'Figma', 'GSAP', 'SEO'],
+                faq: [
+                    { q: 'What do I need to provide?', a: 'Your brand assets (logo, colors, fonts if any), the content/copy you want on the site, and reference websites you like. We take it from there.' },
+                    { q: 'Is the price fixed?', a: 'The ₹7,000 is an upper limit. Final pricing depends on scope and complexity. For simple portfolios it can be lower. Let\'s talk.' },
+                    { q: 'What about hosting?', a: 'Hosting and domain are not included, but we\'ll recommend the best providers and help you set them up at no extra charge.' },
+                    { q: 'Can I update the site myself later?', a: 'Yes. We build with clean code and can also integrate a simple CMS like Netlify CMS or Contentful if you need self-editing capability (quoted separately).' }
+                ],
+                quickList: ['Single page responsive site', 'Animations & interactions', 'SEO ready', '7-day support included']
+            },
+
+            basic: {
+                tag: 'Basic Business',
+                titleLine1: 'Basic Business',
+                titleAccent: 'Website',
+                price: '₹12,000',
+                subtag: 'Multi-Page · CMS Ready · Business Grade',
+                delivery: '7–10 days',
+                revisions: '3',
+                overview: {
+                    title: 'A Professional Digital Presence for Your Business',
+                    text: `Your business deserves more than a template. The Basic Business Website gives you a full multi-page site — Home, About, Services, and Contact — built with a clean design system, CMS-readiness, and a strong SEO foundation.\n\nPerfect for local businesses, consultants, agencies, and service providers who need a reliable, fast, and professional web presence without breaking the bank.`
+                },
+                included: [
+                    'Up to 5 pages (Home, About, Services, Contact + 1 more)',
+                    'Custom responsive design',
+                    'CMS integration (WordPress or headless)',
+                    'Contact form with email notifications',
+                    'On-page SEO setup',
+                    'Google Analytics integration',
+                    'Mobile & cross-browser tested',
+                    'Google Maps embed (if applicable)',
+                    '14-day post-launch support'
+                ],
+                excluded: [
+                    'Hosting & domain (we guide you)',
+                    'E-commerce / payment gateway',
+                    'Custom web application / dashboard',
+                    'Content writing / copywriting',
+                    'Logo design',
+                    'Monthly maintenance retainer'
+                ],
+                process: [
+                    { num: '01', name: 'Brief & Planning', desc: 'We map out all pages, sitemap, and content structure with you.' },
+                    { num: '02', name: 'Design System', desc: 'Typography, color palette, and component library created in Figma.' },
+                    { num: '03', name: 'Page Design', desc: 'Full Figma mockups for every page, desktop and mobile.' },
+                    { num: '04', name: 'Development', desc: 'Built with semantic HTML, modern CSS, and JS. CMS wired up.' },
+                    { num: '05', name: 'Content Entry', desc: 'We populate your content and images across all pages.' },
+                    { num: '06', name: 'Launch & Handoff', desc: 'Live deployment, Google Search Console setup, source handoff.' }
+                ],
+                tech: ['HTML5', 'CSS3', 'JavaScript', 'WordPress', 'PHP', 'Figma', 'SEO', 'Google Analytics'],
+                faq: [
+                    { q: 'Can I add more pages later?', a: 'Absolutely. Additional pages can be added post-launch. We\'ll quote them separately based on complexity.' },
+                    { q: 'Will I be able to edit the site?', a: 'Yes. With CMS integration, you can add, edit, or remove content without touching code.' },
+                    { q: 'What\'s the difference from the Premium plan?', a: 'The Premium plan includes custom full-stack development, advanced animations, complex features, and a larger page count. Basic is great if you need a solid multi-page presence without complex functionality.' },
+                    { q: 'Do you write the copy?', a: 'Copywriting is not included but can be added as an add-on. We\'ll need your raw content at minimum.' }
+                ],
+                quickList: ['Up to 5 pages', 'CMS / self-editable', 'SEO + Analytics', '14-day support included']
+            },
+
+            premium: {
+                tag: 'Premium Business',
+                titleLine1: 'Premium Business',
+                titleAccent: 'Website',
+                price: '₹18,000',
+                subtag: 'Custom Design · Full Stack · Advanced Features',
+                delivery: '14–21 days',
+                revisions: '5',
+                overview: {
+                    title: 'High-Performance, Full-Stack Web Experience',
+                    text: `When your brand demands the best, the Premium Business Website delivers. This is a fully custom-engineered web product — not a theme, not a template. Built with React or Next.js, backed by a robust Node.js API, and designed with a bespoke UI system crafted in Figma.\n\nThis tier is built for businesses that need performance, scalability, advanced interactivity, and a digital presence that genuinely stands out from competitors.`
+                },
+                included: [
+                    'Unlimited pages (scoped in discovery)',
+                    'Full custom UI design system (Figma)',
+                    'React / Next.js frontend',
+                    'Node.js + Express backend (if needed)',
+                    'Database integration (MongoDB / PostgreSQL)',
+                    'Advanced animations (GSAP / Framer Motion)',
+                    'CMS integration or custom admin panel',
+                    'Full SEO suite + performance optimisation',
+                    'Authentication system (if required)',
+                    '30-day post-launch support'
+                ],
+                excluded: [
+                    'Hosting & domain (we guide + assist setup)',
+                    'Third-party API costs (Stripe fees, etc.)',
+                    'Mobile app (iOS / Android)',
+                    'Ongoing monthly retainer',
+                    'Content writing / brand strategy'
+                ],
+                process: [
+                    { num: '01', name: 'Deep Discovery', desc: 'Full requirements gathering, competitor research, and technical architecture planning.' },
+                    { num: '02', name: 'UI/UX Design', desc: 'Complete Figma design system — components, pages, states, responsive breakpoints.' },
+                    { num: '03', name: 'Frontend Dev', desc: 'React/Next.js build with reusable component architecture and animation layer.' },
+                    { num: '04', name: 'Backend Dev', desc: 'API, database schemas, auth flows, and any server-side logic required.' },
+                    { num: '05', name: 'Integration & QA', desc: 'All systems integrated and stress-tested. Lighthouse ≥ 95 target.' },
+                    { num: '06', name: 'Launch & Docs', desc: 'Staged deployment, monitoring setup, and full technical documentation handoff.' }
+                ],
+                tech: ['React', 'Next.js', 'Node.js', 'Express', 'MongoDB', 'PostgreSQL', 'GSAP', 'Figma', 'TypeScript', 'Tailwind CSS'],
+                faq: [
+                    { q: 'How is this different from Basic?', a: 'Premium is a fully engineered product. Custom React/Next.js, a backend API, database, and complex feature sets. Basic is CMS-based multi-page sites.' },
+                    { q: 'Can this scale as my business grows?', a: 'Yes. We architect for scalability from the start — clean component structure, API-first design, and cloud-ready deployments.' },
+                    { q: 'Do you work with an existing brand identity?', a: 'Absolutely. If you have brand guidelines, we follow them precisely. If not, we create a full visual identity as part of the design phase.' },
+                    { q: 'Is the 30-day support free?', a: 'Yes. 30 days of bug fixes and minor tweaks are included at no extra cost. After that, we offer maintenance plans.' }
+                ],
+                quickList: ['Unlimited pages', 'React / Next.js stack', 'Advanced animations', '30-day support included']
+            },
+
+            ecommerce: {
+                tag: 'E-Commerce',
+                titleLine1: 'E-Commerce',
+                titleAccent: 'Website',
+                price: '₹35,000',
+                subtag: 'Store · Payments · Admin Dashboard',
+                delivery: '21–30 days',
+                revisions: '5',
+                overview: {
+                    title: 'Your Complete Online Store, Built to Sell',
+                    text: `Launch a fully-featured e-commerce platform built for conversion and scale. This isn't Shopify — it's a custom-coded store that's yours entirely, with no recurring platform fees, no limitations, and a storefront designed exactly the way your brand demands.\n\nFrom product management and cart flows to Stripe/Razorpay payment integration and a full admin dashboard, we build the complete commerce engine for your business.`
+                },
+                included: [
+                    'Full custom storefront design',
+                    'Product catalogue with categories & filters',
+                    'Cart, checkout & order management',
+                    'Stripe / Razorpay payment integration',
+                    'Admin dashboard (products, orders, customers)',
+                    'User authentication & accounts',
+                    'Inventory management',
+                    'Order email notifications',
+                    'SEO + performance optimisation',
+                    '30-day post-launch support'
+                ],
+                excluded: [
+                    'Hosting & domain (we guide + assist)',
+                    'Payment gateway transaction fees',
+                    'Third-party app / plugin subscriptions',
+                    'Product photography',
+                    'Content / product description writing',
+                    'Logistics / delivery partner integration (quoted separately)'
+                ],
+                process: [
+                    { num: '01', name: 'Commerce Planning', desc: 'Product structure, catalogue hierarchy, user flows, and payment gateway selection.' },
+                    { num: '02', name: 'UI/UX Design', desc: 'Full Figma design for every store screen — product page, cart, checkout, dashboard.' },
+                    { num: '03', name: 'Frontend Build', desc: 'React storefront with product listing, filters, cart, and checkout UI.' },
+                    { num: '04', name: 'Backend & Payments', desc: 'Node.js API, database, auth, order system, and payment gateway wiring.' },
+                    { num: '05', name: 'Admin Dashboard', desc: 'Full-featured admin panel to manage products, view orders, track inventory.' },
+                    { num: '06', name: 'Test & Launch', desc: 'End-to-end payment testing, load testing, and staged go-live.' }
+                ],
+                tech: ['React', 'Next.js', 'Node.js', 'MongoDB', 'Stripe', 'Razorpay', 'Figma', 'TypeScript', 'Redis', 'AWS S3'],
+                faq: [
+                    { q: 'Will there be monthly platform fees?', a: 'No. This is a fully custom build — no Shopify, no platform fees. You only pay for hosting and payment gateway transaction fees.' },
+                    { q: 'Can I manage products myself?', a: 'Yes. The admin dashboard lets you add/edit products, view orders, update inventory, and manage customers without touching code.' },
+                    { q: 'Which payment gateways do you support?', a: 'Stripe and Razorpay are included. We can also integrate PayU, PayPal, or others on request.' },
+                    { q: 'What if I want to add features later?', a: 'The codebase is modular and documented. Adding new features post-launch is straightforward — we can quote additional modules.' }
+                ],
+                quickList: ['Custom storefront', 'Payment gateway ready', 'Admin dashboard', '30-day support included']
+            },
+
+            uiux: {
+                tag: 'UI / UX Design',
+                titleLine1: 'UI / UX',
+                titleAccent: 'Design',
+                price: '₹8,000',
+                subtag: 'Figma Prototypes · Wireframes · Design Systems',
+                delivery: '5–10 days',
+                revisions: '3',
+                overview: {
+                    title: 'Design That Thinks Before It Looks Good',
+                    text: `Great design is more than aesthetics — it's how users think, feel, and navigate through your product. Our UI/UX service delivers research-backed, pixel-perfect Figma designs that solve real user problems and communicate your brand with clarity.\n\nWhether you need a full product design, a landing page mockup, or a component library — we create designs that developers love to build and users love to use.`
+                },
+                included: [
+                    'User flow & wireframe mapping',
+                    'High-fidelity Figma mockups',
+                    'Responsive design (desktop + mobile)',
+                    'Component / design system library',
+                    'Interactive prototype (clickable)',
+                    'Typography & colour system',
+                    'Iconography & illustration direction',
+                    'Developer-ready Figma file with specs'
+                ],
+                excluded: [
+                    'Frontend development / coding',
+                    'Brand identity / logo design (quoted separately)',
+                    'User research / surveys (quoted separately)',
+                    'Motion design / Lottie animations',
+                    'Print / offline design materials',
+                    'Ongoing design retainer'
+                ],
+                process: [
+                    { num: '01', name: 'Research & Brief', desc: 'Understanding your users, competitors, and product goals through a structured brief.' },
+                    { num: '02', name: 'Wireframes', desc: 'Low-fidelity wireframes to validate layout and user flows before visual design.' },
+                    { num: '03', name: 'Visual Design', desc: 'Full high-fidelity UI design with your brand\'s visual language.' },
+                    { num: '04', name: 'Prototype', desc: 'Clickable Figma prototype to simulate real product behaviour.' },
+                    { num: '05', name: 'Revision Rounds', desc: 'Up to 3 rounds of structured feedback and refinements.' },
+                    { num: '06', name: 'Handoff', desc: 'Developer-ready Figma file with specs, assets, and design tokens exported.' }
+                ],
+                tech: ['Figma', 'FigJam', 'Principle', 'Zeplin', 'Notion', 'Lottie (optional)'],
+                faq: [
+                    { q: 'Do you do brand identity / logo design?', a: 'Logo and brand identity design is a separate service. However, if you have existing brand guidelines, we design within them.' },
+                    { q: 'Can I use this design with any developer?', a: 'Yes. The Figma handoff includes all specs, assets, and measurements. Any competent developer can build from it.' },
+                    { q: 'Is this just the design, or does it include development?', a: 'This is design-only. If you\'d like us to develop the designs too, we can bundle it with one of our web development services.' },
+                    { q: 'What if I only need a few screens redesigned?', a: 'No problem. Pricing scales with scope. Reach out with the number of screens and we\'ll quote accordingly.' }
+                ],
+                quickList: ['Figma wireframes + UI', 'Interactive prototype', 'Design system included', 'Dev-ready handoff']
+            },
+
+            maintenance: {
+                tag: 'Annual Maintenance',
+                titleLine1: 'Annual',
+                titleAccent: 'Maintenance',
+                price: '₹5,000',
+                subtag: 'Updates · Support · Monitoring · /year',
+                delivery: 'Ongoing',
+                revisions: 'Unlimited minor',
+                overview: {
+                    title: 'Keep Your Website Healthy, Fast, and Up to Date',
+                    text: `Your website isn't a one-time project — it's a living asset that needs care. Our Annual Maintenance plan keeps your site secure, performant, and fresh throughout the year.\n\nWe handle everything from content updates and plugin upgrades to uptime monitoring and emergency fixes, so you can focus on running your business while we keep the digital side running perfectly.`
+                },
+                included: [
+                    'Up to 5 content updates/month',
+                    'Plugin & CMS version updates',
+                    'Uptime monitoring (24/7 alerts)',
+                    'Monthly performance report',
+                    'Security scans & patches',
+                    'Bug fixes & minor code changes',
+                    'Backup management',
+                    'Priority support response (< 12hrs)',
+                    'Annual SEO health check'
+                ],
+                excluded: [
+                    'New page design or major redesigns',
+                    'New feature development',
+                    'Hosting & domain fees',
+                    'Third-party tool subscriptions',
+                    'Content writing / copywriting',
+                    'Social media management'
+                ],
+                process: [
+                    { num: '01', name: 'Onboarding', desc: 'Access setup, site audit, and baseline performance benchmarking.' },
+                    { num: '02', name: 'Monthly Cycle', desc: 'Content updates, software updates, and security scans on a fixed monthly cycle.' },
+                    { num: '03', name: 'Monitoring', desc: 'Uptime and performance monitoring active 24/7 with automated alerts.' },
+                    { num: '04', name: 'Reporting', desc: 'Monthly report with uptime stats, speed scores, and tasks completed.' },
+                    { num: '05', name: 'On-Demand Fixes', desc: 'Bug reports handled within 12 hours during business hours.' },
+                    { num: '06', name: 'Annual Review', desc: 'Full SEO health check and strategic recommendations at year-end.' }
+                ],
+                tech: ['WordPress', 'cPanel', 'Cloudflare', 'Google Search Console', 'UptimeRobot', 'GTmetrix'],
+                faq: [
+                    { q: 'What counts as a "content update"?', a: 'Text changes, image swaps, adding/removing items from a list or gallery, updating contact details, etc. Major structural changes are quoted separately.' },
+                    { q: 'Is this per site?', a: 'Yes, the ₹5,000/year plan is per website. Discounts available if you have multiple sites.' },
+                    { q: 'What if my site goes down?', a: 'Our uptime monitor alerts us instantly. We prioritise emergency downtime response and aim to have you back live within 2 hours.' },
+                    { q: 'Do I need maintenance if I built my site elsewhere?', a: 'Yes, we can maintain sites we didn\'t build. We\'ll do an initial audit first to understand the codebase.' }
+                ],
+                quickList: ['5 content updates/month', '24/7 uptime monitoring', 'Security & backups', 'Priority support']
+            }
+        };
+
+        // Other services grid (all except current)
+        const OTHER_META = {
+            portfolio: { icon: '🎨', price: 'Up to ₹7,000' },
+            basic: { icon: '🏢', price: 'Up to ₹12,000' },
+            premium: { icon: '⚡', price: 'Up to ₹18,000' },
+            ecommerce: { icon: '🛒', price: 'Up to ₹35,000' },
+            uiux: { icon: '✏️', price: 'Up to ₹8,000' },
+            maintenance: { icon: '🔧', price: 'Up to ₹5,000/yr' }
+        };
+
+        // ─────────────────────────────────────────────
+        // RENDER
+        // ─────────────────────────────────────────────
+        function render(key) {
+            const s = SERVICES[key];
+            if (!s) { window.location.href = 'index.html'; return; }
+
+            // ── Head title
+            document.title = `PixelPair — ${s.tag}`;
+
+            // ── Hero
+            document.getElementById('heroTag').textContent = s.tag;
+            document.getElementById('heroTitle').innerHTML = `${s.titleLine1}<br><span>${s.titleAccent}</span>`;
+            document.getElementById('heroPrice').textContent = s.price;
+            document.getElementById('heroSubtag').textContent = s.subtag;
+
+            // ── Overview
+            document.getElementById('overviewTitle').textContent = s.overview.title;
+            document.getElementById('overviewText').innerHTML = s.overview.text.replace(/\n/g, '<br><br>');
+
+            // ── Included list
+            const inc = document.getElementById('includedList');
+            s.included.forEach(item => {
+                inc.innerHTML += `<li><span class="li-icon yes">✔</span>${item}</li>`;
+            });
+
+            // ── Excluded list
+            const exc = document.getElementById('excludedList');
+            s.excluded.forEach(item => {
+                exc.innerHTML += `<li><span class="li-icon no">✕</span>${item}</li>`;
+            });
+
+            // ── Process
+            const pg = document.getElementById('processGrid');
+            s.process.forEach(p => {
+                pg.innerHTML += `
+        <div class="svc-process-step">
+          <div class="step-num">${p.num}</div>
+          <div class="step-name">${p.name}</div>
+          <div class="step-desc">${p.desc}</div>
+        </div>`;
+            });
+
+            // ── Tech chips
+            const tc = document.getElementById('techChips');
+            s.tech.forEach(t => {
+                tc.innerHTML += `<span class="tech-chip">${t}</span>`;
+            });
+
+            // ── FAQ
+            const fl = document.getElementById('faqList');
+            s.faq.forEach((f, i) => {
+                fl.innerHTML += `
+        <div class="faq-item" id="faq${i}">
+          <div class="faq-question" onclick="toggleFaq('faq${i}')">
+            ${f.q}
+            <i class="faq-icon">+</i>
+          </div>
+          <div class="faq-answer">${f.a}</div>
+        </div>`;
+            });
+
+            // ── Sticky card
+            document.getElementById('cardPrice').textContent = s.price;
+            document.getElementById('cardDelivery').textContent = s.delivery;
+            document.getElementById('cardRevisions').textContent = s.revisions;
+            const cql = document.getElementById('cardQuickList');
+            cql.innerHTML = ''; // clear first
+            s.quickList.forEach(item => {
+                cql.innerHTML += `<li>${item}</li>`;
+            });
+            
+            // ── Update CTA button link
+            const bookBtn = document.getElementById('bookNowBtn');
+            if (bookBtn) {
+                const encodedService = encodeURIComponent(s.tag);
+                const priceValue = s.price.replace(/[^\d]/g, '');
+                bookBtn.href = `contact.html?service=${encodedService}&price=${priceValue}`;
+            }
+
+            // ── Other services
+            const og = document.getElementById('otherGrid');
+            og.innerHTML = ''; // clear first
+            Object.keys(SERVICES).filter(k => k !== key).slice(0, 3).forEach(k => {
+                const sv = SERVICES[k];
+                const mt = OTHER_META[k];
+                og.innerHTML += `
+        <a href="servicedetail.html?s=${k}" class="other-card" data-page="${sv.tag}">
+          <span class="other-icon">${mt.icon}</span>
+          <div class="other-name">${sv.tag}</div>
+          <div class="other-price">${mt.price}</div>
+          <span class="other-arrow">→</span>
+        </a>`;
+            });
+        }
+
+        function toggleFaq(id) {
+            const el = document.getElementById(id);
+            el.classList.toggle('open');
+        }
+
+        // ── Init
+        const params = new URLSearchParams(window.location.search);
+        const key = params.get('s') || 'portfolio';
+        render(key);
+
+        // ── Re-init cursor hover on dynamically added elements
+        setTimeout(() => {
+            document.querySelectorAll('a, button, .other-card, .svc-price-card').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    const c = document.getElementById('cursor');
+                    if (c) c.style.transform = 'translate(-50%,-50%) scale(2)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    const c = document.getElementById('cursor');
+                    if (c) c.style.transform = 'translate(-50%,-50%) scale(1)';
+                });
+            });
+        }, 100);
+    </script>
+</body>
+
+</html>
