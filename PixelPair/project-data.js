@@ -58,7 +58,7 @@ const PROJECTS = [
     name: 'Dentist Clinicia',
     category: 'healthcare',
     year: '2026',
-    liveUrl: 'https://dentistclinicia.netlify.app/',
+    liveUrl: 'https://dentist-clinic-sage.vercel.app/',
     imageUrl: 'assets/dentist.png',
     accent: 'linear-gradient(135deg,#2d1f10,#4b3212)',
     tags: ['Dental Care', 'React', 'Tailwind CSS', 'TypeScript', 'Node.js', 'CSS3'],
