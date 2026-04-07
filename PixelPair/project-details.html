@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="PixelPair project details page.">
+<title>Project Details - PixelPair</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="pixelpair.css">
+<style>
+.detail-hero{padding:10rem 4rem 5rem;background:radial-gradient(circle at top right,var(--glow-strong),transparent 30%),var(--bg2);border-bottom:1px solid var(--border)}
+.detail-breadcrumb{font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:1.25rem}
+.detail-hero-grid{display:grid;grid-template-columns:1.1fr 0.9fr;gap:2rem;align-items:center}
+.detail-title{font-size:clamp(2.4rem,5vw,4.8rem);line-height:0.95;letter-spacing:-0.04em;margin-bottom:1rem}
+.detail-sub{font-family:'DM Mono',monospace;font-size:0.86rem;line-height:1.9;color:var(--muted);max-width:62ch}
+.detail-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem}
+.detail-shot-wrap{background:var(--card);border:1px solid var(--border);padding:1rem;box-shadow:0 30px 80px rgba(0,0,0,0.35)}
+.detail-shot{display:block;width:100%;height:420px;object-fit:cover;object-position:top center}
+.detail-meta{display:flex;gap:0.75rem;flex-wrap:wrap;margin-bottom:1rem}
+.detail-pill{font-family:'DM Mono',monospace;font-size:0.7rem;letter-spacing:0.08em;padding:0.45rem 0.75rem;background:var(--glow);color:var(--accent);border:1px solid var(--border)}
+.detail-layout{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.detail-card{background:var(--card);border:1px solid var(--border);padding:2rem}
+.detail-card h3{font-size:1.2rem;margin-bottom:1rem}
+.detail-card p,.detail-card li{font-family:'DM Mono',monospace;font-size:0.8rem;line-height:1.8;color:var(--muted)}
+.detail-card ul{margin:0;padding-left:1.2rem}
+.stack-grid,.stats-grid-alt,.review-grid{display:grid;gap:1rem}
+.stack-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.stack-item,.stat-item,.review-card{background:var(--bg2);border:1px solid var(--border);padding:1rem}
+.stack-item{font-family:'DM Mono',monospace;font-size:0.76rem;color:var(--text)}
+.stats-grid-alt{grid-template-columns:repeat(3,minmax(0,1fr))}
+.stat-value{font-size:1.4rem;font-weight:700;color:var(--accent);margin-bottom:0.35rem}
+.stat-label{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--muted)}
+.review-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.review-name{font-size:0.95rem;font-weight:700;margin-bottom:0.2rem}
+.review-role{font-family:'DM Mono',monospace;font-size:0.7rem;color:var(--accent);margin-bottom:0.7rem}
+.review-text{font-family:'DM Mono',monospace;font-size:0.78rem;color:var(--muted);line-height:1.8}
+@media(max-width:900px){
+  .detail-hero{padding:8rem 1.5rem 4rem}
+  .detail-hero-grid,.detail-layout,.stack-grid,.stats-grid-alt,.review-grid{grid-template-columns:1fr}
+  .detail-shot{height:280px}
+}
+</style>
+</head>
+<body>
+<div id="page-transition"><div class="pt-panel"></div><div class="pt-label" id="pt-label">Loading...</div></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-follower" id="cursorFollower"></div>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo" data-page="Home">Pixel<span>Pair</span></a>
+  <ul class="nav-links">
+    <li><a href="services.html" data-page="Services">Services</a></li>
+    <li><a href="portfolio.html" data-page="Portfolio">Works</a></li>
+    <li><a href="about.html" data-page="About">About</a></li>
+    <li><a href="contact.html" data-page="Contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="theme-switcher">
+      <div class="theme-btn t-green" onclick="setTheme('')"></div>
+      <div class="theme-btn t-cyan" onclick="setTheme('theme-cyan')"></div>
+      <div class="theme-btn t-purple" onclick="setTheme('theme-purple')"></div>
+      <div class="theme-btn t-orange" onclick="setTheme('theme-orange')"></div>
+      <div class="theme-btn t-pink" onclick="setTheme('theme-pink')"></div>
+      <div class="theme-btn t-gold" onclick="setTheme('theme-gold')"></div>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html" data-page="Home">Home</a>
+    <a href="services.html" data-page="Services">Services</a>
+    <a href="portfolio.html" data-page="Portfolio">Portfolio</a>
+    <a href="about.html" data-page="About">About</a>
+    <a href="contact.html" data-page="Contact">Contact</a>
+    <div class="mobile-menu-divider"></div>
+    <div class="mobile-theme-row">
+      <span class="mobile-theme-label">Theme</span>
+      <div class="theme-btn t-green" onclick="setTheme('')"></div>
+      <div class="theme-btn t-cyan" onclick="setTheme('theme-cyan')"></div>
+      <div class="theme-btn t-purple" onclick="setTheme('theme-purple')"></div>
+      <div class="theme-btn t-orange" onclick="setTheme('theme-orange')"></div>
+      <div class="theme-btn t-pink" onclick="setTheme('theme-pink')"></div>
+      <div class="theme-btn t-gold" onclick="setTheme('theme-gold')"></div>
+    </div>
+  </div>
+</nav>
+
+<section class="detail-hero">
+  <div class="detail-breadcrumb">Project Details</div>
+  <div class="detail-hero-grid">
+    <div>
+      <div class="detail-meta" id="detail-meta"></div>
+      <h1 class="detail-title" id="detail-title">Project</h1>
+      <p class="detail-sub" id="detail-sub"></p>
+      <div class="detail-actions" id="detail-actions"></div>
+    </div>
+    <div class="detail-shot-wrap">
+      <img class="detail-shot" id="detail-shot" src="" alt="Project preview" referrerpolicy="no-referrer">
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="section-label reveal">Overview</div>
+  <h2 class="section-title reveal">Inside The Project</h2>
+  <div class="detail-layout">
+    <article class="detail-card reveal">
+      <h3>About The Project</h3>
+      <p id="detail-about"></p>
+    </article>
+    <article class="detail-card reveal">
+      <h3>How The Flow Works</h3>
+      <ul id="detail-flow"></ul>
+    </article>
+    <article class="detail-card reveal">
+      <h3>Languages & Tools</h3>
+      <div class="stack-grid" id="detail-stack"></div>
+    </article>
+    <article class="detail-card reveal">
+      <h3>Quick Highlights</h3>
+      <div class="stats-grid-alt" id="detail-stats"></div>
+    </article>
+  </div>
+</section>
+
+<section>
+  <div class="section-label reveal">Reviews</div>
+  <h2 class="section-title reveal">Practical Feedback</h2>
+  <div class="review-grid" id="detail-reviews"></div>
+</section>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo">Pixel<span>Pair</span></div>
+      <p>Projects explained with clarity, not just visuals. Every case study should help visitors understand the product quickly.</p>
+    </div>
+    <div class="footer-col"><h4>Navigation</h4><ul>
+      <li><a href="index.html" data-page="Home">Home</a></li>
+      <li><a href="services.html" data-page="Services">Services</a></li>
+      <li><a href="portfolio.html" data-page="Portfolio">Portfolio</a></li>
+      <li><a href="about.html" data-page="About">About Us</a></li>
+      <li><a href="contact.html" data-page="Contact">Contact</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Project Links</h4><ul>
+      <li><a href="portfolio.html" data-page="Portfolio">All Projects</a></li>
+      <li><a href="contact.html" data-page="Contact">Start a Project</a></li>
+      <li><a href="services.html" data-page="Services">Our Services</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Contact</h4>
+      <div class="footer-contact-item"><span class="icon">✉</span><span>contactpixelpair@gmail.com</span></div>
+      <div class="footer-contact-item"><span class="icon">◎</span><span>Available Worldwide<br>Remote &amp; On-site</span></div>
+      <div class="footer-contact-item"><span class="icon">⏱</span><span>Mon - Sun, 24*7</span></div>
+      <div class="footer-contact-item"><span class="icon">⚡</span><span>Avg. response: &lt; 24hrs</span></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 <span>PixelPair</span>. All rights reserved.</div>
+    <div class="footer-badge">Crafted with ☕ &amp; 💻</div>
+  </div>
+</footer>
+
+<script src="pixelpair.js"></script>
+<script src="project-data.js"></script>
+<script>
+const params = new URLSearchParams(window.location.search);
+const project = getProjectById(params.get('project'));
+
+document.title = `${project.name} - Project Details | PixelPair`;
+document.getElementById('detail-title').textContent = project.name;
+document.getElementById('detail-sub').textContent = project.summary;
+document.getElementById('detail-about').textContent = project.about;
+document.getElementById('detail-shot').src = project.imageUrl;
+document.getElementById('detail-shot').alt = `${project.name} landing page preview`;
+
+document.getElementById('detail-meta').innerHTML = `
+  <span class="detail-pill">${project.year}</span>
+  <span class="detail-pill">${project.category}</span>
+  <span class="detail-pill">${project.tags[0]}</span>
+`;
+
+document.getElementById('detail-actions').innerHTML = `
+  <a href="portfolio.html" class="btn-outline" data-page="Portfolio">Back To Portfolio</a>
+  <a href="${project.liveUrl}" class="btn-primary" target="_blank" rel="noreferrer"><span>View Live Project</span></a>
+`;
+
+document.getElementById('detail-flow').innerHTML = project.flow.map((step) => `<li>${step}</li>`).join('');
+document.getElementById('detail-stack').innerHTML = project.tags.map((tag) => `<div class="stack-item">${tag}</div>`).join('');
+document.getElementById('detail-stats').innerHTML = project.stats.map((stat) => `
+  <div class="stat-item">
+    <div class="stat-value">${stat.value}</div>
+    <div class="stat-label">${stat.label}</div>
+  </div>
+`).join('');
+document.getElementById('detail-reviews').innerHTML = project.reviews.map((review) => `
+  <article class="review-card">
+    <div class="testi-stars">★★★★★</div>
+    <div class="review-name">${review.name}</div>
+    <div class="review-role">${review.role}</div>
+    <p class="review-text">${review.quote}</p>
+  </article>
+`).join('');
+</script>
+</body>
+</html>
